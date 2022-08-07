@@ -1,0 +1,50 @@
+﻿@model GIFanpage.Models.Submission
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Submission</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SubmissionName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SubmissionName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SubmissionDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SubmissionDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CloseDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CloseDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FinalDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FinalDate)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.SubmissionID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
