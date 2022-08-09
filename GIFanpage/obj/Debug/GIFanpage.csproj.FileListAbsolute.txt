@@ -170,8 +170,8 @@ C:\Users\PGK\Desktop\GIFanpage\GIFanpage\bin\System.Net.Http.Formatting.xml
 C:\Users\PGK\Desktop\GIFanpage\GIFanpage\bin\System.Web.Http.xml
 C:\Users\PGK\Desktop\GIFanpage\GIFanpage\bin\System.Web.Http.WebHost.xml
 C:\Users\PGK\Desktop\GIFanpage\GIFanpage\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\PGK\Desktop\GIFanpage\GIFanpage\obj\Debug\GIFanpage.csproj.AssemblyReference.cache
 C:\Users\PGK\Desktop\GIFanpage\GIFanpage\obj\Debug\GIFanpage.csproj.CoreCompileInputs.cache
 C:\Users\PGK\Desktop\GIFanpage\GIFanpage\obj\Debug\GIFanpage.csproj.CopyComplete
 C:\Users\PGK\Desktop\GIFanpage\GIFanpage\obj\Debug\GIFanpage.dll
 C:\Users\PGK\Desktop\GIFanpage\GIFanpage\obj\Debug\GIFanpage.pdb
+C:\Users\PGK\Desktop\GIFanpage\GIFanpage\obj\Debug\GIFanpage.csproj.AssemblyReference.cache

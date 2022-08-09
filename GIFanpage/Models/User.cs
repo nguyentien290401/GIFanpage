@@ -25,8 +25,8 @@ namespace GIFanpage.Models
         public string PasswordHash { get; set; }
 
         [Required]
-        [DisplayName("Phone Number")]
-        public string PhoneNumber { get; set; }
+        [DisplayName("Image")]
+        public string UserImg { get; set; }
 
         [DisplayName("Play-style Name")]
         public int PlaystyleID { get; set; }

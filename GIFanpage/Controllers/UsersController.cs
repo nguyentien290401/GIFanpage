@@ -14,44 +14,7 @@ namespace GIFanpage.Controllers
     {
         private GIFanpageDbContext db = new GIFanpageDbContext();
 
-        // GET: Users/Register
         
-        public ActionResult Register()
-        {
-            ViewBag.DepartmentID = new SelectList(db.Playstyles, "PlaystyleID", "PlaystytleName");
-            ViewBag.RoleID = new SelectList(db.Roles, "RoleID", "RoleName");
-            return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Register([Bind(Include = "UserID,Name,Email,PasswordHash,PhoneNumber,PlaystyleID,RoleID")] User user)
-        {
-            User usr = db.Users.Where(u => u.Email == user.Email).FirstOrDefault();
-            if (ModelState.IsValid)
-            {
-                if (usr != null)
-                {
-                    ModelState.AddModelError("", "Email has already Register");
-                }
-                else
-                {
-                    db.Users.Add(user);
-                    db.SaveChanges();
-                    Session["CurrentUserID"] = user.UserID;
-                    Session["CurrentUserName"] = user.Name;
-                    Session["CurrentUserEmail"] = user.Email;
-                    Session["CurrentUserPassword"] = user.PasswordHash;
-                    Session["CurrentUserRoleID"] = user.RoleID;
-                    Session["CurrentUserLike"] = 0;
-                    return RedirectToAction("Index", "Home");
-                }
-            }
-
-            ViewBag.PlaystyleID = new SelectList(db.Playstyles, "PlaystyleID", "PlaystyleName", user.PlaystyleID);
-            ViewBag.RoleID = new SelectList(db.Roles, "RoleID", "RoleName", user.RoleID);
-            return View(user);
-        }
 
         // GET: Users/Login
         public ActionResult Login()
@@ -120,7 +83,7 @@ namespace GIFanpage.Controllers
         }
 
         // GET: Users/Create
-        public ActionResult Create()
+        public ActionResult Register()
         {
             ViewBag.PlaystyleID = new SelectList(db.Playstyles, "PlaystyleID", "PlaystyleName");
             ViewBag.RoleID = new SelectList(db.Roles, "RoleID", "RoleName");
@@ -132,7 +95,7 @@ namespace GIFanpage.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "UserID,Name,Email,PasswordHash,PhoneNumber,PlaystyleID,RoleID")] User user)
+        public ActionResult Register([Bind(Include = "UserID,Name,Email,PasswordHash,UserImg,PlaystyleID,RoleID")] User user)
         {
             if (ModelState.IsValid)
             {

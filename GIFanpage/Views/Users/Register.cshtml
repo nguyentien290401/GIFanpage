@@ -1,65 +1,73 @@
 ﻿@model GIFanpage.Models.User
 
 @{
-    ViewBag.Title = "Register";
+    ViewBag.Title = "Create";
 }
 
-<div class="w3-container" style="padding:128px 16px">
-    <section class="vh-100 bg-image" style="background-image: url('https://scontent.fsgn2-6.fna.fbcdn.net/v/t39.30808-6/297681179_1222967368515603_916350628120636282_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=730e14&_nc_ohc=2iQfzjvMhYkAX9g3Xg9&_nc_ht=scontent.fsgn2-6.fna&oh=00_AT_pONmdOaXX-SvzGazoyjFKfiIPA6-G3IHb6hLsYl_Zrw&oe=62F2354B');">
-        <div class="mask d-flex align-items-center h-100 gradient-custom-3">
-            <div class="container h-100">
-                <div class="row d-flex justify-content-center align-items-center h-100">
-                    <div class="col-12 col-md-9 col-lg-7 col-xl-6">
-                        <div class="card" style="border-radius: 15px;">
-                            <div class="card-body p-5">
-                                <h2 class="text-uppercase text-center mb-5">Create an account</h2>
-
-                                <form action="/Users/Register" method="post">
-                                    @Html.AntiForgeryToken()
-                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                                    <div class="form-outline mb-4">
-                                        <input type="text" name="Name" class="form-control form-control-lg" placeholder="Your Name" />
-                                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-                                    </div>
-
-                                    <div class="form-outline mb-4">
-                                        <input type="email" name="Email" class="form-control form-control-lg" placeholder="Your Email" />
-                                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-                                    </div>
-
-                                    <div class="form-outline mb-4">
-                                        <input type="password" name="PasswordHash" class="form-control form-control-lg" placeholder="Password" />
-                                        @Html.ValidationMessageFor(model => model.PasswordHash, "", new { @class = "text-danger" })
-                                    </div>
-
-                                    <div class="form-outline mb-4">
-                                        <input type="number" name="PhoneNumber" class="form-control form-control-lg" placeholder="Phone Number" />
-                                        @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
-                                    </div>
-
-                                    <div class="form-outline mb-4">
-                                        @Html.DropDownList("PlaystyleID", null, htmlAttributes: new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(model => model.PlaystyleID, "", new { @class = "text-danger" })
-                                    </div>
-
-                                    <div class="col-md-10">
-                                        @Html.TextBoxFor(t => t.RoleID, new { @Value = 2, @type = "hidden" })
-                                        @Html.ValidationMessageFor(model => model.RoleID, "", new { @class = "text-danger" })
-                                    </div>
-
-                                    <button type="submit" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Register</button>
+<h2>Create</h2>
 
 
-                                    <p class="text-center text-muted mt-5 mb-0">Have already an account? <a href="/Users/Login" class="fw-bold text-body"><u>Login here</u></a></p>
-
-                                </form>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+@using (Html.BeginForm("Register", "Users", FormMethod.Post, new { enctype = "multipart/form-data"}))
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <h4>User</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
         </div>
-    </section>
-</div>
+    </div>
 
+    <div class="form-group">
+        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.PasswordHash, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.PasswordHash, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.PasswordHash, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.UserImg, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.UserImg, new { htmlAttributes = new { @class = "form-control" } })
+            <input type="file" />
+            @Html.ValidationMessageFor(model => model.UserImg, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.PlaystyleID, "PlaystyleID", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("PlaystyleID", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.PlaystyleID, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    @Html.TextBoxFor(t => t.RoleID, new { @Value = 2, @type = "hidden" })
+    @Html.ValidationMessageFor(model => model.RoleID, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
