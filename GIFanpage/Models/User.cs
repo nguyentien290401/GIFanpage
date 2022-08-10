@@ -10,6 +10,10 @@ namespace GIFanpage.Models
 {
     public class User
     {
+        public User()
+        {
+            UserImg = "~/Content/Image/add.png";
+        }
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int UserID { get; set; }
@@ -39,5 +43,8 @@ namespace GIFanpage.Models
 
         [ForeignKey("RoleID")]
         public virtual Role Role { get; set; }
+
+        [NotMapped]
+        public HttpPostedFileBase ImageUpload { get; set; }
     }
 }

@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using GIFanpage.Models;
+using System.IO;
 
 namespace GIFanpage.Controllers
 {
@@ -85,9 +86,10 @@ namespace GIFanpage.Controllers
         // GET: Users/Create
         public ActionResult Register()
         {
+            User user = new User();
             ViewBag.PlaystyleID = new SelectList(db.Playstyles, "PlaystyleID", "PlaystyleName");
             ViewBag.RoleID = new SelectList(db.Roles, "RoleID", "RoleName");
-            return View();
+            return View(user);
         }
 
         // POST: Users/Create
@@ -95,12 +97,22 @@ namespace GIFanpage.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Register([Bind(Include = "UserID,Name,Email,PasswordHash,UserImg,PlaystyleID,RoleID")] User user)
+        public ActionResult Register(/*[Bind(Include = "UserID,Name,Email,PasswordHash,UserImg,PlaystyleID,RoleID")]*/ User user)
         {
             if (ModelState.IsValid)
             {
+                if (user.ImageUpload != null)
+                {
+                    string fileName = Path.GetFileNameWithoutExtension(user.ImageUpload.FileName);
+                    string extension = Path.GetExtension(user.ImageUpload.FileName);
+                    fileName = fileName + extension;
+                    user.UserImg = "~/Content/Image/" + fileName;
+                    user.ImageUpload.SaveAs(Path.Combine(Server.MapPath("~/Content/Image/"), fileName));
+                }
+
                 db.Users.Add(user);
                 db.SaveChanges();
+
                 Session["CurrentUserID"] = user.UserID;
                 Session["CurrentUserName"] = user.Name;
                 Session["CurrentUserEmail"] = user.Email;

@@ -34,7 +34,7 @@ UserID int primary key identity(1,1),
 Name nvarchar(max),
 Email nvarchar(max),
 PasswordHash nvarchar(max),
-PhoneNumber nvarchar(max),
+UserImg nvarchar(max),
 PlaystyleID int references Playstyles(PlaystyleID) on delete cascade,
 RoleID int references Roles(RoleID) on delete cascade)
 go

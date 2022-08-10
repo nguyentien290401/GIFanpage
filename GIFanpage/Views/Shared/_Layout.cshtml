@@ -6,6 +6,7 @@
     <title>@ViewBag.Title - Genshin Impact</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <script src="~/Scripts/scripts.js"></script>
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -23,7 +24,7 @@
                     @if (Session["CurrentUserName"] == null)
                     {
                         <li>@Html.ActionLink("Login", "Login", "Users")</li>
-                        <li>@Html.ActionLink("Register", "Create", "Users")</li>
+                        <li>@Html.ActionLink("Register", "Register", "Users")</li>
                     }
                     @if (Session ["CurrentUserName"] != null)
                     {
