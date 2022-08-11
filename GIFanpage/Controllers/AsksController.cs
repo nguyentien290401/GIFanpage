@@ -40,8 +40,9 @@ namespace GIFanpage.Controllers
         public ActionResult Create()
         {
             ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName");
+            ViewBag.UserID = Session["CurrentUserID"];
             ViewBag.SubmissionID = new SelectList(db.Submissions, "SubmissionID", "SubmissionName");
-            ViewBag.UserID = new SelectList(db.Users, "UserID", "Name");
+           // ViewBag.UserID = new SelectList(db.Users, "UserID", "Name");
             return View();
         }
 
@@ -50,7 +51,7 @@ namespace GIFanpage.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "AskID,Title,Description,Content,CreateDate,ViewCount,CommentCount,VotesCount,FileName,FilePath,CurrentUserVoteType,UserID,CategoryID,SubmissionID")] Ask ask)
+        public ActionResult Create([Bind(Include = "AskID,Title,Description,Content,CreateDate,ViewCount,VotesCount,FileName,FilePath,CurrentUserVoteType,UserID,CategoryID,SubmissionID")] Ask ask)
         {
             if (ModelState.IsValid)
             {
