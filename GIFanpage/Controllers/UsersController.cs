@@ -149,10 +149,19 @@ namespace GIFanpage.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "UserID,Name,Email,PasswordHash,PhoneNumber,PlaystyleID,RoleID")] User user)
+        public ActionResult Edit(/*[Bind(Include = "UserID,Name,Email,UserImg,PlaystyleID,RoleID")]*/ User user)
         {
             if (ModelState.IsValid)
             {
+                if (user.ImageUpload != null)
+                {
+                    string fileName = Path.GetFileNameWithoutExtension(user.ImageUpload.FileName);
+                    string extension = Path.GetExtension(user.ImageUpload.FileName);
+                    fileName = fileName + extension;
+                    user.UserImg = "~/Content/Image/" + fileName;
+                    user.ImageUpload.SaveAs(Path.Combine(Server.MapPath("~/Content/Image/"), fileName));
+                }
+
                 db.Entry(user).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -165,6 +174,7 @@ namespace GIFanpage.Controllers
         // GET: Users/Delete/5
         public ActionResult Delete(int? id)
         {
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
