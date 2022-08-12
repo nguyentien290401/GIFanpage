@@ -232,6 +232,7 @@
     <Content Include="Views\Asks\Edit.cshtml" />
     <Content Include="Views\Asks\Index.cshtml" />
     <Content Include="Views\Users\Login.cshtml" />
+    <Content Include="Views\Asks\IndexQuestions.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

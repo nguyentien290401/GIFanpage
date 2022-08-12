@@ -14,12 +14,20 @@ namespace GIFanpage.Controllers
     {
         private GIFanpageDbContext db = new GIFanpageDbContext();
 
-        // GET: Asks
+        // GET: List of all questions
         public ActionResult Index()
         {
-            var asks = db.Asks.Include(a => a.Category).Include(a => a.Submission).Include(a => a.User);
+            var asks = db.Asks.Include(a => a.Category).Include(a => a.User);   /*.Include(a => a.Submission)*/
             return View(asks.ToList());
         }
+
+        // Get: All questions of each accounts
+        public ActionResult IndexQuestions(int id)
+        {
+            var asks = db.Asks.Where(t => t.UserID == id).ToList();
+            return View(asks);
+        }
+
 
         // GET: Asks/Details/5
         public ActionResult Details(int? id)
@@ -41,7 +49,7 @@ namespace GIFanpage.Controllers
         {
             ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName");
             ViewBag.UserID = Session["CurrentUserID"];
-            ViewBag.SubmissionID = new SelectList(db.Submissions, "SubmissionID", "SubmissionName");
+            //ViewBag.SubmissionID = new SelectList(db.Submissions, "SubmissionID", "SubmissionName");
            // ViewBag.UserID = new SelectList(db.Users, "UserID", "Name");
             return View();
         }
@@ -61,7 +69,7 @@ namespace GIFanpage.Controllers
             }
 
             ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", ask.CategoryID);
-            ViewBag.SubmissionID = new SelectList(db.Submissions, "SubmissionID", "SubmissionName", ask.SubmissionID);
+            //ViewBag.SubmissionID = new SelectList(db.Submissions, "SubmissionID", "SubmissionName", ask.SubmissionID);*/
             ViewBag.UserID = new SelectList(db.Users, "UserID", "Name", ask.UserID);
             return View(ask);
         }
@@ -79,7 +87,7 @@ namespace GIFanpage.Controllers
                 return HttpNotFound();
             }
             ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", ask.CategoryID);
-            ViewBag.SubmissionID = new SelectList(db.Submissions, "SubmissionID", "SubmissionName", ask.SubmissionID);
+            //ViewBag.SubmissionID = new SelectList(db.Submissions, "SubmissionID", "SubmissionName", ask.SubmissionID);
             ViewBag.UserID = new SelectList(db.Users, "UserID", "Name", ask.UserID);
             return View(ask);
         }
@@ -98,7 +106,7 @@ namespace GIFanpage.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", ask.CategoryID);
-            ViewBag.SubmissionID = new SelectList(db.Submissions, "SubmissionID", "SubmissionName", ask.SubmissionID);
+            //ViewBag.SubmissionID = new SelectList(db.Submissions, "SubmissionID", "SubmissionName", ask.SubmissionID);
             ViewBag.UserID = new SelectList(db.Users, "UserID", "Name", ask.UserID);
             return View(ask);
         }

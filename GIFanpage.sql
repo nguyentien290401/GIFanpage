@@ -52,8 +52,8 @@ FileName nvarchar(max),
 FilePath nvarchar(max),
 CurrentUserVoteType int,
 UserID int references Users(UserID) on delete cascade,
-CategoryID int references Categories(CategoryID) on delete cascade,
-SubmissionID int references Submissions(SubmissionID))
+CategoryID int references Categories(CategoryID) on delete cascade)
+--SubmissionID int references Submissions(SubmissionID))
 go
 
 create table Comments(

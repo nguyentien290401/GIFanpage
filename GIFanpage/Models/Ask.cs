@@ -28,8 +28,8 @@ namespace GIFanpage.Models
         [Display(Name = "Category")]
         public int CategoryID { get; set; }
 
-        [Display(Name = "Deadline")]
-        public int SubmissionID { get; set; }
+        //[Display(Name = "Deadline")]
+        //public int SubmissionID { get; set; }
 
         [ForeignKey("UserID")]
         public virtual User User { get; set; }
@@ -37,8 +37,8 @@ namespace GIFanpage.Models
         [ForeignKey("CategoryID")]
         public virtual Category Category { get; set; }
 
-        [ForeignKey("SubmissionID")]
-        public virtual Submission Submission { get; set; }
+        //[ForeignKey("SubmissionID")]
+        //public virtual Submission Submission { get; set; }
         public virtual List<Comment> Comments { get; set; }
         public virtual List<Vote> Votes { get; set; }
     }
