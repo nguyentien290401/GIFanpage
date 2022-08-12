@@ -37,6 +37,8 @@ namespace GIFanpage.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Ask ask = db.Asks.Find(id);
+            ask.ViewCount++;
+            db.SaveChanges();
             if (ask == null)
             {
                 return HttpNotFound();
