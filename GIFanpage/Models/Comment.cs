@@ -14,7 +14,7 @@ namespace GIFanpage.Models
         public int CommentID { get; set; }
         public string Content { get; set; }
         public DateTime CommentDate { get; set; }
-        public int IdeaID { get; set; }
+        public int AskID { get; set; }
         public int UserID { get; set; }
         public Boolean IsHidden { get; set; }
 

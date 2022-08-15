@@ -18,7 +18,7 @@
             @Html.DisplayFor(model => model.Category.CategoryName)
         </dd>
 
-        
+
         <dt>
             @Html.DisplayNameFor(model => model.User.Name)
         </dt>
@@ -67,7 +67,7 @@
             @Html.DisplayFor(model => model.ViewCount)
         </dd>
 
-        
+
 
         <dt>
             @Html.DisplayNameFor(model => model.FileName)
@@ -85,7 +85,7 @@
             @Html.DisplayFor(model => model.FilePath)
         </dd>
 
-        
+
 
     </dl>
 </div>
@@ -93,3 +93,64 @@
     @Html.ActionLink("Edit", "Edit", new { id = Model.AskID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+
+
+<h3 class="pull-left">New Comment</h3>
+<form action="/asks/AddComment?cmtID=@Model.AskID" method="post">
+    <fieldset>
+        <div class="row">
+            <div class="form-group col-xs-12 col-sm-9 col-lg-10">
+                <input type="hidden" name="CommentDate" value="@DateTime.Now" />
+                <input type="hidden" name="AskID" value="@Model.AskID" />
+                <input type="hidden" name="IsHidden" value=false />
+                <input type="hidden" name="UserID" value="@Session["CurrentUserID"]" />
+                <textarea class="form-control" name="Content" placeholder="Your advice" required=""></textarea>
+                <button type="submit" class="btn btn-normal pull-right">Submit</button>
+            </div>
+        </div>
+    </fieldset>
+</form>
+
+@if (Model.CommentCount == 0)
+{
+    <p>Don't have any comment</p>
+}
+
+@for (int i = 0; i < Model.CommentCount; i++)
+{
+    <div class="media">
+        <div class="media-body">
+            @if (Model.Comments[i].IsHidden == true)
+            {
+                <h4 class="media-heading">Anonymous</h4>
+            }
+            else
+            {
+                <h4 class="media-heading">@Model.Comments[i].User.Name</h4>
+            }
+            <p>@Model.Comments[i].Content</p>
+            <ul class="list-unstyled list-inline media-detail pull-left">
+                <li><i class="fa fa-calendar"></i>@Model.Comments[i].CommentDate</li>
+            </ul>
+            @*<ul class="list-unstyled list-inline media-detail pull-right">
+                    <li class=""><a href="">Like</a></li>
+                </ul>*@
+            @*@if (Convert.ToInt32(Session["CurrentUserID"]) == Model.Comments[i].UserID)
+                {
+
+                    if (ViewBag.Final == 0)
+                    {
+                        <ul class="list-unstyled list-inline media-detail pull-right mr-2 hidden">
+                            <li class=""><a href="" id="button-edit">Edit</a></li>
+                        </ul>
+                    }
+                    else
+                    {
+                        <ul class="list-unstyled list-inline media-detail pull-right mr-2">
+                            <li class=""><a href="" id="button-edit">Edit</a></li>
+                        </ul>
+                    }
+                }*@
+        </div>
+    </div>
+}

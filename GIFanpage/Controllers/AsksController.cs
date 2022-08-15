@@ -17,8 +17,8 @@ namespace GIFanpage.Controllers
         // GET: List of all questions
         public ActionResult Index()
         {
-            var asks = db.Asks.Include(a => a.Category).Include(a => a.User);   /*.Include(a => a.Submission)*/
-            return View(asks.ToList());
+            var asks = db.Asks.Include(a => a.Category).Include(a => a.User).ToList();   /*.Include(a => a.Submission)*/
+            return View(asks);
         }
 
         // Get: All questions of each accounts
@@ -28,22 +28,37 @@ namespace GIFanpage.Controllers
             return View(asks);
         }
 
-
+        
         // GET: Asks/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int? ask)
         {
-            if (id == null)
+            if (ask == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Ask ask = db.Asks.Find(id);
-            ask.ViewCount++;
+
+            Ask asks = db.Asks.Find(ask);
+            asks.ViewCount++;
             db.SaveChanges();
-            if (ask == null)
+            if (asks == null)
             {
                 return HttpNotFound();
             }
-            return View(ask);
+            return View(asks);
+        }
+
+        [HttpPost]
+        public ActionResult AddComment(Comment comment, int cmtID)
+        {
+            Ask ask = db.Asks.Where(i => i.AskID == comment.AskID).FirstOrDefault();
+            if (ask != null)
+            {
+                ask.CommentCount++;
+                db.Comments.Add(comment);
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("Details", "Asks", new { ask = cmtID });
         }
 
         // GET: Asks/Create
@@ -138,6 +153,9 @@ namespace GIFanpage.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        
+
 
         protected override void Dispose(bool disposing)
         {
