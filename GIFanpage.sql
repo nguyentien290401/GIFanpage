@@ -94,9 +94,9 @@ insert into Roles values('Staff')
 go
 
 
-insert into Users values('admin', 'admin@gmail.com', '123456', '0123456789', 1, 1)
+insert into Users values('admin', 'admin@gmail.com', '123456', '~/Content/Image/Ayaka.jpg', 1, 1)
 go
-insert into Users values('staff', 'staff@gmail.com', '123456', '0123456789', 1, 2)
+insert into Users values('staff', 'staff@gmail.com', '123456', '~/Content/Image/KeqingAvatar.jpg', 1, 2)
 go
 
 
@@ -117,3 +117,13 @@ insert into Submissions values('Your ideas about ver 2.8 ', 'Deadline', '3-7-202
 go
 insert into Submissions values('Your ideas about ver 3.0', 'Deadline', '5-7-2022', '5-10-2022')
 go
+
+use GIFanpage
+
+select * from Comments
+
+select * from Asks
+
+select * from Users
+
+select * from Votes

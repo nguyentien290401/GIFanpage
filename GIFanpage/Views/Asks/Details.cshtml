@@ -102,7 +102,8 @@
             <div class="form-group col-xs-12 col-sm-9 col-lg-10">
                 <input type="hidden" name="CommentDate" value="@DateTime.Now" />
                 <input type="hidden" name="AskID" value="@Model.AskID" />
-                <input type="hidden" name="IsHidden" value=false />
+                <input type="checkbox" name="IsHidden" value="true" /><p>Hidden</p>
+                @*<input type="hidden" name="IsHidden" value=false />*@
                 <input type="hidden" name="UserID" value="@Session["CurrentUserID"]" />
                 <textarea class="form-control" name="Content" placeholder="Your advice" required=""></textarea>
                 <button type="submit" class="btn btn-normal pull-right">Submit</button>
@@ -133,24 +134,52 @@
                 <li><i class="fa fa-calendar"></i>@Model.Comments[i].CommentDate</li>
             </ul>
             @*<ul class="list-unstyled list-inline media-detail pull-right">
-                    <li class=""><a href="">Like</a></li>
-                </ul>*@
-            @*@if (Convert.ToInt32(Session["CurrentUserID"]) == Model.Comments[i].UserID)
-                {
+            <li class=""><a href="">Like</a></li>
+        </ul>*@
+            @if (Convert.ToInt32(Session["CurrentUserID"]) == Model.Comments[i].UserID)
+            {
+                <ul class="list-unstyled list-inline media-detail pull-right mr-2">
+                    <li class=""><a href="" id="button-edit">Edit</a></li>
+                </ul>
 
-                    if (ViewBag.Final == 0)
-                    {
-                        <ul class="list-unstyled list-inline media-detail pull-right mr-2 hidden">
-                            <li class=""><a href="" id="button-edit">Edit</a></li>
-                        </ul>
-                    }
-                    else
-                    {
-                        <ul class="list-unstyled list-inline media-detail pull-right mr-2">
-                            <li class=""><a href="" id="button-edit">Edit</a></li>
-                        </ul>
-                    }
-                }*@
+                <form action="/asks/EditComment?cmtID=@Model.AskID" method="post" id="edit-form" class="hidden">
+                    <fieldset>
+                        <div class="row">
+                            <div class="form-group col-xs-12 col-sm-9 col-lg-10">
+                                <input type="hidden" name="CommentID" value="@Model.Comments[i].CommentID" />
+                                <input type="hidden" name="CommentDate" value="@DateTime.Now" />
+                                <input type="hidden" name="AskID" value="@Model.AskID" />
+                                <input type="hidden" name="UserID" value="@Session["CurrentUserID"]" />
+                                <input type="hidden" name="IsHidden" value="@Model.Comments[i].IsHidden" /> 
+                                <textarea class="form-control" name="Content" placeholder="@Model.Comments[i].Content" required=""></textarea>
+                                <button type="submit" class="btn btn-normal pull-right">Edit</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+
+
+
+
+
+
+            }
         </div>
     </div>
 }
+<script>
+    const button = document.querySelectorAll("#button-edit");
+    const editForm = document.querySelectorAll("#edit-form");
+
+    function handleClick(e) {
+        e.preventDefault();
+        for (i = 0; i < button.length; i++) {
+            editForm[i].classList.toggle("hidden");
+        };
+
+    }
+
+    for (i = 0; i < editForm.length; i++) {
+        button[i].addEventListener("click", handleClick);
+    }
+</script>

@@ -61,6 +61,21 @@ namespace GIFanpage.Controllers
             return RedirectToAction("Details", "Asks", new { ask = cmtID });
         }
 
+        public ActionResult EditComment(Comment cm, int cmtID)
+        {
+            Comment comment = db.Comments.Where(c => c.CommentID == cm.CommentID).FirstOrDefault();
+            if (comment != null)
+            {
+                comment.Content = cm.Content;
+                comment.CommentDate = cm.CommentDate;
+                comment.UserID = cm.UserID;
+                comment.AskID = cm.AskID;
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("Details", "Asks", new { ask = cmtID });
+        }
+
         // GET: Asks/Create
         public ActionResult Create()
         {
