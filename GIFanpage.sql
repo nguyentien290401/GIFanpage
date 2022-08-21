@@ -46,11 +46,9 @@ Description nvarchar(max),
 Content nvarchar(max),
 CreateDate datetime,
 ViewCount int,
-VotesCount int,
 CommentCount int,
 FileName nvarchar(max),
 FilePath nvarchar(max),
-CurrentUserVoteType int,
 UserID int references Users(UserID) on delete cascade,
 CategoryID int references Categories(CategoryID) on delete cascade)
 --SubmissionID int references Submissions(SubmissionID))
@@ -60,6 +58,8 @@ create table Comments(
 CommentID int primary key identity(1,1),
 Content nvarchar(max),
 CommentDate datetime,
+VotesCount int,
+CurrentUserVoteType int,
 AskID int references Asks(AskID)on delete cascade,
 UserID int references Users(UserID),
 IsHidden bit default(0))
@@ -68,7 +68,7 @@ go
 create table Votes(
 VoteID int primary key identity(1,1),
 UserID int references Users(UserID),
-AskID int references Asks(AskID) on delete cascade,
+CommentID int references Comments(CommentID) on delete cascade,
 VoteValue int)
 go
 
