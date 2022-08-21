@@ -138,27 +138,28 @@
                         <a href="/users/login" class="w3-bar-item w3-button"><i class="fa fa-user"></i> LOGIN</a>
                         <a href="/users/register" class="w3-bar-item w3-button">REGISTER</a>
                         @*<li>@Html.ActionLink("Login", "Login", "Users")</li>
-                            <li>@Html.ActionLink("Register", "Register", "Users")</li>*@
+            <li>@Html.ActionLink("Register", "Register", "Users")</li>*@
                     }
                     @if (Session["CurrentUserName"] != null)
                     {
                         <a href="/home/index" class="w3-bar-item w3-button"> Home</a>
-                        <a href="/categories/index" class="w3-bar-item w3-button">Genshin Wiki</a>
-                        <a href="/playstyles/index" class="w3-bar-item w3-button"> Playstyle</a>
+                        <a href="/categories/index" class="w3-bar-item w3-button">Characters</a>
+                        <a href="/categories/index" class="w3-bar-item w3-button">News</a>                 
                         <a href="/asks/index" class="w3-bar-item w3-button">Questions</a>
                         <a href="/asks/indexquestions/@Session["CurrentUserID"]" class="w3-bar-item w3-button"> My Questions</a>
+                        <a href="/feedbacks/create/@Session["CurrentUserID"]" class="w3-bar-item w3-button">Feedbacks</a>
                         <a href="/users/index" class="w3-bar-item w3-button"><i class="fa fa-user"></i> User</a>
                         <a href="/users/logout" class="w3-bar-item w3-button">Logout</a>
                         @*<li>@Html.ActionLink("Home", "Index", "Home")</li>
-                            <li>@Html.ActionLink("Genshin Wiki", "Index", "Categories")</li>
-                            <li>@Html.ActionLink("Playstyle", "Index", "Playstyles")</li>
-                            <li>@Html.ActionLink("Category", "Index", "Categories")</li>
-                            <li>@Html.ActionLink("Questions", "Index", "Asks")</li>
-                            <li>@Html.ActionLink("My Questions", "IndexQuestions", "Asks")</li>
-                            <li>@Html.ActionLink("Feedback", "Index", "Submissions")</li>
-                            <li>@Html.ActionLink("Role", "Index", "Roles")</li>
-                            <li>@Html.ActionLink("User Manager", "Index", "Users")</li>
-                            <li>@Html.ActionLink("Logout", "Logout", "Users")</li>*@
+            <li>@Html.ActionLink("Genshin Wiki", "Index", "Categories")</li>
+            <li>@Html.ActionLink("Playstyle", "Index", "Playstyles")</li>
+            <li>@Html.ActionLink("Category", "Index", "Categories")</li>
+            <li>@Html.ActionLink("Questions", "Index", "Asks")</li>
+            <li>@Html.ActionLink("My Questions", "IndexQuestions", "Asks")</li>
+            <li>@Html.ActionLink("Feedback", "Index", "Submissions")</li>
+            <li>@Html.ActionLink("Role", "Index", "Roles")</li>
+            <li>@Html.ActionLink("User Manager", "Index", "Users")</li>
+            <li>@Html.ActionLink("Logout", "Logout", "Users")</li>*@
 
 
                     }

@@ -10,107 +10,108 @@ using GIFanpage.Models;
 
 namespace GIFanpage.Controllers
 {
-    public class SubmissionsController : Controller
+    public class FeedbacksController : Controller
     {
         private GIFanpageDbContext db = new GIFanpageDbContext();
 
-        // GET: Submissions
+        // GET: Feedbacks
         public ActionResult Index()
         {
-            return View(db.Submissions.ToList());
+            return View(db.Feedbacks.ToList());
         }
 
-        // GET: Submissions/Details/5
+        // GET: Feedbacks/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Submission submission = db.Submissions.Find(id);
-            if (submission == null)
+            Feedback feedback = db.Feedbacks.Find(id);
+            if (feedback == null)
             {
                 return HttpNotFound();
             }
-            return View(submission);
+            return View(feedback);
         }
 
-        // GET: Submissions/Create
+        // GET: Feedbacks/Create
         public ActionResult Create()
         {
+             
             return View();
         }
 
-        // POST: Submissions/Create
+        // POST: Feedbacks/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "SubmissionID,SubmissionName,SubmissionDescription,CloseDate,FinalDate")] Submission submission)
+        public ActionResult Create([Bind(Include = "FeedbackID,FeedbackTitle,FeedbackContent,UserID")] Feedback feedback)
         {
             if (ModelState.IsValid)
             {
-                db.Submissions.Add(submission);
+                db.Feedbacks.Add(feedback);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(submission);
+            return View(feedback);
         }
 
-        // GET: Submissions/Edit/5
+        // GET: Feedbacks/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Submission submission = db.Submissions.Find(id);
-            if (submission == null)
+            Feedback feedback = db.Feedbacks.Find(id);
+            if (feedback == null)
             {
                 return HttpNotFound();
             }
-            return View(submission);
+            return View(feedback);
         }
 
-        // POST: Submissions/Edit/5
+        // POST: Feedbacks/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "SubmissionID,SubmissionName,SubmissionDescription,CloseDate,FinalDate")] Submission submission)
+        public ActionResult Edit([Bind(Include = "FeedbackID,FeedbackTitle,FeedbackContent")] Feedback feedback)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(submission).State = EntityState.Modified;
+                db.Entry(feedback).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(submission);
+            return View(feedback);
         }
 
-        // GET: Submissions/Delete/5
+        // GET: Feedbacks/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Submission submission = db.Submissions.Find(id);
-            if (submission == null)
+            Feedback feedback = db.Feedbacks.Find(id);
+            if (feedback == null)
             {
                 return HttpNotFound();
             }
-            return View(submission);
+            return View(feedback);
         }
 
-        // POST: Submissions/Delete/5
+        // POST: Feedbacks/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Submission submission = db.Submissions.Find(id);
-            db.Submissions.Remove(submission);
+            Feedback feedback = db.Feedbacks.Find(id);
+            db.Feedbacks.Remove(feedback);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

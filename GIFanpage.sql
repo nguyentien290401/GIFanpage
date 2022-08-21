@@ -20,15 +20,6 @@ RoleID int primary key identity(1,1),
 RoleName nvarchar(max))
 go
 
-create table Submissions(
-SubmissionID int primary key identity(1,1),
-SubmissionName nvarchar(max),
-SubmissionDescription nvarchar(max),
-CloseDate datetime,
-FinalDate datetime
-)
-go
-
 create table Users(
 UserID int primary key identity(1,1),
 Name nvarchar(max),
@@ -38,6 +29,26 @@ UserImg nvarchar(max),
 PlaystyleID int references Playstyles(PlaystyleID) on delete cascade,
 RoleID int references Roles(RoleID) on delete cascade)
 go
+
+create table Feedbacks (
+FeedbackID int  primary key identity(1,1),
+FeedbackTitle nvarchar(max),
+FeedbackContent nvarchar(max),
+UserID int references Users(UserID) on delete cascade
+)
+go
+
+--create table Submissions(
+--SubmissionID int primary key identity(1,1),
+--SubmissionName nvarchar(max),
+--SubmissionDescription nvarchar(max),
+--CloseDate datetime,
+--FinalDate datetime,
+--FeedbackTitle int references Feedbacks(FeedbackTitle) on delete cascade
+--)
+--go
+
+
 
 create table Asks(
 AskID int primary key identity(1,1),
@@ -109,21 +120,15 @@ go
 insert into Categories values('Spiral Abyss', 'Talk about the relevant around Spiral Abyss each version')
 go
 
-insert into Submissions values('Your ideas about ver 2.6', 'Deadline', '3-7-2022', '3-10-2022')
-go
-insert into Submissions values('Your ideas about ver 2.7', 'Deadline', '3-7-2022', '3-10-2022')
-go
-insert into Submissions values('Your ideas about ver 2.8 ', 'Deadline', '3-7-2022', '3-10-2022')
-go
-insert into Submissions values('Your ideas about ver 3.0', 'Deadline', '5-7-2022', '5-10-2022')
-go
+--insert into Submissions values('Your ideas about ver 2.6', 'Deadline', '3-7-2022', '3-10-2022','')
+--go
+--insert into Submissions values('Your ideas about ver 2.7', 'Deadline', '3-7-2022', '3-10-2022','')
+--go
+--insert into Submissions values('Your ideas about ver 2.8 ', 'Deadline', '3-7-2022', '3-10-2022','')
+--go
+--insert into Submissions values('Your ideas about ver 3.0', 'Deadline', '5-7-2022', '5-10-2022','')
+--go
 
 use GIFanpage
 
-select * from Comments
-
-select * from Asks
-
-select * from Users
-
-select * from Votes
+select * from Feedbacks
