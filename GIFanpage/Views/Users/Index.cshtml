@@ -51,12 +51,10 @@
         </td>
         <td>
             
-            <img src="@Url.Content(item.UserImg)" style="height: 200px; margin: 10px" id="previewImage" />
+            <img src="@Url.Content(item.UserImg)" style="height: 80px;" id="previewImage" />
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.UserID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.UserID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.UserID })
+            @Html.ActionLink("Edit", "Edit", new { id=item.UserID })|@Html.ActionLink("Details", "Details", new { id=item.UserID })|@Html.ActionLink("Delete", "Delete", new { id=item.UserID })
         </td>
     </tr>
 }

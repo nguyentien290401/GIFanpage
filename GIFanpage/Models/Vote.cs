@@ -13,7 +13,7 @@ namespace GIFanpage.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int VoteID { get; set; }
         public int UserID { get; set; }
-        public int AskID { get; set; }
+        public int CommentID { get; set; }
         public int VoteValue { get; set; }
     }
 }

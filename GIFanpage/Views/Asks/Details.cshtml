@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Details</h2>
@@ -59,13 +60,7 @@
             @Html.DisplayFor(model => model.CreateDate)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ViewCount)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.ViewCount)
-        </dd>
 
 
 
@@ -85,7 +80,7 @@
             @Html.DisplayFor(model => model.FilePath)
         </dd>
 
-
+        <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-eye"></i>  @Model.ViewCount</button>
 
     </dl>
 </div>
@@ -96,12 +91,15 @@
 
 
 <h3 class="pull-left">New Comment</h3>
+<br />
+<br />
 <form action="/asks/AddComment?cmtID=@Model.AskID" method="post">
     <fieldset>
         <div class="row">
             <div class="form-group col-xs-12 col-sm-9 col-lg-10">
                 <input type="hidden" name="CommentDate" value="@DateTime.Now" />
-                <input type="hidden" name="AskID" value="@Model.AskID" />
+                <input type="hidden" name="AskID" value="@Model.AskID" />           
+                <input type="text" name="CurrentUserVoteType" value="0" hidden />    
                 <input type="checkbox" name="IsHidden" value="true" /><p>Hidden</p>
                 @*<input type="hidden" name="IsHidden" value=false />*@
                 <input type="hidden" name="UserID" value="@Session["CurrentUserID"]" />
@@ -117,7 +115,8 @@
     <p>Don't have any comment</p>
 }
 
-@for (int i = 0; i < Model.CommentCount; i++)
+else {
+for (int i = 0; i < Model.CommentCount; i++)
 {
     <div class="media">
         <div class="media-body">
@@ -131,8 +130,42 @@
             }
             <p>@Model.Comments[i].Content</p>
             <ul class="list-unstyled list-inline media-detail pull-left">
-                <li><i class="fa fa-calendar"></i>@Model.Comments[i].CommentDate</li>
+                <li><i class="fa fa-calendar"></i>  @Model.Comments[i].CommentDate</li>
             </ul>
+
+
+
+            @if (@Model.Comments[i].CurrentUserVoteType < 1 )
+            {
+                <form action="/asks/like?ask=@Model.AskID&cmt=@Model.Comments[i].CommentID &user=@Session["CurrentUserID"]" method="post" class="w3-theme-d1 w3-margin-bottom">
+                    <input type="hidden" name="UserID" value="@Session["CurrentUserID"]" />
+                    <input type="hidden" name="CommentID" value="@Model.Comments[i].CommentID" />
+                    <input type="hidden" name="VoteValue" value="1" />
+                    <button type="submit" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-thumbs-o-up"></i> Like</button>
+                    <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-comment"></i>  @Model.CommentCount</button>
+                    <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-address-book"></i>  @Model.Category.CategoryName</button>
+                    <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-thumbs-up"></i>  @Model.Comments[i].VotesCount</button>
+                </form>
+            } else
+             {
+ 
+            <form action="/asks/dislike?ask=@Model.AskID&Cmt=@Model.Comments[i].CommentID &user=@Session["CurrentUserID"]" method="post" class="w3-theme-d1 w3-margin-bottom">
+                <input type="hidden" name="UserID" value="@Session["CurrentUserID"]" />
+                <input type="hidden" name="CommentID" value="@Model.Comments[i].CommentID" />
+                <input type="hidden" name="VoteValue" value="-1" />
+                <button type="submit" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-thumbs-up"></i> Dislike</button>
+                <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-comment"></i>  @Model.CommentCount</button>
+                <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-address-book"></i>  @Model.Category.CategoryName</button>
+                <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-thumbs-up"></i>  @Model.Comments[i].VotesCount</button>
+            </form>
+            }
+
+
+
+
+
+
+
             @*<ul class="list-unstyled list-inline media-detail pull-right">
             <li class=""><a href="">Like</a></li>
         </ul>*@
@@ -142,6 +175,8 @@
                     <li class=""><a href="" id="button-edit">Edit</a></li>
                 </ul>
 
+
+
                 <form action="/asks/EditComment?cmtID=@Model.AskID" method="post" id="edit-form" class="hidden">
                     <fieldset>
                         <div class="row">
@@ -150,7 +185,7 @@
                                 <input type="hidden" name="CommentDate" value="@DateTime.Now" />
                                 <input type="hidden" name="AskID" value="@Model.AskID" />
                                 <input type="hidden" name="UserID" value="@Session["CurrentUserID"]" />
-                                <input type="hidden" name="IsHidden" value="@Model.Comments[i].IsHidden" /> 
+                                <input type="hidden" name="IsHidden" value="@Model.Comments[i].IsHidden" />
                                 <textarea class="form-control" name="Content" placeholder="@Model.Comments[i].Content" required=""></textarea>
                                 <button type="submit" class="btn btn-normal pull-right">Edit</button>
                             </div>
@@ -167,6 +202,10 @@
         </div>
     </div>
 }
+}
+
+
+
 <script>
     const button = document.querySelectorAll("#button-edit");
     const editForm = document.querySelectorAll("#edit-form");

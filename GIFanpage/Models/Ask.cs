@@ -18,11 +18,8 @@ namespace GIFanpage.Models
         public DateTime CreateDate { get; set; }
         public int ViewCount { get; set; }
         public int CommentCount { get; set; }
-        public int VotesCount { get; set; }
         public string FileName { get; set; }
         public string FilePath { get; set; }
-        public int CurrentUserVoteType { get; set; }
-
         public int UserID { get; set; }
 
         [Display(Name = "Category")]
@@ -40,6 +37,5 @@ namespace GIFanpage.Models
         //[ForeignKey("SubmissionID")]
         //public virtual Submission Submission { get; set; }
         public virtual List<Comment> Comments { get; set; }
-        public virtual List<Vote> Votes { get; set; }
     }
 }

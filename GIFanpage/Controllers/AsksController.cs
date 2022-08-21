@@ -30,20 +30,41 @@ namespace GIFanpage.Controllers
 
         
         // GET: Asks/Details/5
-        public ActionResult Details(int? ask)
+        public ActionResult Details(int ask)
         {
-            if (ask == null)
+            //if (ask == null)
+            //{
+            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            //}
+            //Ask asks = db.Asks.Find(ask);
+            //if (asks == null)
+            //{
+            //    return HttpNotFound();
+            //}
+
+            Ask asks = db.Asks.Where(a => a.AskID == ask).FirstOrDefault(); 
+            asks.ViewCount++;
+
+
+
+            db.SaveChanges();
+
+            //// Check Like
+            for (int i = 0; i < asks.Comments.Count; i++)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                var id = asks.Comments[i].CommentID;
+                var user = Convert.ToInt32(Session["CurrentUserID"]);
+                Vote vt = db.Votes.Where(v => v.CommentID == id && v.UserID == user).FirstOrDefault();
+                if (vt != null)
+                {
+                    asks.Comments[i].CurrentUserVoteType = vt.VoteValue;
+                }
+                else
+                {
+                    asks.Comments[i].CurrentUserVoteType = 0;
+                }
             }
 
-            Ask asks = db.Asks.Find(ask);
-            asks.ViewCount++;
-            db.SaveChanges();
-            if (asks == null)
-            {
-                return HttpNotFound();
-            }
             return View(asks);
         }
 
@@ -75,6 +96,54 @@ namespace GIFanpage.Controllers
 
             return RedirectToAction("Details", "Asks", new { ask = cmtID });
         }
+
+        [HttpPost]
+        public ActionResult Like(int ask, int user, int cmt, Vote vote)
+        {
+            Ask question = db.Asks.Where(q => q.AskID == ask).FirstOrDefault();
+            Comment comment = db.Comments.Where(i => i.CommentID == cmt).FirstOrDefault();
+            Vote vt = db.Votes.Where(v => v.UserID == user && v.CommentID == vote.CommentID).FirstOrDefault();
+            comment.VotesCount++;
+            if (vt != null)
+            {
+                vt.VoteValue = vote.VoteValue;
+                comment.CurrentUserVoteType = vote.VoteValue;
+            }
+            else
+            {
+                db.Votes.Add(vote);
+                comment.CurrentUserVoteType = vote.VoteValue;
+            }
+
+            db.SaveChanges();
+
+            return RedirectToAction("Details", "Asks", new { ask = ask });
+        }
+
+        [HttpPost]
+        public ActionResult DisLike(int ask, int user, int Cmt, Vote vote)
+        {
+            Ask question = db.Asks.Where(q => q.AskID == ask).FirstOrDefault();
+            Comment comment = db.Comments.Where(i => i.CommentID == Cmt).FirstOrDefault();
+            Vote vt = db.Votes.Where(v => v.UserID == user && v.CommentID == vote.CommentID).FirstOrDefault();
+            comment.VotesCount--;
+            if (vt != null)
+            {
+                vt.VoteValue = vote.VoteValue;
+                comment.CurrentUserVoteType = vote.VoteValue;
+            }
+            else
+            {
+                db.Votes.Add(vote);
+                comment.CurrentUserVoteType = vote.VoteValue;
+            }
+
+            db.SaveChanges();
+
+            return RedirectToAction("Details", "Asks", new { ask = ask });
+        }
+
+
 
         // GET: Asks/Create
         public ActionResult Create()
