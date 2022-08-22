@@ -1,0 +1,50 @@
+﻿@model GIFanpage.Models.Character
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Character</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CharacterName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CharacterName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CharacterVision)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CharacterVision)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CharacterDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CharacterDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CharacterImage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CharacterImage)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CharacterID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

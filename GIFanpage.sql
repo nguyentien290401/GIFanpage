@@ -4,6 +4,24 @@ go
 use GIFanpage
 go
 
+create table News(
+NewsID int primary key identity(1,1),
+NewsTitle nvarchar(max),
+NewsDescription nvarchar(max),
+NewsImage nvarchar(max),
+NewsContent nvarchar(max),
+CreateDate datetime);
+go
+
+create table Characters(
+CharacterID int primary key identity(1,1),
+CharacterName nvarchar(20),
+CharacterVision nvarchar(10),
+CharacterImage nvarchar(max),
+CharacterDescription nvarchar(max)
+);
+go
+
 create table Categories(
 CategoryID int primary key identity(1,1),
 CategoryName nvarchar(max),

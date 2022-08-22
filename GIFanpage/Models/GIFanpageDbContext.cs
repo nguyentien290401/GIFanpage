@@ -18,7 +18,8 @@ namespace GIFanpage.Models
         public DbSet<Playstyle> Playstyles { get; set; }
         public DbSet<Ask> Asks { get; set; }
         public DbSet<Role> Roles { get; set; }
-        
+        public DbSet<Character> Characters { get; set; }
+        public DbSet<New> News { get; set; }
         public DbSet<Feedback> Feedbacks { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Vote> Votes { get; set; }

@@ -32,6 +32,7 @@ namespace GIFanpage.Controllers
             {
                 Session["CurrentUserID"] = usr.UserID;
                 Session["CurrentUserName"] = usr.Name;
+                Session["CurrentUserImg"] = usr.UserImg;
                 Session["CurrentUserRoleID"] = usr.RoleID;
                 Session["CurrentUserLike"] = 0;
                 if (usr.RoleID == 1)

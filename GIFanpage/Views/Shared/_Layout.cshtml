@@ -4,172 +4,157 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Genshin Impact</title>
-    @Styles.Render("~/Content/css")
+    @*@Styles.Render("~/Content/css")*@
     @Scripts.Render("~/bundles/modernizr")
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-    @*<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
-        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js" rel="stylesheet">
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" rel="stylesheet">*@
-    @*<style>
-            .navbar {
-                background: #000000
-            }
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" rel="stylesheet">
 
-            .nav-item::after {
-                content: '';
-                display: block;
-                width: 0px;
-                height: 2px;
-                background: #fec400;
-                transition: 0.4s
-            }
 
-            .nav-item:hover::after {
-                width: 100%
-            }
-
-            .navbar-dark .navbar-nav .active > .nav-link,
-            .navbar-dark .navbar-nav .nav-link.active,
-            .navbar-dark .navbar-nav .nav-link.show,
-            .navbar-dark .navbar-nav .show > .nav-link,
-            .navbar-dark .navbar-nav .nav-link:focus,
-            .navbar-dark .navbar-nav .nav-link:hover {
-                color: #fec400
-            }
-
-            .nav-link {
-                padding: 25px 5px;
-                transition: 0.2s
-            }
-
-            body {
-                background-color: grey;
-            }
-        </style>*@
     <style>
-        /* Styles for wrapping the search box */
 
-        .main {
-            width: 50%;
-            margin: 50px auto;
+        .navbar {
+            background: #000000
         }
 
-        /* Bootstrap 4 text input with search icon */
-
-        .has-search .form-control {
-            padding-left: 2.375rem;
-            margin-bottom: 1rem;
-        }
-
-        .sorting {
-            padding: 1.5rem;
-        }
-
-        .slogan {
-            margin-top: 3.5rem;
-            text-align: center;
-            margin-bottom: 0;
-        }
-
-        .has-search .form-control-feedback {
-            position: absolute;
-            z-index: 2;
+        .nav-item::after {
+            content: '';
             display: block;
-            width: 2.375rem;
-            height: 2.375rem;
-            line-height: 2.375rem;
-            text-align: center;
-            pointer-events: none;
-            color: #aaa;
+            width: 0px;
+            height: 2px;
+            background: #fec400;
+            transition: 0.4s
+        }
+
+        .nav-item:hover::after {
+            width: 100%
+        }
+
+        .navbar-dark .navbar-nav .active > .nav-link,
+        .navbar-dark .navbar-nav .nav-link.active,
+        .navbar-dark .navbar-nav .nav-link.show,
+        .navbar-dark .navbar-nav .show > .nav-link,
+        .navbar-dark .navbar-nav .nav-link:focus,
+        .navbar-dark .navbar-nav .nav-link:hover {
+            color: #69e0ff
+        }
+
+        .nav-link {
+            padding: 25px 5px;
+            transition: 0.2s
         }
     </style>
+
     <script src="~/Scripts/scripts.js"></script>
 </head>
 <body>
-    @*<nav class="navbar navbar-expand-sm bg-dark navbar-dark navbar-fixed-top">
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark navbar-fixed-top">
         <a class="navbar-brand" href="/home/index">
             <img src="~/Content/Image/Logo.png" alt="Avatar Logo" style="width:100px" />
         </a>
-        <button class="navbar-toggler" type="button" data-target="#navigation"> <span class="navbar-toggler-icon"></span>
-       </button>
-
-
-        <div class="collapse navbar-collapse">
-            <ul class="navbar-nav">
-                <li class="nav-item active"> <a href="#" class="nav-link"> Home </a> </li>
-                <li class="nav-item"> <a href="#" class="nav-link"> Product </a> </li>
-                <li class="nav-item"> <a href="#" class="nav-link"> About </a> </li>
-                <li class="nav-item"> <a href="#" class="nav-link"> Contact Us </a> </li>
-            </ul>
-        </div>
-        
-       
-            <ul class="nav justify-content-end">
-                <li class="nav-item active"> <a href="#" class="nav-link"> Login </a> </li>
-                <li class="nav-item"> <a href="#" class="nav-link"> Product </a> </li>
-                <li class="nav-item"> <a href="#" class="nav-link"> About </a> </li>
-                <li class="nav-item"> <a href="#" class="nav-link"> Contact Us </a> </li>
-            </ul>
-       
-
-    </nav>*@
+        <button class="navbar-toggler" type="button" data-target="#navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
 
 
-
-
-
-    <div class="navbar navbar-inverse bg-primary navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("GIFanpage", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+        @if (Session["CurrentUserName"] == null)
+        {
+            <div class="collapse navbar-collapse justify-content-end">
+                <ul class="nav navbar-nav justify-content-end">
+                    <li class="nav-item active"> <a href="/users/login" class="nav-link"> Login </a> </li>
+                    <li class="nav-item"> <a href="/users/register" class="nav-link"> Register </a> </li>
+                </ul>
+                }
             </div>
-            <div class="navbar-collapse collapse">
-                <div class="nav navbar-nav">
-                    @if (Session["CurrentUserName"] == null)
-                    {
-                        <a href="/users/login" class="w3-bar-item w3-button"><i class="fa fa-user"></i> LOGIN</a>
-                        <a href="/users/register" class="w3-bar-item w3-button">REGISTER</a>
-                        @*<li>@Html.ActionLink("Login", "Login", "Users")</li>
-            <li>@Html.ActionLink("Register", "Register", "Users")</li>*@
-                    }
-                    @if (Session["CurrentUserName"] != null)
-                    {
-                        <a href="/home/index" class="w3-bar-item w3-button"> Home</a>
-                        <a href="/categories/index" class="w3-bar-item w3-button">Characters</a>
-                        <a href="/categories/index" class="w3-bar-item w3-button">News</a>                 
-                        <a href="/asks/index" class="w3-bar-item w3-button">Questions</a>
-                        <a href="/asks/indexquestions/@Session["CurrentUserID"]" class="w3-bar-item w3-button"> My Questions</a>
-                        <a href="/feedbacks/create/@Session["CurrentUserID"]" class="w3-bar-item w3-button">Feedbacks</a>
-                        <a href="/users/index" class="w3-bar-item w3-button"><i class="fa fa-user"></i> User</a>
-                        <a href="/users/logout" class="w3-bar-item w3-button">Logout</a>
-                        @*<li>@Html.ActionLink("Home", "Index", "Home")</li>
-            <li>@Html.ActionLink("Genshin Wiki", "Index", "Categories")</li>
-            <li>@Html.ActionLink("Playstyle", "Index", "Playstyles")</li>
-            <li>@Html.ActionLink("Category", "Index", "Categories")</li>
-            <li>@Html.ActionLink("Questions", "Index", "Asks")</li>
-            <li>@Html.ActionLink("My Questions", "IndexQuestions", "Asks")</li>
-            <li>@Html.ActionLink("Feedback", "Index", "Submissions")</li>
-            <li>@Html.ActionLink("Role", "Index", "Roles")</li>
-            <li>@Html.ActionLink("User Manager", "Index", "Users")</li>
-            <li>@Html.ActionLink("Logout", "Logout", "Users")</li>*@
+        }
+        @if (Session["CurrentUserName"] != null)
+        {
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav">
+                    <li class="nav-item active"> <a href="#" class="nav-link"> Home </a> </li>
+                    <li class="nav-item"> <a href="/characters/index" class="nav-link"> Character </a> </li>
+                    <li class="nav-item"> <a href="/news/index" class="nav-link"> News </a> </li>
+                    <li class="nav-item"> <a href="/asks/index" class="nav-link"> Questions </a> </li>
+                    <li class="nav-item"> <a href="/asks/indexQuestions" class="nav-link"> My Questions </a> </li>
+                    <li class="nav-item"> <a href="/feedbacks/index" class="nav-link"> Feedback </a> </li>
+                </ul>
+            </div>
 
 
-                    }
+            <ul class="nav navbar-nav justify-content-end">
+                <li class="nav-item active">
+                    <a href="/users/index" class="nav-link" style="color: orangered ;">
+                        Welcome
+                        @*<img src="@Url.Content(Session"["CurrentUserImg"]")" alt="Avatar Logo" style="width:100px" />*@
+                        @Session["CurrentUserName"]
+                    </a>
+                </li>
+                <li class="nav-item active"> <a href="/users/logout" class="nav-link"> Logout </a> </li>
+            </ul>
+        }
+
+        }
+    </nav>
 
 
 
+
+
+
+    @*<div class="navbar navbar-inverse bg-primary navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("GIFanpage", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
+                <div class="navbar-collapse collapse">
+                    <div class="nav navbar-nav">
+                        @if (Session["CurrentUserName"] == null)
+                        {
+                            <a href="/users/login" class="w3-bar-item w3-button"><i class="fa fa-user"></i> LOGIN</a>
+                            <a href="/users/register" class="w3-bar-item w3-button">REGISTER</a>
+                            <li>@Html.ActionLink("Login", "Login", "Users")</li>
+                <li>@Html.ActionLink("Register", "Register", "Users")</li>
+                        }
+                        @if (Session["CurrentUserName"] != null)
+                        {
+                            <a href="/home/index" class="w3-bar-item w3-button"> Home</a>
+                            <a href="/characters/index" class="w3-bar-item w3-button">Characters</a>
+                            <a href="/news/index" class="w3-bar-item w3-button">News</a>
+                            <a href="/asks/index" class="w3-bar-item w3-button">Questions</a>
+                            <a href="/asks/indexquestions/@Session["CurrentUserID"]" class="w3-bar-item w3-button"> My Questions</a>
+                            <a href="/feedbacks/create/@Session["CurrentUserID"]" class="w3-bar-item w3-button">Feedbacks</a>
+                            <a href="/users/index" class="w3-bar-item w3-button"><i class="fa fa-user"></i> User</a>
+                            <a href="/users/logout" class="w3-bar-item w3-button">Logout</a>
+
+                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                <li>@Html.ActionLink("Genshin Wiki", "Index", "Categories")</li>
+                <li>@Html.ActionLink("Playstyle", "Index", "Playstyles")</li>
+                <li>@Html.ActionLink("Category", "Index", "Categories")</li>
+                <li>@Html.ActionLink("Questions", "Index", "Asks")</li>
+                <li>@Html.ActionLink("My Questions", "IndexQuestions", "Asks")</li>
+                <li>@Html.ActionLink("Feedback", "Index", "Submissions")</li>
+                <li>@Html.ActionLink("Role", "Index", "Roles")</li>
+                <li>@Html.ActionLink("User Manager", "Index", "Users")</li>
+                <li>@Html.ActionLink("Logout", "Logout", "Users")</li>
+
+
+                        }
+
+
+
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
+        </div>*@
     <div class="container body-content">
         @RenderBody()
         <hr />
@@ -182,4 +167,54 @@
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
+
 </html>
+
+<footer class="bg-dark text-center text-white">
+    <!-- Grid container -->
+    <div class="container p-4 pb-0">
+        <!-- Section: Social media -->
+        <section class="mb-4">
+            <!-- Facebook -->
+            <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+                <i class="fa fa-facebook-official w3-hover-opacity"></i>
+            </a>
+
+            <!-- Twitter -->
+            <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+                <i class="fa fa-instagram w3-hover-opacity"></i>
+            </a>
+
+            <!-- Google -->
+            <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+                <i class="fa fa-snapchat w3-hover-opacity"></i>
+            </a>
+
+            <!-- Instagram -->
+            <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+                <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+            </a>
+
+            <!-- Linkedin -->
+            <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+                <i class="fa fa-twitter w3-hover-opacity"></i>
+            </a>
+
+            <!-- Github -->
+            <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+                <i class="fa fa-linkedin w3-hover-opacity"></i>
+            </a>
+        </section>
+        <!-- Section: Social media -->
+    </div>
+    <!-- Grid container -->
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+        © 2020 Copyright:
+        <a class="text-white" href="https://genshin.hoyoverse.com/vi/home">Genshin Impact</a>
+    </div>
+    <!-- Copyright -->
+</footer>
+
+<
+
