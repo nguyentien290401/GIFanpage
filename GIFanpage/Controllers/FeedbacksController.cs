@@ -5,7 +5,9 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
+using System.IO;
 using System.Web.Mvc;
+using ClosedXML.Excel;
 using GIFanpage.Models;
 
 namespace GIFanpage.Controllers
@@ -17,7 +19,36 @@ namespace GIFanpage.Controllers
         // GET: Feedbacks
         public ActionResult Index()
         {
-            return View(db.Feedbacks.ToList());
+            return View(from feedback in db.Feedbacks
+                        select feedback);
+            //return View(db.Feedbacks.ToList());
+        }
+
+        [HttpPost]
+        public FileResult ExportToExcel()
+        {
+            DataTable dt = new DataTable("Grid");
+            dt.Columns.AddRange(new DataColumn[3] { new DataColumn("FeedbackID"),
+                                                     new DataColumn("FeedbackTitle"),
+                                                     new DataColumn("FeedbackContent"),                                                  
+                                                    });
+
+            var feedbacks = from GIFanpagesDbContext in db.Feedbacks select GIFanpagesDbContext;
+
+            foreach (var feedback in feedbacks)
+            {
+                dt.Rows.Add(feedback.FeedbackID, feedback.FeedbackTitle, feedback.FeedbackContent);
+            }
+
+            using (XLWorkbook wb = new XLWorkbook()) //Install ClosedXml from Nuget for XLWorkbook  
+            {
+                wb.Worksheets.Add(dt);
+                using (MemoryStream stream = new MemoryStream()) //using System.IO;  
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Feedback about Fanpage.xlsx");
+                }
+            }
         }
 
         // GET: Feedbacks/Details/5
