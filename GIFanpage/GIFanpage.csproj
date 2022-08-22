@@ -203,6 +203,7 @@
     <Content Include="Content\Image\Ayaka.jpg" />
     <Content Include="Content\Image\Ganyu-1st prize.jpg" />
     <Content Include="Content\Image\KeqingAvatar.jpg" />
+    <Content Include="Content\Image\LoginBackground.jpeg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />

@@ -12,10 +12,20 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,800" rel="stylesheet">
 
 
     <style>
+        .gradient-custom {
+            /* fallback for old browsers */
+            background: #6a11cb;
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))
+        }
 
+        /* Navbar CSS*/
         .navbar {
             background: #000000
         }
@@ -46,6 +56,8 @@
             padding: 25px 5px;
             transition: 0.2s
         }
+
+
     </style>
 
     <script src="~/Scripts/scripts.js"></script>
@@ -157,10 +169,8 @@
         </div>*@
     <div class="container body-content">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
+     
+   
     </div>
 
     @Scripts.Render("~/bundles/jquery")
@@ -210,11 +220,11 @@
     <!-- Grid container -->
     <!-- Copyright -->
     <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-        © 2020 Copyright:
+        © 2022 Copyright:
         <a class="text-white" href="https://genshin.hoyoverse.com/vi/home">Genshin Impact</a>
     </div>
     <!-- Copyright -->
 </footer>
 
-<
+
 
