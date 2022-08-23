@@ -16,6 +16,23 @@
 
 
     <style>
+        /*Register css*/
+        .card-img-left {
+            width: 45%;
+            /* Link to your background image using in the property below! */
+            background: scroll left url('https://i.ytimg.com/vi/y3yrizZKzaY/maxresdefault.jpg');
+            background-size: cover;
+        }
+        
+       
+        .btn-google {
+            color: white !important;
+            background-color: #ea4335;
+        }
+
+   
+*/
+        /*Login background color*/
         .gradient-custom {
             /* fallback for old browsers */
             background: #6a11cb;
@@ -63,7 +80,7 @@
     <script src="~/Scripts/scripts.js"></script>
 </head>
 <body>
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark navbar-fixed-top">
+    <nav class="navbar navbar-expand-sm  navbar-dark navbar-fixed-top">
         <a class="navbar-brand" href="/home/index">
             <img src="~/Content/Image/Logo.png" alt="Avatar Logo" style="width:100px" />
         </a>
@@ -91,7 +108,7 @@
                     <li class="nav-item"> <a href="/characters/index" class="nav-link"> Character </a> </li>
                     <li class="nav-item"> <a href="/news/index" class="nav-link"> News </a> </li>
                     <li class="nav-item"> <a href="/asks/index" class="nav-link"> Questions </a> </li>
-                    <li class="nav-item"> <a href="/asks/indexQuestions" class="nav-link"> My Questions </a> </li>
+                    <li class="nav-item"> <a href="/asks/indexQuestions/@Session["CurrentUserID"]" class="nav-link"> My Questions </a> </li>
                     <li class="nav-item"> <a href="/feedbacks/index" class="nav-link"> Feedback </a> </li>
                 </ul>
             </div>
