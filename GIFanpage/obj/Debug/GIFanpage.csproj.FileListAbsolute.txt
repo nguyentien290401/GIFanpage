@@ -279,4 +279,3 @@ C:\Users\PGK\Desktop\GIFanpage\GIFanpage\GIFanpage\bin\MoreLinq.xml
 C:\Users\PGK\Desktop\GIFanpage\GIFanpage\GIFanpage\bin\System.Linq.Dynamic.Core.pdb
 C:\Users\PGK\Desktop\GIFanpage\GIFanpage\GIFanpage\bin\System.Linq.Dynamic.Core.xml
 C:\Users\PGK\Desktop\GIFanpage\GIFanpage\GIFanpage\bin\System.ValueTuple.xml
-C:\Users\PGK\Desktop\GIFanpage\GIFanpage\GIFanpage\obj\Debug\GIFanpage.csproj.AssemblyReference.cache

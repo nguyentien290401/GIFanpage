@@ -204,10 +204,13 @@
     <Content Include="Content\Image\Ganyu-1st prize.jpg" />
     <Content Include="Content\Image\InazumaSilde.png" />
     <Content Include="Content\Image\KeqingAvatar.jpg" />
+    <Content Include="Content\Image\KokomiAvatar.png" />
     <Content Include="Content\Image\LiyueSlide.png" />
     <Content Include="Content\Image\LoginBackground.jpeg" />
     <Content Include="Content\Image\MonstadtSlide.png" />
     <Content Include="Content\Image\SumeruSlide.png" />
+    <Content Include="Content\Image\TighnariAvatar.png" />
+    <Content Include="Content\Image\ZhongliAvatar.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
