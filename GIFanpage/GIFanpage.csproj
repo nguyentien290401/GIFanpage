@@ -211,6 +211,7 @@
     <Content Include="Content\Image\PaimonFeedbacks.png" />
     <Content Include="Content\Image\PaimonNews.png" />
     <Content Include="Content\Image\PaimonQuestions.png" />
+    <Content Include="Content\Image\RegisterBackground.png" />
     <Content Include="Content\Image\SumeruSlide.png" />
     <Content Include="Content\Image\TighnariAvatar.png" />
     <Content Include="Content\Image\ZhongliAvatar.jpg" />
