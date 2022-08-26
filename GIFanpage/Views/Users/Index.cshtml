@@ -54,7 +54,7 @@
             <img src="@Url.Content(item.UserImg)" style="height: 80px;" id="previewImage" />
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.UserID })|@Html.ActionLink("Details", "Details", new { id=item.UserID })|@Html.ActionLink("Delete", "Delete", new { id=item.UserID })
+            @Html.ActionLink("Edit", "ChangeProfile", new { id=item.UserID })|@Html.ActionLink("Details", "Details", new { id=item.UserID })|@Html.ActionLink("Delete", "Delete", new { id=item.UserID })
         </td>
     </tr>
 }

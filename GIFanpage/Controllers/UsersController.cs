@@ -129,7 +129,7 @@ namespace GIFanpage.Controllers
         }
 
         // GET: Users/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult ChangeProfile(int? id)
         {
             if (id == null)
             {
@@ -150,7 +150,7 @@ namespace GIFanpage.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(/*[Bind(Include = "UserID,Name,Email,UserImg,PlaystyleID,RoleID")]*/ User user)
+        public ActionResult ChangeProfile(/*[Bind(Include = "UserID,Name,Email,UserImg,PlaystyleID,RoleID")]*/ User user)
         {
             if (ModelState.IsValid)
             {
@@ -165,11 +165,11 @@ namespace GIFanpage.Controllers
 
                 db.Entry(user).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Home");
             }
             ViewBag.PlaystyleID = new SelectList(db.Playstyles, "PlaystyleID", "PlaystyleName", user.PlaystyleID);
             ViewBag.RoleID = new SelectList(db.Roles, "RoleID", "RoleName", user.RoleID);
-            return View(user);
+            return View();
         }
 
         // GET: Users/Delete/5

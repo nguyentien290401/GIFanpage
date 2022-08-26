@@ -270,7 +270,7 @@
     <Content Include="Views\Users\Register.cshtml" />
     <Content Include="Views\Users\Delete.cshtml" />
     <Content Include="Views\Users\Details.cshtml" />
-    <Content Include="Views\Users\Edit.cshtml" />
+    <Content Include="Views\Users\ChangeProfile.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Asks\Create.cshtml" />
     <Content Include="Views\Asks\Delete.cshtml" />

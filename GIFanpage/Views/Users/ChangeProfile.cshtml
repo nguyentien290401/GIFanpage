@@ -1,0 +1,175 @@
+﻿@model GIFanpage.Models.User
+
+@{
+    ViewBag.Title = "ChangeProfile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit</h2>
+
+<div class="container">
+    @using (Html.BeginForm("ChangeProfile", "Users", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        
+            <div class="col-md-3 mb-3">
+                <div class="card" style="left: 150%; top: 1rem;">
+                    <div class="card-body">
+                        <div class="d-flex flex-column align-items-center text-center">
+                            <img src="@Url.Content(Model.UserImg)" class="rounded-circle" height="150" width="150" id="previewImage" />
+
+                            <h4>@Model.Name</h4>
+                            <p class="text-muted font-size-sm">@Model.Email</p>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-8 mb-3">
+                <div class="card" style="left: 25%;">
+                    <div class="card-body" style="height: auto;">
+                        
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            @Html.HiddenFor(model => model.UserID)
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Full Name</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-9 text-secondary">
+                                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @type = "hidden" } })
+                                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Password</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    @Html.EditorFor(model => model.PasswordHash, new { htmlAttributes = new { @class = "form-control", @type = "password" } })
+                                    @Html.ValidationMessageFor(model => model.PasswordHash, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <hr>
+
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Playstyle</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    @Html.DropDownList("PlaystyleID", null, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.PlaystyleID, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            @Html.TextBoxFor(model => model.RoleID, new { @Value = Session["CurrentUserRoleID"], @type = "hidden" })
+                            @Html.ValidationMessageFor(model => model.RoleID, "", new { @class = "text-danger" })
+                            <hr>
+
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Image</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    @*@Html.EditorFor(model => model.UserImg, new { htmlAttributes = new { @class = "form-control" } })*@
+                                    @*<img src="@Url.Content(Model.UserImg)" style="height: 200px; margin: 10px" id="previewImage" hidden/>*@
+                                    <input type="file" name="ImageUpload" required onchange="ShowImagePreview(this, document.getElementById('previewImage'))" />
+                                    @Html.ValidationMessageFor(model => model.UserImg, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <hr />
+
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <button class="btn btn-primary" type="submit">Edit</button>
+                                </div>
+                            </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+    }
+    </div>
+
+
+@*@using (Html.BeginForm("ChangeProfile", "Users", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.UserID)
+        @Html.HiddenFor(model => model.UserImg)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PasswordHash, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PasswordHash, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PasswordHash, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.UserImg, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.UserImg, new { htmlAttributes = new { @class = "form-control" } })
+                <img src="@Url.Content(Model.UserImg)" style="height: 200px; margin: 10px" id="previewImage" />
+                <input type="file" name="ImageUpload" required onchange="ShowImagePreview(this, document.getElementById('previewImage'))" />
+                @Html.ValidationMessageFor(model => model.UserImg, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PlaystyleID, "PlaystyleID", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("PlaystyleID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.PlaystyleID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.RoleID, "RoleID", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("RoleID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.RoleID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}*@
+
+
+
+@*@section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }*@

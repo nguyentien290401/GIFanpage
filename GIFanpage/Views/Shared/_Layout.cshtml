@@ -111,8 +111,9 @@
                         <li class="nav-item"> <a href="/characters/index" class="nav-link"> Character </a> </li>
                         <li class="nav-item"> <a href="/news/index" class="nav-link"> News </a> </li>
                         <li class="nav-item"> <a href="/asks/index" class="nav-link"> Questions </a> </li>
-                        <li class="nav-item"> <a href="/asks/indexQuestions/@Session["CurrentUserID"]" class="nav-link"> My Questions </a> </li>
                         <li class="nav-item"> <a href="/feedbacks/index" class="nav-link"> Feedback </a> </li>
+                        <li class="nav-item"> <a href="/asks/indexQuestions/@Session["CurrentUserID"]" class="nav-link"> My Questions </a> </li>
+                        <li class="nav-item"> <a href="/users/changeProfile/@Session["CurrentUserID"]" class="nav-link"> Change Profile </a> </li>
                     </ul>
                 </div>
 
@@ -120,7 +121,6 @@
                 <ul class="nav navbar-nav justify-content-end ">
                     <li class="nav-item active">
                         <a href="/users/index" class="nav-link" style="color: orangered ;">
-                            Welcome
                             @*<img src="@Url.Content(Session"["CurrentUserImg"]")" alt="Avatar Logo" style="width:100px" />*@
                             @Session["CurrentUserName"]
                         </a>
