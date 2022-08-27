@@ -23,6 +23,37 @@
 
 <body>
     <style>
+
+        #feedback-form-wrapper #floating-icon > button {
+            position: fixed;
+            right: 0;
+            top: 50%;
+            transform: rotate(-90deg) translate(50%, -50%);
+            transform-origin: right;
+        }
+
+        #feedback-form-wrapper .rating-input-wrapper input[type="radio"] {
+            display: none;
+        }
+
+            #feedback-form-wrapper .rating-input-wrapper input[type="radio"] ~ span {
+                cursor: pointer;
+            }
+
+            #feedback-form-wrapper .rating-input-wrapper input[type="radio"]:checked ~ span {
+                background-color: #4261dc;
+                color: #fff;
+            }
+
+        #feedback-form-wrapper .rating-labels > label {
+            font-size: 14px;
+            color: #777;
+        }
+
+
+
+
+
         /*Feature in Homepage*/
         .featurette-divider {
             margin: 4rem 0; /* Space out the Bootstrap <hr> more */
@@ -111,16 +142,16 @@
                         <li class="nav-item"> <a href="/characters/index" class="nav-link"> Character </a> </li>
                         <li class="nav-item"> <a href="/news/index" class="nav-link"> News </a> </li>
                         <li class="nav-item"> <a href="/asks/index" class="nav-link"> Questions </a> </li>
-                        <li class="nav-item"> <a href="/feedbacks/index" class="nav-link"> Feedback </a> </li>
                         <li class="nav-item"> <a href="/asks/indexQuestions/@Session["CurrentUserID"]" class="nav-link"> My Questions </a> </li>
-                        <li class="nav-item"> <a href="/users/changeProfile/@Session["CurrentUserID"]" class="nav-link"> Change Profile </a> </li>
+                        <li class="nav-item"> <a href="/feedbacks/create/@Session["CurrentUserID"]" class="nav-link"> Feedback </a> </li>
+                        <li class="nav-item"> <a href="/users/changeProfile/@Session["CurrentUserID"]" class="nav-link"> Quiz </a> </li>
                     </ul>
                 </div>
 
 
                 <ul class="nav navbar-nav justify-content-end ">
                     <li class="nav-item active">
-                        <a href="/users/index" class="nav-link" style="color: orangered ;">
+                        <a href="/users/changeProfile/@Session["CurrentUserID"]" class="nav-link" style="color: orangered ;">
                             @*<img src="@Url.Content(Session"["CurrentUserImg"]")" alt="Avatar Logo" style="width:100px" />*@
                             @Session["CurrentUserName"]
                         </a>

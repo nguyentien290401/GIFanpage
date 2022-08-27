@@ -47,7 +47,7 @@
             </div>
         </div>*@
     <div>
-        <input type="text" name="CreateDate" value="@DateTime.Now" hidden />
+        <input type="text" name="CreateDate" value="@Session["CurrentUserID"] />
         @Html.ValidationMessageFor(model => model.CreateDate, "", new { @class = "text-danger" })
     </div>
 

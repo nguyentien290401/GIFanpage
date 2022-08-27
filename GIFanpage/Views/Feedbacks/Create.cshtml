@@ -6,44 +6,95 @@
 
 <h2>Create</h2>
 
-@using (Html.BeginForm()) 
+@*@using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Feedback</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.FeedbackTitle, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FeedbackTitle, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FeedbackTitle, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FeedbackContent, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FeedbackContent, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FeedbackContent, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <figure class="av"></figure>
+        <div>
+            <input type="text" name="UserID" value="@Session["CurrentUserID"]" hidden />
+            @Html.ValidationMessageFor(model => model.UserID, "", new { @class = "text-danger" })
+        </div>
+
+        <a href="feedbacks/create"></a>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+    }*@
+
+@using (Html.BeginForm())
 {
-    @Html.AntiForgeryToken()
-    
-<div class="form-horizontal">
-    <h4>Feedback</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(model => model.FeedbackTitle, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.FeedbackTitle, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.FeedbackTitle, "", new { @class = "text-danger" })
-        </div>
-    </div>
+    <div class="container mt-4 shadow-lg">
+        <div class="row">
+            <div class="col-md-3">
+                <div>
+                    <input type="text" name="UserID" value="@Session["CurrentUserID"]" hidden />
+                </div>
+                @*<img src="~/Content/Image/PaimonQuestions.png" width="200" style="align-items: center;" />*@
+            </div>
+            <div class="col-md-6">
+                <h2>Feedback Form</h2>
+                <p>
+                    Paimon would love to hear your thoughts, concerns or problem with anything
+                    so we can improve!
+                </p>
+                <hr />
+               
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <h4>Feedback Type</h4>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <input type="radio" class="pointer" />&nbsp;&nbsp;<label>Comments</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="radio"class="pointer" />&nbsp;&nbsp;<label>Bug Reports</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="radio" class="pointer" />&nbsp;&nbsp;<label>Questions</label>
+                        </div>
+                    </div>
+                    <div class="form-group mt-3 mb-3">
+                        <label class="form-label"> Title</label>
+                        <input type="text" name="FeedbackTitle" class="form-control" required />
+                    </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.FeedbackContent, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.FeedbackContent, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.FeedbackContent, "", new { @class = "text-danger" })
-        </div>
-    </div>
+                    <div class="form-group mb-2">
+                        <label class="form-label"> Describe Feedback</label>
+                        <textarea rows="4" class="form-control" name="FeedbackContent" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                
 
-    <div>
-        <input type="text" name="UserID" value="@Session["CurrentUserID"]" hidden />
-        @Html.ValidationMessageFor(model => model.UserID, "", new { @class = "text-danger" })
-    </div>
+            </div>
 
-    <a href="feedbacks/create"></a>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-default" />
         </div>
+        <hr />
     </div>
-</div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+    @*<div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>*@

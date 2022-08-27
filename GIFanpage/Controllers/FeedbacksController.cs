@@ -84,7 +84,7 @@ namespace GIFanpage.Controllers
             {
                 db.Feedbacks.Add(feedback);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index","Home");
             }
 
             return View(feedback);
