@@ -6,22 +6,55 @@
 
 <h2>IndexQuestion</h2>
 
-<div class="container" style="margin-top: 50px; margin-bottom: 20px; min-height: 500px;">
+<div class="container" style="margin-top: 18px; margin-bottom: 15px; min-height: 448px;">
     <div class="row  d-flex justify-content-center">
         <div class="col-md-10">
             <div class="headings d-flex justify-content-between align-items-center mb-3">
-                <h1 class="title">My Ideas</h1>
-                <div class="buttons">
+                <h2 class="title">My Questions</h2>
+                @*<div class="buttons">*@
 
-                    <span class="badge bg-white d-flex flex-row align-items-center">
-                        <span class="text-primary">Comments "ON"</span>
+                    <div class="d-flex flex-row align-items-end">
+
+                        <ul class="pagination">
+
+                            @{
+                                int numberPage = ViewBag.numberPage;
+                                int pageCurrent = ViewBag.pageCurrent;
+                                if (pageCurrent > 1)
+                                {
+                                    int prePage = pageCurrent - 1;
+                                    <li class="page-item active"><a class="page-link" href="?page=@prePage">PrePage</a></li>
+                                }
+
+                                int i;
+                                for (i = 1; i <= numberPage; i++)
+                                {
+                                    if (i == pageCurrent)
+                                    {
+                                        <li class="page-item active"><a class="page-link" href="?page=@i">@i</a></li>
+                                    }
+                                    else
+                                    {
+                                        <li class="page-item"><a class="page-link" href="?page=@i">@i</a></li>
+                                    }
+                                }
+                                if (pageCurrent > 1 && pageCurrent < numberPage)
+                                {
+                                    int nextPage = pageCurrent + 1;
+                                    <li class="page-item"><a class="page-link" href="?page=@nextPage">NextPage</a></li>
+                                }
+                            }
+                        </ul>
+                        @*<span class="text-primary">Comments "ON"</span>
                         <div class="form-check form-switch">
                             <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
-                        </div>
-                    </span>
+                        </div>*@
+                    @*</div>*@
 
                 </div>
             </div>
+
+            
 
                 @foreach (var item in Model)
                 {

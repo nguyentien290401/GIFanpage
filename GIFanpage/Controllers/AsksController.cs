@@ -22,10 +22,26 @@ namespace GIFanpage.Controllers
         }
 
         // Get: All questions of each accounts
-        public ActionResult IndexQuestions(int id)
+        public ActionResult IndexQuestions(int id, int? page)
         {
-            var asks = db.Asks.Where(t => t.UserID == id).ToList();
-            return View(asks);
+            var asks = db.Asks.Where(t => t.UserID == id);
+            if (page > 0)
+            { 
+                page = page; 
+            }
+            else
+            {
+                page = 1;                       //Set page default 
+            }
+            int limit = 4;                      //Display show 4 quesitons
+            int start = (int) (page - 1) * limit;
+            int totalQuestion = asks.Count();
+            ViewBag.totalQuestion = totalQuestion;
+            ViewBag.pageCurrent = page;
+            float numberPage = (float) totalQuestion / limit ;
+            ViewBag.numberPage = (int) Math.Ceiling(numberPage);
+            var asksQuestion = asks.OrderByDescending(a => a.AskID).Skip(start).Take(limit);
+            return View(asksQuestion.ToList());
         }
 
         
