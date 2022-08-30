@@ -24,6 +24,30 @@
 <body>
     <style>
 
+        /*IndexQuestionView  -->    Back to top button*/          
+        .container #myBtn > button {
+            display: none; /* Hidden by default */
+            position: fixed; /* Fixed/sticky position */
+            bottom: 150px; /* Place the button at the bottom of the page */
+            right: 30px; /* Place the button 30px from the right */
+            z-index: 200; /* Make sure it does not overlap */
+            border: none; /* Remove borders */
+            outline: none; /* Remove outline */
+            background-color: red; /* Set a background color */
+            color: white; /* Text color */
+            cursor: pointer; /* Add a mouse pointer on hover */
+            padding: 15px; /* Some padding */
+            border-radius: 10px; /* Rounded corners */
+            font-size: 18px; /* Increase font size */
+        }
+
+          .container  #myBtn:hover > button {
+                background-color: #555; /* Add a dark-grey background on hover */
+            }
+           
+
+
+        /*Feedback form*/
         #feedback-form-wrapper #floating-icon > button {
             position: fixed;
             right: 0;
@@ -275,6 +299,28 @@
     <a class="text-white" href="https://genshin.hoyoverse.com/vi/home">Genshin Impact</a>
     <!-- Copyright -->
 </footer>
+
+<script>
+    //Get the button:
+    mybutton = document.getElementById("myBtn");
+
+    // When the user scrolls down 20px from the top of the document, show the button
+    window.onscroll = function () { scrollFunction() };
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            mybutton.style.display = "block";
+        } else {
+            mybutton.style.display = "none";
+        }
+    }
+
+    // When the user clicks on the button, scroll to the top of the document
+    function topFunction() {
+        document.body.scrollTop = 0; // For Safari
+        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    }
+</script>
 
 
 

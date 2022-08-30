@@ -22,22 +22,24 @@ namespace GIFanpage.Controllers
         }
 
         //Get: Index questions of user role
-        public ActionResult IndexQuestionView(/*int ask, */int? page, string Search/*, string sortColumn = ""*/)
+        public ActionResult IndexQuestionView(string Search /*int? page, string sortColumn = ""*/)
         {
            
             List <Ask> asks = db.Asks.Include(a => a.Category).Include(a => a.User).ToList();
+
+            //Search
             if (Search != null)
             {
                 var findAsk = db.Asks.Where(s => s.Title.Contains(Search)).Include(a => a.Category).Include(a => a.User).ToList();
                 if (asks.Count == 0)
                 {
-                    
-                    ViewBag.Msg = "Data not found";
+                    ViewBag.Msg = "Data Not Found";
                     return View();
                 }
                 else
                 {
-                    return View(findAsk);
+                    var findAskDate = findAsk.OrderByDescending(f => f.ViewCount).ToList();
+                    return View(findAskDate);
                 }
             }
 
@@ -57,9 +59,7 @@ namespace GIFanpage.Controllers
             //ViewBag.pageCurrent = page;
             //float numberPage = (float)totalQuestion / limit;
             //ViewBag.numberPage = (int)Math.Ceiling(numberPage);
-            var asksQuestion = asks.OrderByDescending(a => a.AskID);    /*.Skip(start).Take(limit)*/
-
-
+            var asksQuestion = asks.OrderByDescending(a => a.ViewCount).ToList();            /*.Skip(start).Take(limit);*/
 
             ////Sorting 
             //ViewBag.sortColumn = sortColumn;
@@ -71,10 +71,6 @@ namespace GIFanpage.Controllers
             //{
             //    asksQuestion = asks.OrderByDescending(i => i.CreateDate).ToList();
             //}
-
-
-
-
 
             return View(asksQuestion);
         }
@@ -224,6 +220,7 @@ namespace GIFanpage.Controllers
         {
             ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName");
             ViewBag.UserID = Session["CurrentUserID"];
+            //ViewBag.UserID = new SelectList(db.Users, "UserID", "UserImg");
             //ViewBag.SubmissionID = new SelectList(db.Submissions, "SubmissionID", "SubmissionName");
             // ViewBag.UserID = new SelectList(db.Users, "UserID", "Name");
             return View();
@@ -246,6 +243,7 @@ namespace GIFanpage.Controllers
             ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", ask.CategoryID);
             //ViewBag.SubmissionID = new SelectList(db.Submissions, "SubmissionID", "SubmissionName", ask.SubmissionID);
             ViewBag.UserID = new SelectList(db.Users, "UserID", "Name", ask.UserID);
+            //ViewBag.UserID = new SelectList(db.Users, "UserID", "UserImg", ask.UserID);
             return View(ask);
         }
 
@@ -264,6 +262,7 @@ namespace GIFanpage.Controllers
             ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", ask.CategoryID);
             //ViewBag.SubmissionID = new SelectList(db.Submissions, "SubmissionID", "SubmissionName", ask.SubmissionID);
             ViewBag.UserID = new SelectList(db.Users, "UserID", "Name", ask.UserID);
+            //ViewBag.UserID = new SelectList(db.Users, "UserID", "UserImg", ask.UserID);
             return View(ask);
         }
 
