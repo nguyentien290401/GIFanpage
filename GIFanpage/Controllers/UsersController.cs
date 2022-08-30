@@ -129,7 +129,7 @@ namespace GIFanpage.Controllers
         }
 
         // GET: Users/Edit/5
-        public ActionResult ChangeProfile(int? id)
+        public ActionResult changeProfile(int? id)
         {
             if (id == null)
             {
@@ -150,7 +150,7 @@ namespace GIFanpage.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ChangeProfile(/*[Bind(Include = "UserID,Name,Email,UserImg,PlaystyleID,RoleID")]*/ User user)
+        public ActionResult changeProfile(/*[Bind(Include = "UserID,Name,Email,UserImg,PlaystyleID,RoleID")]*/ User user)
         {
             if (ModelState.IsValid)
             {
