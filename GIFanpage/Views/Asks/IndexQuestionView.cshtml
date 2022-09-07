@@ -31,11 +31,13 @@
             }
         </div>
 
+        <div class="col-md-10">
+            <h3>Display</h3>
+            <h1 class="jumbotron text-center">@ViewBag.Msg</h1>
+        </div>
         @if (ViewBag.Msg == null)
         {
-            <div class="col-md-10">
-                <h3>Display</h3>
-            </div>
+
             foreach (var item in Model)
             {
                 <div class="col-md-10">
@@ -45,21 +47,18 @@
                                 <span class="font-weight-bold text-primary">
                                     <a href="/asks/details?ask=@item.AskID" style="text-decoration: none;">@item.Title</a>
                                 </span>
+
                             </div>
-                            <small><i class="fa fa-calendar fa-fw w3-margin-right"></i> @item.CreateDate</small>
+                            <small><i class="fa fa-calendar" style="margin-right: 8px;"></i> @item.CreateDate</small>
                         </div>
                         <div class="action d-flex justify-content-between mt-2 align-items-center">
                             <div class="reply px-4">
-                                <button type="button" class="w3-button w3-theme-d2 "><i class="fa fa-comment"></i>  @item.CommentCount</button>
-                                <button type="button" class="w3-button w3-theme-d2 "><i class="fa fa-address-book"></i>  @item.Category.CategoryName</button>
-                                @*<button type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-thumbs-up"></i>  @item.VotesCount</button>*@
                                 <button type="button" class="w3-button w3-theme-d2 "><i class="fa fa-eye"></i>  @item.ViewCount</button>
-                                @*<small><a href="/asks/edit/@item.AskID" style="text-decoration: none;">Edit</a></small>
-                                    <span class="dots"></span>
-                                    <small><a href="/asks/delete/@item.AskID" style="text-decoration: none;">Delete</a></small>*@
+                                <button type="button" class="w3-button w3-theme-d2 "><i class="fa fa-comment"></i>  @item.CommentCount</button>
+                                <button type="button" class="w3-button w3-theme-d2 "><i class="fa fa-book" aria-hidden="true"></i>  @item.Category.CategoryName</button>
                             </div>
                             <div class="icons align-items-center">
-                                <i class="fa fa-eye" aria-hidden="true"></i> @item.ViewCount @item.Description @item.Content
+                                <i class="fa fa-user-circle" aria-hidden="true"></i> @item.User.Name
                             </div>
                         </div>
                     </div>

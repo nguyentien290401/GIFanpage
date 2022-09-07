@@ -109,32 +109,19 @@
                             </div>
 
                             <div class="form-floating mb-3">
-                                @Html.DropDownList("PlaystyleID", null, htmlAttributes: new { @class = "form-control" })
+                                <label for="floatingPasswordConfirm" >Playstyle</label>
+                                @Html.DropDownList("PlaystyleID", null, htmlAttributes: new { @class = "list-group-item" })
                                 @Html.ValidationMessageFor(model => model.PlaystyleID, "", new { @class = "text-danger" })
                                 <input type="text" name="PlaystyleID" class="form-control" id="floatingPasswordConfirm" placeholder="Your style" hidden>
-                                <label for="floatingPasswordConfirm">Playstyle</label>
+
                             </div>
 
                             <div class="d-grid mb-2"">
                                 <button class="btn btn-lg btn-primary btn-login fw-bold text-uppercase" type="submit">Register</button>
                             </div>
 
-                            <a class="d-block text-center mt-2 small" href="/users/login" style="font-size:medium;">Have an account? Login</a>
-
-                            @*<hr class="my-4">
-
-        <div class="d-grid mb-2">
-            <button class="btn btn-lg btn-google btn-login fw-bold text-uppercase" type="submit">
-                <i class="fab fa-google me-2"></i> Sign up with Google
-            </button>
-        </div>
-
-        <div class="d-grid">
-            <button class="btn btn-lg btn-facebook btn-login fw-bold text-uppercase" type="submit">
-                <i class="fab fa-facebook-f me-2"></i> Sign up with Facebook
-            </button>
-        </div>*@
-
+                            <a class="d-block text-center mt-2 small" href="/users/login" style="font-size:medium; text-decoration: none;">Have an account? Login</a>
+             
                         </form>
                     </div>
                 </div>

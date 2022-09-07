@@ -231,13 +231,28 @@ namespace GIFanpage.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "AskID,Title,Description,Content,CreateDate,ViewCount,VotesCount,FileName,FilePath,CurrentUserVoteType,UserID,CategoryID,SubmissionID")] Ask ask)
+        public ActionResult Create([Bind(Include = "AskID,Title,Description,Content,CreateDate,ViewCount,FileName,FilePath,UserID,CategoryID")] Ask ask, HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
             {
-                db.Asks.Add(ask);
-                db.SaveChanges();
-                return RedirectToAction("IndexQuestionView");
+                if (file == null)
+                {
+                    db.Asks.Add(ask);
+                    db.SaveChanges();
+                    return RedirectToAction("IndexQuestionView", "Asks");
+                }   
+                else
+                {
+                    var myFile = file.FileName;
+                    var path = "~/Content/Image/" + myFile;
+                    file.SaveAs(Server.MapPath(path));
+                    ask.FilePath = path;
+
+                    db.Asks.Add(ask);
+                    db.SaveChanges();
+                    return RedirectToAction("IndexQuestionView", "Asks");
+                }    
+                
             }
 
             ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", ask.CategoryID);

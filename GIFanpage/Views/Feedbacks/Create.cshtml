@@ -6,44 +6,6 @@
 
 <h2>Create</h2>
 
-@*@using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        <h4>Feedback</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.FeedbackTitle, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.FeedbackTitle, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.FeedbackTitle, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.FeedbackContent, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.FeedbackContent, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.FeedbackContent, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <figure class="av"></figure>
-        <div>
-            <input type="text" name="UserID" value="@Session["CurrentUserID"]" hidden />
-            @Html.ValidationMessageFor(model => model.UserID, "", new { @class = "text-danger" })
-        </div>
-
-        <a href="feedbacks/create"></a>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
-    }*@
-
 @using (Html.BeginForm())
 {
     <div class="container mt-4 shadow-lg">
@@ -61,33 +23,48 @@
                     so we can improve!
                 </p>
                 <hr />
-               
-                    @Html.AntiForgeryToken()
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    <h4>Feedback Type</h4>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <input type="radio" class="pointer" />&nbsp;&nbsp;<label>Comments</label>
-                        </div>
-                        <div class="col-md-4">
-                            <input type="radio"class="pointer" />&nbsp;&nbsp;<label>Bug Reports</label>
-                        </div>
-                        <div class="col-md-4">
-                            <input type="radio" class="pointer" />&nbsp;&nbsp;<label>Questions</label>
+
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <h4>Feedback Type</h4>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input">
+                            <label class="custom-control-label" for="customRadioInline1">Comments</label>
                         </div>
                     </div>
+                    <div class="col-md-4">
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input">
+                            <label class="custom-control-label" for="customRadioInline1">Bug Reports</label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input">
+                            <label class="custom-control-label" for="customRadioInline1">Questions</label>
+                        </div>
+                    </div>
+                </div>
+                <form class="needs-validation" novalidate>
                     <div class="form-group mt-3 mb-3">
-                        <label class="form-label"> Title</label>
-                        <input type="text" name="FeedbackTitle" class="form-control" required />
+                        <label for="validationDefault01" class="form-label"> Title</label>
+                        <input type="text" name="FeedbackTitle" class="form-control" id="validationDefault01" required />
+                        <div class="invalid-feedback">
+                            Please fullfill this field
+                        </div>
                     </div>
 
                     <div class="form-group mb-2">
-                        <label class="form-label"> Describe Feedback</label>
-                        <textarea rows="4" class="form-control" name="FeedbackContent" required></textarea>
+                        <label for="validationDefault02" class="form-label"> Describe Feedback</label>
+                        <textarea rows="4" name="FeedbackContent" class="form-control" id="validationDefault02" required></textarea>
+                    </div>
+                    <div class="invalid-feedback">
+                        Please fullfill this field
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
-                
-
+                </form>
             </div>
 
         </div>
@@ -95,6 +72,7 @@
     </div>
 }
 
-    @*<div>
-            @Html.ActionLink("Back to List", "Index")
-        </div>*@
+@*<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>*@
+

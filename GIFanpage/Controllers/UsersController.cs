@@ -98,7 +98,7 @@ namespace GIFanpage.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Register(/*[Bind(Include = "UserID,Name,Email,PasswordHash,UserImg,PlaystyleID,RoleID")]*/ User user)
+        public ActionResult Register (User user)
         {
             if (ModelState.IsValid)
             {
