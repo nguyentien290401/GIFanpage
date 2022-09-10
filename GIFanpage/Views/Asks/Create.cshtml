@@ -80,7 +80,17 @@
 
 
 <script>
-   
+    // Check button of create question
+    $('#toggle').click(function () {
+        //check if checkbox is checked
+        if ($(this).is(':checked')) {
+
+            $('#add-button').removeAttr('disabled'); //enable input
+
+        } else {
+            $('#add-button').attr('disabled', true); //disable input
+        }
+    });
 </script>
     @*@using (Html.BeginForm())
         {

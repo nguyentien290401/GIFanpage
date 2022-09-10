@@ -24,7 +24,7 @@
 <body>
     <style>
 
-        /*IndexQuestionView  -->    Back to top button*/          
+        /*IndexQuestionView  -->    Back to top button*/
         .container #myBtn > button {
             display: none; /* Hidden by default */
             position: fixed; /* Fixed/sticky position */
@@ -41,10 +41,10 @@
             font-size: 18px; /* Increase font size */
         }
 
-          .container  #myBtn:hover > button {
-                background-color: #555; /* Add a dark-grey background on hover */
-            }
-           
+        .container #myBtn:hover > button {
+            background-color: #555; /* Add a dark-grey background on hover */
+        }
+
 
 
         /*Feedback form*/
@@ -176,14 +176,21 @@
                 <ul class="nav navbar-nav justify-content-end ">
                     <li class="nav-item active">
                         <a href="/users/changeProfile/@Session["CurrentUserID"]" class="nav-link" style="color: orangered ;">
-                            @*<img src="@Url.Content(Session"["CurrentUserImg"]")" alt="Avatar Logo" style="width:100px" />*@
-                            @Session["CurrentUserName"]
+                            @if (Session["CurrentUserImg"] == null)
+                            {
+                                <img src="~/Content/Image/add.png" class="bd-placeholder-img rounded-circle" width="30" />
+                                @Session["CurrentUserName"]
+                            }
+                            else
+                            {
+                                <img src="@Url.Content(Session["CurrentUserImg"].ToString())" class="bd-placeholder-img rounded-circle" width="30" />
+                                @Session["CurrentUserName"]
+                            }
                         </a>
                     </li>
-                    <li class="nav-item active"> <a href="/users/logout" class="nav-link"> Logout </a> </li>
+                    <li class="nav-item active" style="display: flex; align-items: center;"> <a href="/users/logout" class="nav-link"> Logout </a> </li>
                 </ul>
             }
-
 
         </nav>
 
@@ -242,14 +249,15 @@
                 </div>
             </div>
         </div>*@
-<div class="container-fluid" style="padding: 0;">
-    @RenderBody()
-</div>
-   
+    <div class="container-fluid" style="padding: 0;">
+
+        @RenderBody()
+    </div>
+
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
-
+   
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
 
@@ -261,34 +269,31 @@
         <!-- Section: Social media -->
         <section class="mb-2">
             <!-- Facebook -->
-            <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+            <a class="btn btn-outline-light btn-floating m-1" href="https://www.facebook.com/GenshinImpact.vi" role="button">
                 <i class="fa fa-facebook-official w3-hover-opacity"></i>
             </a>
 
-            <!-- Twitter -->
-            <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+            <!-- Instragram -->
+            <a class="btn btn-outline-light btn-floating m-1" href="https://www.instagram.com/genshinimpact/" role="button">
                 <i class="fa fa-instagram w3-hover-opacity"></i>
             </a>
 
             <!-- Google -->
-            <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+            <a class="btn btn-outline-light btn-floating m-1" href="https://g.co/kgs/TDpNA5" role="button">
                 <i class="fa fa-snapchat w3-hover-opacity"></i>
             </a>
 
             <!-- Instagram -->
-            <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+            <a class="btn btn-outline-light btn-floating m-1" href="https://www.pinterest.com/search/pins/?q=genshin%20impact&rs=typed&term_meta[]=genshin%7Ctyped&term_meta[]=impact%7Ctyped" role="button">
                 <i class="fa fa-pinterest-p w3-hover-opacity"></i>
             </a>
 
-            <!-- Linkedin -->
-            <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+            <!-- Twitter -->
+            <a class="btn btn-outline-light btn-floating m-1" href="https://twitter.com/GenshinImpact" role="button">
                 <i class="fa fa-twitter w3-hover-opacity"></i>
             </a>
 
-            <!-- Github -->
-            <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
-                <i class="fa fa-linkedin w3-hover-opacity"></i>
-            </a>
+            
         </section>
         <!-- Section: Social media -->
     @*</div>*@
@@ -301,37 +306,9 @@
 </footer>
 
 <script>
-    // Check button of create question
-    $('#toggle').click(function () {
-        //check if checkbox is checked
-        if ($(this).is(':checked')) {
+    
 
-            $('#add-button').removeAttr('disabled'); //enable input
-
-        } else {
-            $('#add-button').attr('disabled', true); //disable input
-        }
-    });
-
-    //Get the button:
-    mybutton = document.getElementById("myBtn");
-
-    // When the user scrolls down 20px from the top of the document, show the button
-    window.onscroll = function () { scrollFunction() };
-
-    function scrollFunction() {
-        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-            mybutton.style.display = "block";
-        } else {
-            mybutton.style.display = "none";
-        }
-    }
-
-    // When the user clicks on the button, scroll to the top of the document
-    function topFunction() {
-        document.body.scrollTop = 0; // For Safari
-        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-    }
+   
 
     
     // Example starter JavaScript for disabling form submissions if there are invalid fields
