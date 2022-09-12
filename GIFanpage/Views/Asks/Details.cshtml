@@ -184,7 +184,7 @@
             @if (Convert.ToInt32(Session["CurrentUserID"]) == Model.Comments[i].UserID)
             {
             
-            <div class="bg-light mt-2 p-3 hidden" id="edit-form">
+            <div class="bg-light mt-2 p-3 " id="edit-form">
                 <form action="/asks/EditComment?cmtID=@Model.AskID" method="post">
                     <div class="d-flex flex-row align-items-start">
                         <textarea rows="3" class="form-control shadow-none textarea" name="Content" placeholder="@Model.Comments[i].Content" style="margin-left: 15px;" required></textarea>

@@ -291,12 +291,12 @@
     <Content Include="Views\News\Details.cshtml" />
     <Content Include="Views\News\Edit.cshtml" />
     <Content Include="Views\News\Index.cshtml" />
+    <Content Include="Views\Asks\IndexQuestionView.cshtml" />
     <Content Include="Views\Characters\Create.cshtml" />
     <Content Include="Views\Characters\Delete.cshtml" />
     <Content Include="Views\Characters\Details.cshtml" />
     <Content Include="Views\Characters\Edit.cshtml" />
     <Content Include="Views\Characters\Index.cshtml" />
-    <Content Include="Views\Asks\IndexQuestionView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

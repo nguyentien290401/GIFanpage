@@ -21,7 +21,19 @@
             @Html.DisplayNameFor(model => model.CharacterDescription)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CharacterImage)
+            @Html.DisplayNameFor(model => model.CharacterRarity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CharacterRegion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CharacterBirthday)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CharacterImageCard)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CharacterImageOriginal)
         </th>
         <th></th>
     </tr>
@@ -38,7 +50,19 @@
             @Html.DisplayFor(modelItem => item.CharacterDescription)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.CharacterImage)
+            @Html.DisplayFor(modelItem => item.CharacterRarity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CharacterRegion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CharacterBirthday)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CharacterImageCard)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CharacterImageOriginal)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.CharacterID }) |

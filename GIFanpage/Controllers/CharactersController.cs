@@ -46,10 +46,32 @@ namespace GIFanpage.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CharacterID,CharacterName,CharacterVision,CharacterDescription,CharacterImage")] Character character)
+        public ActionResult Create([Bind(Include = "CharacterID,CharacterName,CharacterVision,CharacterDescription,CharacterRarity,CharacterRegion,CharacterBirthday,CharacterImageCard,CharacterImageOriginal")] Character character, HttpPostedFileBase fileCard, HttpPostedFileBase fileOriginal)
         {
             if (ModelState.IsValid)
             {
+                if (fileCard == null || fileOriginal == null)
+                {
+                    db.Characters.Add(character);
+                    db.SaveChanges();
+                    return RedirectToAction("Index", "Characters");
+                }    
+                else
+                {
+                    // Define image card file
+                    var myFileCard = fileCard.FileName;
+                    var pathCard = "~/Content/Image/" + myFileCard;
+                    fileCard.SaveAs(Server.MapPath(pathCard));
+                    character.CharacterImageCard = pathCard;
+
+                    // Define image original file
+                    var myFileOriginal = fileOriginal.FileName;
+                    var pathOriginal = "~/Content/Image/" + myFileOriginal;
+                    fileOriginal.SaveAs(Server.MapPath(pathOriginal));
+                    character.CharacterImageOriginal = pathOriginal;
+
+                }
+
                 db.Characters.Add(character);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -78,7 +100,7 @@ namespace GIFanpage.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CharacterID,CharacterName,CharacterVision,CharacterDescription,CharacterImage")] Character character)
+        public ActionResult Edit([Bind(Include = "CharacterID,CharacterName,CharacterVision,CharacterDescription,CharacterRarity,CharacterRegion,CharacterBirthday,CharacterImageCard,CharacterImageOriginal")] Character character)
         {
             if (ModelState.IsValid)
             {

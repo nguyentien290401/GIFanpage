@@ -15,6 +15,10 @@ namespace GIFanpage.Models
         public string CharacterName { get; set; }
         public string CharacterVision { get; set; }
         public string CharacterDescription { get; set; }
-        public string CharacterImage { get; set; }
+        public string CharacterRarity { get; set; }
+        public string CharacterRegion { get; set; }
+        public DateTime CharacterBirthday { get; set; }
+        public string CharacterImageCard { get; set; }
+        public string CharacterImageOriginal { get; set; }
     }
 }
