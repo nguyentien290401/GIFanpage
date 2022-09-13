@@ -5,78 +5,32 @@
 }
 
 <h2>Details</h2>
+<style>
+    body {
+        background-color: #e6e6e6;
+    }
+</style>
 
-<div>
-    <h4>Character</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.CharacterName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CharacterName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CharacterVision)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CharacterVision)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CharacterDescription)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CharacterDescription)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CharacterRarity)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CharacterRarity)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CharacterRegion)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CharacterRegion)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CharacterBirthday)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CharacterBirthday)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CharacterImageCard)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CharacterImageCard)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CharacterImageOriginal)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CharacterImageOriginal)
-        </dd>
-
-    </dl>
+<div class="container p-5" style="margin-top: 18px; margin-bottom: 15px; min-height: 448px;">
+    <div class="row  d-flex justify-content-center ">
+        <div class="col-md-5">
+            <img src="@Url.Content(Model.CharacterImageOriginal)" width="450" />
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-5" style="padding-left: 20px;">
+            <h2>Character: @Model.CharacterName</h2>
+            <i>Rarity: @Model.CharacterRarity</i>
+            <br /><br />
+            <p>Vision: @Model.CharacterVision</p>
+            <p>Region: @Model.CharacterRegion</p>
+            <p>Birthday: @Model.CharacterBirthday.Day / @Model.CharacterBirthday.Month</p>
+            <p>Description: @Model.CharacterDescription</p>
+            <div style="display: flex;">
+                <p>Image Card: </p> <img style="display: flex; justify-content: center;" src="@Url.Content(Model.CharacterImageCard)" width="100" />
+            </div>
+            
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.CharacterID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+

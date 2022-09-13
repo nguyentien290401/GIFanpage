@@ -20,19 +20,25 @@ namespace GIFanpage.Controllers
             return View(db.Characters.ToList());
         }
 
-        // GET: Characters/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult IndexView(string Search = "")
         {
-            if (id == null)
+            //Search
+            List<Character> characters = db.Characters.Where(s => s.CharacterName.Contains(Search)).ToList();
+
+            if (characters.Count() == 0)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Character character = db.Characters.Find(id);
-            if (character == null)
-            {
-                return HttpNotFound();
-            }
-            return View(character);
+                ViewBag.Msg = "Data Not Found";
+                return View();
+            }    
+            return View(characters);
+        }
+
+        // GET: Characters/Details/5
+        public ActionResult Details(int character)
+        {
+            Character characters = db.Characters.Where(c => c.CharacterID == character).FirstOrDefault();
+            
+            return View(characters);
         }
 
         // GET: Characters/Create
@@ -54,7 +60,7 @@ namespace GIFanpage.Controllers
                 {
                     db.Characters.Add(character);
                     db.SaveChanges();
-                    return RedirectToAction("Index", "Characters");
+                    return RedirectToAction("IndexView", "Characters");
                 }    
                 else
                 {
@@ -74,7 +80,7 @@ namespace GIFanpage.Controllers
 
                 db.Characters.Add(character);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("IndexView", "Characters");
             }
 
             return View(character);

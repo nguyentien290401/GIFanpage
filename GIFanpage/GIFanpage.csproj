@@ -205,6 +205,8 @@
     <Content Include="Content\Image\InazumaSilde.png" />
     <Content Include="Content\Image\KeqingAvatar.jpg" />
     <Content Include="Content\Image\KokomiAvatar.png" />
+    <Content Include="Content\Image\KokomiCard.png" />
+    <Content Include="Content\Image\KokomiOriginal.png" />
     <Content Include="Content\Image\LiyueSlide.png" />
     <Content Include="Content\Image\LoginBackground.jpeg" />
     <Content Include="Content\Image\MonstadtSlide.png" />
@@ -297,6 +299,7 @@
     <Content Include="Views\Characters\Details.cshtml" />
     <Content Include="Views\Characters\Edit.cshtml" />
     <Content Include="Views\Characters\Index.cshtml" />
+    <Content Include="Views\Characters\IndexView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
