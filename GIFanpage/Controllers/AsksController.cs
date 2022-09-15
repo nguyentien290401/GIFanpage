@@ -102,20 +102,9 @@ namespace GIFanpage.Controllers
         // GET: Asks/Details/5
         public ActionResult Details(int ask)
         {
-            //if (ask == null)
-            //{
-            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            //}
-            //Ask asks = db.Asks.Find(ask);
-            //if (asks == null)
-            //{
-            //    return HttpNotFound();
-            //}
-
+            
             Ask asks = db.Asks.Where(a => a.AskID == ask).FirstOrDefault();
             asks.ViewCount++;
-
-
 
             db.SaveChanges();
 
@@ -137,6 +126,8 @@ namespace GIFanpage.Controllers
 
             return View(asks);
         }
+
+
 
         [HttpPost]
         public ActionResult AddComment(Comment comment, int cmtID)

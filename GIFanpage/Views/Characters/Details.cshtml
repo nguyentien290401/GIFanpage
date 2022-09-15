@@ -4,20 +4,39 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+
+
 <style>
     body {
         background-color: #e6e6e6;
+        font-family: Helvetica;
     }
+
+    .breadcrumb-item a {
+        text-decoration: none;
+        color: #0dcaf0;
+        font-size: 16px;
+    }
+
+   
 </style>
 
 <div class="container p-5" style="margin-top: 18px; margin-bottom: 15px; min-height: 448px;">
     <div class="row  d-flex justify-content-center ">
-        <div class="col-md-5">
+        <div class="col-md-11">
+            <nav aria-label="breadcrumb" style="background-color: white;margin: 20px 0; padding: 10px 10px 1px 10px; border-radius: 10px;" >
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/home/index">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/characters/indexView">Characters</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">@Model.CharacterName's information</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="col-sm-12 col-lg-5 d-flex justify-content-center">
             <img src="@Url.Content(Model.CharacterImageOriginal)" width="450" />
         </div>
-        <div class="col-md-1"></div>
-        <div class="col-md-5" style="padding-left: 20px;">
+        <div class="col-sm-12 col-lg-1"></div>
+        <div class="col-sm-12 col-lg-5" style="padding-left: 20px;">
             <h2>Character: @Model.CharacterName</h2>
             <i>Rarity: @Model.CharacterRarity</i>
             <br /><br />
@@ -26,9 +45,9 @@
             <p>Birthday: @Model.CharacterBirthday.Day / @Model.CharacterBirthday.Month</p>
             <p>Description: @Model.CharacterDescription</p>
             <div style="display: flex;">
-                <p>Image Card: </p> <img style="display: flex; justify-content: center;" src="@Url.Content(Model.CharacterImageCard)" width="100" />
+                <p>Image Card: </p> <img style="display: flex; justify-content: center; margin-left: 20px;" src="@Url.Content(Model.CharacterImageCard)" width="100" />
             </div>
-            
+
         </div>
     </div>
 </div>
