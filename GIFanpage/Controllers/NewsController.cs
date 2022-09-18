@@ -20,19 +20,19 @@ namespace GIFanpage.Controllers
             return View(db.News.ToList());
         }
 
-        // GET: News/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult IndexView()
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            New @new = db.News.Find(id);
-            if (@new == null)
-            {
-                return HttpNotFound();
-            }
-            return View(@new);
+            List<New> newInfos = db.News.ToList();
+
+            return View(newInfos);
+        }
+
+        // GET: News/Details/5
+        public ActionResult Details(int newInfo)
+        {
+            New newInfos = db.News.Where(n => n.NewsID == newInfo).FirstOrDefault();
+
+            return View(newInfos);
         }
 
         // GET: News/Create
@@ -46,16 +46,25 @@ namespace GIFanpage.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "NewsID,NewsTitle,NewsDescription,NewsImage,NewsContent,CreateDate")] New @new)
+        public ActionResult Create([Bind(Include = "NewsID,NewsTitle,NewsDescription,NewsImage,NewsContent,CreateDate")] New newInfo, HttpPostedFileBase fileNew)
         {
             if (ModelState.IsValid)
             {
-                db.News.Add(@new);
+                if (fileNew != null)
+                {
+                    // Define image card file
+                    var fileName = fileNew.FileName;
+                    var pathFile = "~/Content/Image/" + fileName;
+                    fileNew.SaveAs(Server.MapPath(pathFile));
+                    newInfo.NewsImage = pathFile;
+                }
+
+                db.News.Add(newInfo);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("IndexView");
             }
 
-            return View(@new);
+            return View(newInfo);
         }
 
         // GET: News/Edit/5
@@ -65,12 +74,12 @@ namespace GIFanpage.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            New @new = db.News.Find(id);
-            if (@new == null)
+            New newInfo = db.News.Find(id);
+            if (newInfo == null)
             {
                 return HttpNotFound();
             }
-            return View(@new);
+            return View(newInfo);
         }
 
         // POST: News/Edit/5
@@ -78,15 +87,15 @@ namespace GIFanpage.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "NewsID,NewsTitle,NewsDescription,NewsImage,NewsContent,CreateDate")] New @new)
+        public ActionResult Edit([Bind(Include = "NewsID,NewsTitle,NewsDescription,NewsImage,NewsContent,CreateDate")] New newInfo)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(@new).State = EntityState.Modified;
+                db.Entry(newInfo).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(@new);
+            return View(newInfo);
         }
 
         // GET: News/Delete/5
@@ -96,12 +105,12 @@ namespace GIFanpage.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            New @new = db.News.Find(id);
-            if (@new == null)
+            New newInfo = db.News.Find(id);
+            if (newInfo == null)
             {
                 return HttpNotFound();
             }
-            return View(@new);
+            return View(newInfo);
         }
 
         // POST: News/Delete/5
@@ -109,8 +118,8 @@ namespace GIFanpage.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            New @new = db.News.Find(id);
-            db.News.Remove(@new);
+            New newInfo = db.News.Find(id);
+            db.News.Remove(newInfo);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

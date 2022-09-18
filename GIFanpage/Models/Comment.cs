@@ -18,6 +18,7 @@ namespace GIFanpage.Models
         public int VotesCount { get; set; }
         public int AskID { get; set; }
         public int UserID { get; set; }
+        public Boolean IsTrue { get; set; }
         public Boolean IsHidden { get; set; }
 
         [ForeignKey("UserID")]

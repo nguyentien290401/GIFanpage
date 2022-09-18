@@ -78,6 +78,7 @@ ViewCount int,
 CommentCount int,
 FileName nvarchar(max),
 FilePath nvarchar(max),
+IsTrue bit default(0),
 UserID int references Users(UserID) on delete cascade,
 CategoryID int references Categories(CategoryID) on delete cascade)
 --SubmissionID int references Submissions(SubmissionID))
@@ -91,6 +92,7 @@ VotesCount int,
 CurrentUserVoteType int,
 AskID int references Asks(AskID)on delete cascade,
 UserID int references Users(UserID),
+IsTrue bit default(0),
 IsHidden bit default(0))
 go
 

@@ -20,6 +20,8 @@ namespace GIFanpage.Models
         public int CommentCount { get; set; }
         public string FileName { get; set; }
         public string FilePath { get; set; }
+        public Boolean IsTrue { get; set; }
+
         public int UserID { get; set; }
 
         [Display(Name = "Category")]

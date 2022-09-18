@@ -204,6 +204,29 @@ namespace GIFanpage.Controllers
             return RedirectToAction("Details", "Asks", new { ask = ask });
         }
 
+        public ActionResult check(int ask, int Cmt)
+        {
+            Ask asks = db.Asks.Where(a => a.AskID == ask).FirstOrDefault();
+            Comment comment = db.Comments.Where(i => i.CommentID == Cmt).FirstOrDefault();
+
+            asks.IsTrue = true;
+            comment.IsTrue = true;
+            db.SaveChanges();
+
+            return RedirectToAction("Details", "Asks", new { ask = ask });
+        }
+
+        public ActionResult unCheck(int ask, int Cmt)
+        {
+            Ask asks = db.Asks.Where(a => a.AskID == ask).FirstOrDefault();
+            Comment comment = db.Comments.Where(i => i.CommentID == Cmt).FirstOrDefault();
+
+            asks.IsTrue = false;
+            comment.IsTrue = false;
+            db.SaveChanges();
+
+            return RedirectToAction("Details", "Asks", new { ask = ask });
+        }
 
 
         // GET: Asks/Create
