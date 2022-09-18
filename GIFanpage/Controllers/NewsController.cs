@@ -32,6 +32,11 @@ namespace GIFanpage.Controllers
         {
             New newInfos = db.News.Where(n => n.NewsID == newInfo).FirstOrDefault();
 
+            List<New> numberNews = db.News.Where(n => n.NewsID == newInfo).ToList();
+
+            int totalNumberNews = numberNews.Count();
+            ViewBag.totalNumberNews = totalNumberNews;
+
             return View(newInfos);
         }
 
