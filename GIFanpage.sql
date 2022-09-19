@@ -17,8 +17,12 @@ create table Characters(
 CharacterID int primary key identity(1,1),
 CharacterName nvarchar(20),
 CharacterVision nvarchar(10),
-CharacterImage nvarchar(max),
-CharacterDescription nvarchar(max)
+CharacterDescription nvarchar(max),
+CharacterRarity nvarchar(10),
+CharacterRegion nvarchar(20),
+CharacterBirthday datetime,
+CharacterImageCard nvarchar(max),
+CharacterImageOriginal nvarchar(max)
 );
 go
 
