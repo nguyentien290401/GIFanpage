@@ -7,60 +7,97 @@
 <h2>IndexView</h2>
 
 
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.NewsTitle)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NewsDescription)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NewsImage)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NewsContent)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreateDate)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.NewsTitle)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NewsDescription)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NewsImage)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NewsContent)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreateDate)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.NewsID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.NewsID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.NewsID })
-            </td>
-        </tr>
+<style>
+    .row-parent:hover > .row {
+        border: 3px solid rgba(57,59,64,0.15);
+        border-radius: 4px;
+        background-color: white;
+        border-radius: 4px;
     }
 
-</table>
+    .row {
+        position: relative;
+        overflow: hidden;
+        background-color: #f6f7f7;
+        border: 3px solid;
+        border-color: white;
+        border-radius: 4px;
+        margin-bottom: 20px;
+        cursor: pointer;
+        min-height: 165px;
+    }
 
-@foreach (var item in Model)
-{
-    <a href="/news/details?newInfo=@item.NewsID"> Button @item.NewsID</a>
+    .col-md-3 > img {
+        display: block;
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        object-fit: cover;
+        object-position: center;
+        transition: 200ms ease-in-out;
+    }
 
-}
+
+    .row:hover > .col-md-3 img.zoom {
+        transform: scale(1.15);
+    }
+</style>
+
+<div class="container-fluid" style="padding: 0; max-height: 600px; overflow:hidden; width: 100%; padding-bottom: 56.25%; position: relative; ">
+    <iframe src="https://www.youtube.com/embed/35MhuH8xdbU?autoplay=0&loop=1&rel=0&color=white&playlist=35MhuH8xdbU" width="1263" height="600" style="max-width: 100%; position: absolute; top: 0; left: 0; width: 100%; height: 100%; " title="Short video about the Colaboration between Mihoyo and Ufotable" frameborder="0" allowfullscreen></iframe>
+</div>
+
+
+<div class="container-fluid" style="padding: 0; min-height: 650px; background-color: #f0f0f0">
+    <img src="~/Content/Image/NewsTitle.png" style="max-width: 100%;" />
+    <div class="container p-5" style="margin-top: 18px; min-height: 448px;">
+        @foreach (var item in Model)
+        {
+            <a href="/news/details?newInfo=@item.NewsID" style="text-decoration: none;">
+                <div class="row-parent">
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-sm-12 col-md-3 fade-image" style="display: flex; justify-content: center; align-items: center; margin-top: 10px; margin-bottom: 10px; position: relative; overflow: hidden;">
+                            <img class="zoom" src="@Url.Content(item.NewsImage)" style="max-width: 100%; position: absolute;" />
+                        </div>
+                        <div class="col-sm-12 col-md-9" style="position: relative;">
+                            <h3 style="font-size: 24px; font-weight: 400; color: black">@item.NewsTitle</h3>
+                            <p style="line-height: 22px; color: #7d7d7d; ">@item.NewsDescription</p>
+                            <div style="display: inline-flex; position: absolute; right: 15px; bottom: 0; gap: 15px;">
+                                <i style="color: #999; ">@item.CreateDate.Day / @item.CreateDate.Month / @item.CreateDate.Year</i>
+                                <p class="text-primary">Info</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </a>
+        }
+
+    </div>
+</div>
+
+<button onclick="topFunction()" class="btn btn-danger btn-floating btn-lg" id="myBtn" title="Go to top" style="position: fixed; right: 30px; bottom: 100px; display: none;">
+    <i class="fa fa-arrow-up" aria-hidden="true"></i>
+</button>
+
+
+<script>
+    //Get the button:
+    mybutton = document.getElementById("myBtn");
+
+    // When the user scrolls down 20px from the top of the document, show the button
+    window.onscroll = function () { scrollFunction() };
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 6000 || document.documentElement.scrollTop > 1000) {
+            mybutton.style.display = "block";
+        } else {
+            mybutton.style.display = "none";
+        }
+    }
+
+    // When the user clicks on the button, scroll to the top of the document
+    function topFunction() {
+        document.body.scrollTop = 0; // For Safari
+        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    }
+</script>
