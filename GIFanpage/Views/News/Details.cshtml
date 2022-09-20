@@ -60,6 +60,7 @@
         line-height: 24px;
         display: flex;
         justify-content: center;
+        align-items: center;
         flex-direction: column;
     }
 
@@ -137,7 +138,7 @@
                 Date Posted @Model.CreateDate.Day / @Model.CreateDate.Month / @Model.CreateDate.Year
             </div>
             <div class="artical__content">
-                <img src="/Content/Image/NewsBackground.png" style="max-width: 100%; margin-bottom: 20px;">
+                <img src="@Url.Content(Model.NewsImage)" style="max-width: 100%; margin-bottom: 20px;">
                 @Html.Raw(Model.NewsContent);
             </div>
 

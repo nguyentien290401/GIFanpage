@@ -17,7 +17,6 @@
 
     .row {
         position: relative;
-        overflow: hidden;
         background-color: #f6f7f7;
         border: 3px solid;
         border-color: white;
@@ -30,7 +29,7 @@
     .col-md-3 > img {
         display: block;
         width: 100%;
-        aspect-ratio: 16 / 9;
+        aspect-ratio: 53 / 28;
         object-fit: cover;
         object-position: center;
         transition: 200ms ease-in-out;
@@ -52,26 +51,25 @@
     <div class="container p-5" style="margin-top: 18px; min-height: 448px;">
         @foreach (var item in Model)
         {
-            <a href="/news/details?newInfo=@item.NewsID" style="text-decoration: none;">
-                <div class="row-parent">
-                    <div class="row d-flex justify-content-center">
-                        <div class="col-sm-12 col-md-3 fade-image" style="display: flex; justify-content: center; align-items: center; margin-top: 10px; margin-bottom: 10px; position: relative; overflow: hidden;">
-                            <img class="zoom" src="@Url.Content(item.NewsImage)" style="max-width: 100%; position: absolute;" />
-                        </div>
-                        <div class="col-sm-12 col-md-9" style="position: relative;">
-                            <h3 style="font-size: 24px; font-weight: 400; color: black">@item.NewsTitle</h3>
-                            <p style="line-height: 22px; color: #7d7d7d; ">@item.NewsDescription</p>
-                            <div style="display: inline-flex; position: absolute; right: 15px; bottom: 0; gap: 15px;">
-                                <i style="color: #999; ">@item.CreateDate.Day / @item.CreateDate.Month / @item.CreateDate.Year</i>
-                                <p class="text-primary">Info</p>
-                            </div>
-                        </div>
+        <a href="/news/details?newInfo=@item.NewsID" style="text-decoration: none;">
 
+            <div class="row-parent d-flex justify-content-center">
+                <div class="row p-3" style="padding-top: 10px;">
+                    <div class="col-sm-12 col-md-3 fade-image" style="display: flex; justify-content: center; align-items: center; margin-top: 10px; margin-bottom: 10px;padding-left:unset; padding-right: unset; position: relative; overflow: hidden;">
+                        <img class="zoom" src="@Url.Content(item.NewsImage)" style="max-width: 100%;" />
+                    </div>
+                    <div class="col-sm-12 col-md-9" @*style="position: absolute;"*@>
+                        <h3 style="font-size: 24px; font-weight: 400; color: black">@item.NewsTitle</h3>
+                        <p style="line-height: 22px; color: #7d7d7d; ">@item.NewsDescription</p>
+                        <div style="display: inline-flex; position: absolute; right: 15px; bottom: 0; gap: 15px;">
+                            <i style="color: #999; ">@item.CreateDate.Day / @item.CreateDate.Month / @item.CreateDate.Year</i>
+                            <p class="text-primary">Info</p>
+                        </div>
                     </div>
                 </div>
-            </a>
+            </div>
+        </a>
         }
-
     </div>
 </div>
 
@@ -88,7 +86,7 @@
     window.onscroll = function () { scrollFunction() };
 
     function scrollFunction() {
-        if (document.body.scrollTop > 6000 || document.documentElement.scrollTop > 1000) {
+        if (document.body.scrollTop > 600 || document.documentElement.scrollTop > 600) {
             mybutton.style.display = "block";
         } else {
             mybutton.style.display = "none";
