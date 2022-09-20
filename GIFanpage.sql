@@ -94,10 +94,19 @@ Content nvarchar(max),
 CommentDate datetime,
 VotesCount int,
 CurrentUserVoteType int,
+SubCommentCount int,
 AskID int references Asks(AskID)on delete cascade,
 UserID int references Users(UserID),
 IsTrue bit default(0),
 IsHidden bit default(0))
+go
+
+create table SubComments(
+SubCommentID int primary key identity(1,1),
+Content nvarchar(max),
+SubCommentDate datetime,
+CommentID int references Comments(CommentID) on delete cascade,
+UserID int references Users(UserID))
 go
 
 create table Votes(
@@ -155,4 +164,6 @@ go
 
 use GIFanpage
 
-select * from Feedbacks
+select * from Asks
+select * from Comments
+select * from SubComments
