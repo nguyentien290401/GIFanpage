@@ -174,6 +174,21 @@ namespace GIFanpage.Controllers
             return RedirectToAction("Details", "Asks", new { ask = askID, cmt = subCmtID });
         }
 
+        public ActionResult EditSubComment(SubComment subCm, int askID, int subCmtID)
+        {
+            SubComment subComment = db.SubComments.Where(c => c.SubCommentID == subCm.SubCommentID).FirstOrDefault();
+            if (subComment != null)
+            {
+                subComment.Content = subCm.Content;
+                subComment.SubCommentDate = subCm.SubCommentDate;
+                subComment.UserID = subCm.UserID;
+                subComment.CommentID = subCm.CommentID;
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("Details", "Asks", new { ask = askID, cmt = subCmtID });
+        }
+
         [HttpPost]
         public ActionResult Like(int ask, int cmt, int user, Vote vote)
         {
