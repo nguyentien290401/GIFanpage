@@ -190,6 +190,7 @@
     <Compile Include="Models\New.cs" />
     <Compile Include="Models\Playstyle.cs" />
     <Compile Include="Models\Role.cs" />
+    <Compile Include="Models\SubComment.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Vote.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

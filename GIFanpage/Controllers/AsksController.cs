@@ -159,7 +159,23 @@ namespace GIFanpage.Controllers
         }
 
         [HttpPost]
-        public ActionResult Like(int ask, int user, int cmt, Vote vote)
+        public ActionResult AddSubComment(Comment comment, SubComment subComment, int askID, int subCmtID)
+        {
+            Ask ask = db.Asks.Where(i => i.AskID == comment.AskID).FirstOrDefault();
+            Comment cmt = db.Comments.Where(i => i.CommentID == subComment.CommentID).FirstOrDefault();
+            
+            if (ask != null && cmt != null)
+            {
+                cmt.SubCommentCount++;
+                db.SubComments.Add(subComment);
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("Details", "Asks", new { ask = askID, cmt = subCmtID });
+        }
+
+        [HttpPost]
+        public ActionResult Like(int ask, int cmt, int user, Vote vote)
         {
             Ask question = db.Asks.Where(q => q.AskID == ask).FirstOrDefault();
             Comment comment = db.Comments.Where(i => i.CommentID == cmt).FirstOrDefault();
@@ -182,7 +198,7 @@ namespace GIFanpage.Controllers
         }
 
         [HttpPost]
-        public ActionResult DisLike(int ask, int user, int Cmt, Vote vote)
+        public ActionResult DisLike(int ask, int Cmt, int user, Vote vote)
         {
             Ask question = db.Asks.Where(q => q.AskID == ask).FirstOrDefault();
             Comment comment = db.Comments.Where(i => i.CommentID == Cmt).FirstOrDefault();
@@ -227,7 +243,6 @@ namespace GIFanpage.Controllers
 
             return RedirectToAction("Details", "Asks", new { ask = ask });
         }
-
 
         // GET: Asks/Create
         public ActionResult Create()

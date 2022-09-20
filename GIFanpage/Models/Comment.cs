@@ -14,6 +14,7 @@ namespace GIFanpage.Models
         public int CommentID { get; set; }
         public string Content { get; set; }
         public DateTime CommentDate { get; set; }
+        public int SubCommentCount { get; set; }
         public int CurrentUserVoteType { get; set; }
         public int VotesCount { get; set; }
         public int AskID { get; set; }
@@ -24,6 +25,7 @@ namespace GIFanpage.Models
         [ForeignKey("UserID")]
         public virtual User User { get; set; }
         public virtual List<Vote> Votes { get; set; }
+        public virtual List<SubComment> SubComments { get; set; }
 
     }
 }

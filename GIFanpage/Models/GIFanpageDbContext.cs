@@ -15,6 +15,7 @@ namespace GIFanpage.Models
 
         public DbSet<Category> Categories { get; set; }
         public DbSet<Comment> Comments { get; set; }
+        public DbSet<SubComment> SubComments { get; set; }
         public DbSet<Playstyle> Playstyles { get; set; }
         public DbSet<Ask> Asks { get; set; }
         public DbSet<Role> Roles { get; set; }

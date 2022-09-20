@@ -39,5 +39,7 @@ namespace GIFanpage.Models
         //[ForeignKey("SubmissionID")]
         //public virtual Submission Submission { get; set; }
         public virtual List<Comment> Comments { get; set; }
+        
+
     }
 }
