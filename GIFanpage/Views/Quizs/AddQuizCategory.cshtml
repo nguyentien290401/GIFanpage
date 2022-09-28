@@ -1,0 +1,71 @@
+﻿@model GIFanpage.Models.QuizCategory
+
+@{
+    ViewBag.Title = "AddQuizCategory";
+}
+
+<h2>AddQuizCategory</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Course </h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.QuizCategoryName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.QuizCategoryName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.QuizCategoryName, "", new { @class = "text-danger" })
+
+
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+
+<table class="table table-responsive">
+
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+
+            <th>Room Name</th>
+            <th>View All Questions</th>
+
+        </tr>
+
+    </thead>
+
+
+    <tbody>
+        @foreach (var item in ViewData["quizCategoryList"] as List<GIFanpage.Models.QuizCategory>)
+        {
+            <tr>
+                <td>@item.QuizCategoryID</td>
+
+                <td>@item.QuizCategoryName</td>
+
+                <td>@item.QuizCategoryPassword</td>
+
+                <td><a class="btn btn-info btn-sm" href="@Url.Action("ViewAllQuestions", new { id = @item.QuizCategoryID })">View Questions of this exam!</a></td>
+
+            </tr>
+        }
+
+        <tr>
+        </tr>
+    </tbody>
+
+</table>

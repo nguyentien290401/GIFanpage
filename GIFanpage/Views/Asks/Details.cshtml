@@ -66,7 +66,7 @@
                 <div class="action d-flex justify-content-between mt-2 align-items-center">
 
                     <div class="reply px-4">
-                        <small><i class="fa fa-comment"></i> @Model.CommentCount </small>
+                        <small><i class="fa fa-comment"></i> @Model.CommentCount  </small>
                         @*<span class="dots" style="padding-left: 10px;"></span>
                             <small><i class="fa fa-thumbs-up"> Like </i></small>
                             <span class="dots" style="padding-left: 10px;"></span>
@@ -197,7 +197,7 @@
                         {
                             <form action="/asks/dislike?ask=@Model.AskID&Cmt=@Model.Comments[i].CommentID&user=@Session["CurrentUserID"]" method="post">
                                 <div class="reply px-4">
-                                    <small><i class="fa fa-comment"></i> 10 </small>
+                                    <small><i class="fa fa-comment"></i> @Model.Comments[i].SubCommentCount </small>
                                     <span class="dots" style="padding-left: 10px;"></span>
                                     <small><button type="submit" style="border: unset; background-color: white;"><i class="fa fa-thumbs-up"></i>  Dislike </button></small>
                                     <span class="dots" style="padding-left: 10px;"></span>
@@ -207,6 +207,14 @@
                                 <input type="hidden" name="CommentID" value="@Model.Comments[i].CommentID" />
                                 <input type="hidden" name="VoteValue" value="-1" />
                             </form>
+                            if (Convert.ToInt32(Session["CurrentUserID"]) == Model.Comments[i].UserID)
+                            {
+                                <small><a href="" id="button-edit" style="text-decoration: none;">Edit</a></small>
+                            }
+                            else
+                            {
+                                <span class="dots" style="padding-left: 10px;"></span>
+                            }
                         }
 
 
@@ -255,9 +263,6 @@
                                     <div class="user d-flex flex-row" style="display: flex; align-items: flex-start;">
                                         <div style="display: flex; flex-direction: column; align-items: center; ">
                                             <img src="@Url.Content(Model.Comments[i].SubComments[j].User.UserImg)" width="45" class="user-img rounded-circle mr-2" style="display:flex; align-items:flex-start;">
-
-
-
                                         </div>
 
                                         <span style="padding-left: 15px;">
@@ -278,6 +283,15 @@
                                         <small><button type="button" style="border: unset; background-color: white;"><i class="fa fa-thumbs-o-up"> @Model.Comments[i].VotesCount</i> </button></small>
                                     </div>
 
+                                    @if (Convert.ToInt32(Session["CurrentUserID"]) == Model.Comments[i].SubComments[j].UserID)
+                                    {
+                                    <small><a href="" id="" style="text-decoration: none;">Edit</a></small>
+                                    }
+                                    else
+                                    {
+                                    <span class="dots" style="padding-left: 10px;"></span>
+                                    }
+
                                     <div class="icons align-items-center">
                                         <i class="fa fa-star text-warning"></i>
                                         <i class="fa fa-check-circle-o check-icon"></i>
@@ -288,23 +302,25 @@
                                 @if (Convert.ToInt32(Session["CurrentUserID"]) == Model.Comments[i].SubComments[j].UserID)
                                 {
 
-                                    <div class="bg-light mt-2 p-3 " id="">
-                                        <form action="/asks/EditSubComment?askID=@Model.AskID&subCmtID=@Model.Comments[i].CommentID" method="post">
-                                            <div class="d-flex flex-row align-items-start">
-                                                <textarea rows="3" class="form-control shadow-none textarea" name="Content" placeholder="@Model.Comments[i].SubComments[j].Content" style="margin-left: 15px;" required></textarea>
-                                                <input type="hidden" name="SubCommentID" value="@Model.Comments[i].SubComments[j].SubCommentID" />
-                                                <input type="hidden" name="SubCommentDate" value="@DateTime.Now" />
-                                                <input type="hidden" name="CommentID" value="@Model.Comments[i].CommentID" />
-                                                
-                                                <input type="hidden" name="UserID" value="@Session["CurrentUserID"]" />
-                                                
-                                            </div>
-                                            <div class="mt-2 text-right" style="display: flex; justify-content: flex-end;">
-                                                <button class="btn btn-primary btn-sm shadow-none" type="submit">Edit</button>
+                            <div class="bg-light mt-2 p-3 " id="">
+                                <form action="/asks/EditSubComment?askID=@Model.AskID&subCmtID=@Model.Comments[i].CommentID" method="post">
+                                    <div class="d-flex flex-row align-items-start">
+                                        <textarea rows="3" class="form-control shadow-none textarea" name="Content" placeholder="@Model.Comments[i].SubComments[j].Content" style="margin-left: 15px;" required></textarea>
+                                        <input type="hidden" name="SubCommentID" value="@Model.Comments[i].SubComments[j].SubCommentID" />
+                                        <input type="hidden" name="SubCommentDate" value="@DateTime.Now" />
+                                        <input type="hidden" name="CommentID" value="@Model.Comments[i].CommentID" />
 
-                                            </div>
-                                        </form>
+                                        <input type="hidden" name="UserID" value="@Session["CurrentUserID"]" />
+
                                     </div>
+                                    <div class="mt-2 text-right" style="display: flex; justify-content: flex-end;">
+                                        <button class="btn btn-primary btn-sm shadow-none" type="submit">Edit</button>
+
+                                    </div>
+                                </form>
+
+                                
+                            </div>
 
 
 

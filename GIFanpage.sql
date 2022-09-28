@@ -116,6 +116,37 @@ CommentID int references Comments(CommentID) on delete cascade,
 VoteValue int)
 go
 
+create table QuizCategories(
+QuizCategoryID int primary key identity (1,1),
+QuizCategoryName nvarchar(100),
+QuizCategoryPassword nvarchar(max),
+UserID int references Users(UserID)
+)
+go
+
+create table QuizQuestions (
+QuizQuestionID int primary key identity(1,1),
+QuizQuestionContent nvarchar(max),
+QA nvarchar(50),
+QB nvarchar(50),
+QC nvarchar(50),
+QD nvarchar(50),
+CorrectAnswer nvarchar(10),
+QuizCategoryID int references QuizCategories(QuizCategoryID)
+)
+go
+
+create table QuizExams(
+QuizExamID int primary key identity(1,1),
+QuizExamContent nvarchar(50),
+QuizExamDate datetime,
+QuizExamScore int,
+UserID int references Users(UserID)
+--RoleID int references Roles(RoleID)
+)
+go
+
+
 
 
 use GIFanpage
