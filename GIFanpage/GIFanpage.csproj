@@ -169,6 +169,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
     <Compile Include="Controllers\AsksController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\CharactersController.cs" />
@@ -214,6 +216,7 @@
     <Content Include="Content\Image\KokomiOriginal.png" />
     <Content Include="Content\Image\LiyueSlide.png" />
     <Content Include="Content\Image\LoginBackground.jpeg" />
+    <Content Include="Content\Image\Logo.png" />
     <Content Include="Content\Image\MonstadtSlide.png" />
     <Content Include="Content\Image\NewsTitle.png" />
     <Content Include="Content\Image\PaimonAsk.png" />
@@ -230,6 +233,14 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Admin\Views\Dashboard\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Dashboard\UserAccount.cshtml" />
+    <Content Include="Areas\Admin\Views\Dashboard\CharacterInfo.cshtml" />
+    <Content Include="Areas\Admin\Views\Dashboard\NewInfo.cshtml" />
+    <Content Include="Areas\Admin\Views\Dashboard\Question.cshtml" />
+    <Content Include="Areas\Admin\Views\Dashboard\CreateUser.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -312,6 +323,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Data\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
