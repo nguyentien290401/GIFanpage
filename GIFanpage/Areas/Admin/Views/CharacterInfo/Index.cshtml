@@ -1,0 +1,76 @@
+﻿@model IEnumerable<GIFanpage.Models.Character>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CharacterName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CharacterVision)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CharacterDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CharacterRarity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CharacterRegion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CharacterBirthday)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CharacterImageCard)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CharacterImageOriginal)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CharacterName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CharacterVision)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CharacterDescription)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CharacterRarity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CharacterRegion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CharacterBirthday)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CharacterImageCard)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CharacterImageOriginal)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.CharacterID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.CharacterID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.CharacterID })
+        </td>
+    </tr>
+}
+
+</table>
