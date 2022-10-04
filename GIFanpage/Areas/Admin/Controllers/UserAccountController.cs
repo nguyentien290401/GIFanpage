@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -54,9 +55,11 @@ namespace GIFanpage.Areas.Admin.Controllers
         // GET: Admin/UserAccount/Create
         public ActionResult Create()
         {
+            User user = new User();
+
             ViewBag.PlaystyleID = new SelectList(db.Playstyles, "PlaystyleID", "PlaystyleName");
             ViewBag.RoleID = new SelectList(db.Roles, "RoleID", "RoleName");
-            return View();
+            return View(user);
         }
 
         // POST: Admin/UserAccount/Create
@@ -64,10 +67,19 @@ namespace GIFanpage.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "UserID,Name,Email,PasswordHash,UserImg,PlaystyleID,RoleID")] User user)
+        public ActionResult Create(User user)
         {
             if (ModelState.IsValid)
             {
+                if (user.ImageUpload != null)
+                {
+                    string fileName = Path.GetFileNameWithoutExtension(user.ImageUpload.FileName);
+                    string extension = Path.GetExtension(user.ImageUpload.FileName);
+                    fileName = fileName + extension;
+                    user.UserImg = "~/Content/Image/" + fileName;
+                    user.ImageUpload.SaveAs(Path.Combine(Server.MapPath("~/Content/Image/"), fileName));
+                }
+
                 db.Users.Add(user);
                 db.SaveChanges();
                 return RedirectToAction("Index");
