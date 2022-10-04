@@ -5,88 +5,144 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Create</h2>
+<style>
+    /*.image-card > img {
+        display: flex;
+        aspect-ratio: 1/1;
+        object-fit: cover;
+        object-position: center;
+    }*/
+</style>
 
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Character</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.CharacterName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CharacterName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CharacterName, "", new { @class = "text-danger" })
+<div class="card" style="margin-bottom: 30px;">
+    <div class="row px-5  d-flex justify-content-center">
+        <div class="col-md-10">
+            <div style="display:inline-flex; width: 100%;">
+                <div>
+                    <h2 style="padding-top: 20px;">Character's Information Form</h2>
+                    <i class="text-secondary" style="font-size: 14px;">
+                        Figure out the information of Character in Teyvat world
+                    </i>
+                </div>
+                <a href="/admin/characterInfo/index" style="text-decoration: none; margin-left: auto; margin-top: 30px;">
+                    <button class="btn btn-lg btn-primary btn-login fw-bold text-uppercase" type="submit"><i class="pe-7s-back btn-icon-wrapper"> Back to List</i></button>
+                </a>
             </div>
-        </div>
+            <hr />
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.CharacterVision, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CharacterVision, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CharacterVision, "", new { @class = "text-danger" })
-            </div>
-        </div>
+            <form action="/admin/characterInfo/create" method="post" enctype="multipart/form-data">
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="row  d-flex justify-content-center">
+                    <div class="form-group col-md-6">
+                        <label for="CharacterName" class="fw-bolder">Character's Name</label>
+                        <input type="text" name="CharacterName" class="form-control" placeholder="" id="CharacterName" required style="margin-top:unset;">
+                        @Html.ValidationMessageFor(model => model.CharacterName, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="CharacterVision" class="fw-bolder">Vision</label>
+                        <input type="text" name="CharacterVision" class="form-control" placeholder="" id="CharacterVision" required style="margin-top:unset;">
+                        @Html.ValidationMessageFor(model => model.CharacterVision, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="CharacterRarity" class="fw-bolder">Rarity</label>
+                        <input type="text" name="CharacterRarity" class="form-control" placeholder="" id="CharacterRarity" required style="margin-top:unset;">
+                        @Html.ValidationMessageFor(model => model.CharacterRarity, "", new { @class = "text-danger" })
+                    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.CharacterDescription, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CharacterDescription, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CharacterDescription, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                    <div class="form-group col-md-6">
+                        <label for="CharacterName" class="fw-bolder">Birthday</label>
+                        <input type="date" name="CharacterBirthday" class="form-control" placeholder="" id="CharacterName" required style="margin-top:unset;">
+                        @Html.ValidationMessageFor(model => model.CharacterBirthday, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="CharacterRegion" class="fw-bolder">Region</label>
+                        <input type="text" name="CharacterRegion" class="form-control" placeholder="" id="CharacterRegion" required style="margin-top:unset;">
+                        @Html.ValidationMessageFor(model => model.CharacterRegion, "", new { @class = "text-danger" })
+                    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.CharacterRarity, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CharacterRarity, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CharacterRarity, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                    <div class="form-group">
+                        <label class="fw-bolder">Content</label>
+                        <textarea rows="3" name="CharacterDescription" class="form-control" id="summernote" required></textarea>
+                        @Html.ValidationMessageFor(model => model.CharacterDescription, "", new { @class = "text-danger" })
+                    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.CharacterRegion, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CharacterRegion, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CharacterRegion, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                    <div class="form-group col-md-6">
+                        <label class="fw-bolder">Image Card</label>
+                        <br />
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.CharacterBirthday, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CharacterBirthday, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CharacterBirthday, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                        <input type="file" name="fileCard" class="form-control-file" id="upload-button1" required hidden>
+                        <label for="upload-button1" class="btn-success p-2" style="border-radius: 10px; cursor: pointer;">
+                            <i class="fa fa-download" aria-hidden="true"></i> &nbsp; Choose A Photo
+                        </label>
+                        <div class="image-card" style="display: flex; margin-top: 10px;">
+                            <img id="preview-image1" width="200" />
+                        </div>
+                    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.CharacterImageCard, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CharacterImageCard, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CharacterImageCard, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                    <div class="form-group col-md-6">
+                        <label class="fw-bolder">Original Image</label>
+                        <br />
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.CharacterImageOriginal, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CharacterImageOriginal, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CharacterImageOriginal, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
+                        <input type="file" name="fileOriginal" class="form-control-file" id="upload-button2" required hidden>
+                        <label for="upload-button2" class="btn-success p-2" style="border-radius: 10px; cursor: pointer;">
+                            <i class="fa fa-download" aria-hidden="true"></i> &nbsp; Choose A Photo
+                        </label>
+                        <div class="image-card" style="display: flex; margin-top: 10px;">
+                            <img id="preview-image2" width="200" />
+                        </div>
+                    </div>
+                    <div class="col-md-12" style="display: flex; justify-content: flex-start; margin-top: 15px; margin-bottom: 20px;">
+                        <button class="btn  btn-primary btn-login fw-bold " type="submit"><i class="fa fa-floppy-o" aria-hidden="true"> Save</i></button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
 </div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+
+<script>
+    $('#summernote').summernote({
+
+        tabsize: 2,
+        height: 200,
+        toolbar: [
+            ['style', ['style']],
+            ['font', ['bold', 'underline', 'clear']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['table', ['table']],
+            ['insert', ['link', 'picture', 'video']],
+            ['view', ['fullscreen', 'codeview', 'help']]
+        ]
+    });
+</script>
+
+<script>
+    var uploadBtn1 = document.getElementById("upload-button1");
+    var previewImg1 = document.getElementById("preview-image1");
+
+    uploadBtn1.addEventListener("change", function (event) {
+        if (event.target.files.length == 0) {
+            return;
+        }
+        var tempUrl1 = URL.createObjectURL(event.target.files[0]);
+        previewImg1.setAttribute("src", tempUrl1);
+    })
+
+
+    var uploadBtn2 = document.getElementById("upload-button2");
+    var previewImg2 = document.getElementById("preview-image2");
+
+    uploadBtn2.addEventListener("change", function (event) {
+        if (event.target.files.length == 0) {
+            return;
+        }
+        var tempUrl2 = URL.createObjectURL(event.target.files[0]);
+        previewImg2.setAttribute("src", tempUrl2);
+    })
+</script>

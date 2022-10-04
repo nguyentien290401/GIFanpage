@@ -184,17 +184,12 @@ go
 insert into Categories values('Spiral Abyss', 'Talk about the relevant around Spiral Abyss each version')
 go
 
---insert into Submissions values('Your ideas about ver 2.6', 'Deadline', '3-7-2022', '3-10-2022','')
---go
---insert into Submissions values('Your ideas about ver 2.7', 'Deadline', '3-7-2022', '3-10-2022','')
---go
---insert into Submissions values('Your ideas about ver 2.8 ', 'Deadline', '3-7-2022', '3-10-2022','')
---go
---insert into Submissions values('Your ideas about ver 3.0', 'Deadline', '5-7-2022', '5-10-2022','')
---go
+insert into Characters values('Kokomi', 'Hydro', 'Sangonomiya Kokomi', '5 star', 'Inazuma', '9/28/2019', '~/Content/Image/KokomiCard.png', '~/Content/Image/KokomiAvatar.png')
+go
 
 use GIFanpage
 
-select * from Asks
-select * from Comments
-select * from SubComments
+
+select * from Characters
+select * from Playstyles
+
