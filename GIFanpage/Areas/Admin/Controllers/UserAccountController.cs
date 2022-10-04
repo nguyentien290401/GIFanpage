@@ -112,10 +112,19 @@ namespace GIFanpage.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "UserID,Name,Email,PasswordHash,UserImg,PlaystyleID,RoleID")] User user)
+        public ActionResult Edit(User user)
         {
             if (ModelState.IsValid)
             {
+                if (user.ImageUpload != null)
+                {
+                    string fileName = Path.GetFileNameWithoutExtension(user.ImageUpload.FileName);
+                    string extension = Path.GetExtension(user.ImageUpload.FileName);
+                    fileName = fileName + extension;
+                    user.UserImg = "~/Content/Image/" + fileName;
+                    user.ImageUpload.SaveAs(Path.Combine(Server.MapPath("~/Content/Image/"), fileName));
+                }
+
                 db.Entry(user).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

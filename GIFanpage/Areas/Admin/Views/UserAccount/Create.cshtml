@@ -22,96 +22,97 @@
     }
 </style>
 
+<div class="row" style="margin-bottom: 20px;">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="row py-3">
+                <div class="col-md-12">
 
-
-
-    <div class="row" style="margin-bottom: 20px;">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="row py-3">
-                    <div class="col-md-12">
-
+                </div>
+                <div class="container px-5" style="display: inline-flex;">
+                    <h2>Create New Account</h2>
+                    <div style="margin-left: auto; margin-top: 5px;">
+                        <a href="/admin/userAccount/index" style="text-decoration: none;">
+                            <button class="btn btn-lg btn-primary btn-login fw-bold text-uppercase" type="submit"><i class="pe-7s-back btn-icon-wrapper"> Back to List</i></button>
+                        </a>
                     </div>
-                    <div class="container px-5">
-                        <h2>Create New Account</h2>
-                        <hr />
-                    </div>
-                    <div class="col-md-12">
-                        <form action="/admin/userAccount/create" method="post" enctype="multipart/form-data">
-                            @Html.AntiForgeryToken()
-                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                            <div class="row">
-                                <div class="col-md-5">
-                                    <div class="change-img p-4">
-                                        <div class="img-wrapper">
-                                            <img src="@Url.Content(Model.UserImg)" width="200" class="bd-placeholder-img rounded-circle" id="previewImage" />
-                                        </div>
-                                    </div>
-                                    <div class="change-img">
-                                        <input type="file" name="ImageUpload" onchange="ShowImagePreview(this, document.getElementById('previewImage'))" />
+                    <hr />
+                </div>
+                <div class="col-md-12">
+                    <form action="/admin/userAccount/create" method="post" enctype="multipart/form-data">
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="change-img p-4">
+                                    <div class="img-wrapper">
+                                        <img src="@Url.Content(Model.UserImg)" width="200" class="bd-placeholder-img rounded-circle" id="previewImage" />
                                     </div>
                                 </div>
-                                <div class="col-md-7">
-                                    <div class="card-body px-4 p-sm-4">
-                                        <div class="form-floating mb-3">
-                                            <input type="text" name="Name" class="form-control" id="floatingInputUsername" placeholder="myusername" required autofocus>
-                                            <label for="floatingInputUsername">Username</label>
-                                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-                                        </div>
-
-                                        <div class="form-floating mb-3">
-                                            <input type="email" name="Email" class="form-control" id="floatingInputEmail" placeholder="name@example.com">
-                                            <label for="floatingInputEmail">Email address</label>
-                                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-                                        </div>
-
-                                        <div class="form-floating mb-3">
-                                            <input type="password" name="PasswordHash" class="form-control" id="floatingPassword" placeholder="Password">
-                                            <label for="floatingPassword">Password</label>
-                                            @Html.ValidationMessageFor(model => model.PasswordHash, "", new { @class = "text-danger" })
-                                        </div>
-
-
-
-                                        <div class="row">
-                                            <div class="col-md-5">
-
-                                                <label for="floatingPasswordConfirm">Playstyle</label>
-                                                @Html.DropDownList("PlaystyleID", null, htmlAttributes: new { @class = "list-group-item col-md-12" })
-                                                @Html.ValidationMessageFor(model => model.PlaystyleID, "", new { @class = "text-danger" })
-                                                <input type="text" name="PlaystyleID" class="form-control" id="floatingPasswordConfirm" placeholder="Your style" hidden>
-
-                                            </div>
-                                            <div class="col-md-2"></div>
-                                            <div class="col-md-5">
-
-                                                <label for="floatingPasswordConfirm">Role</label>
-                                                @Html.DropDownList("RoleID", null, htmlAttributes: new { @class = "list-group-item col-md-12" })
-                                                @Html.ValidationMessageFor(model => model.RoleID, "", new { @class = "text-danger" })
-                                                <input type="text" name="RoleID" class="form-control" id="floatingPasswordConfirm" placeholder="Your role" hidden>
-
-                                            </div>
-                                        </div>
-
-
-                                        <div class="d-grid my-3 col-md-3" style="padding-left:unset;">
-                                            <button class="btn btn-lg btn-primary btn-login fw-bold text-uppercase" type="submit">Create</button>
-                                        </div>
-
-                                        <a class="d-block text-center mt-2 small" href="/users/login" style="font-size:medium; ">Already have an account? Login</a>
-
-
-                                    </div>
+                                <div class="change-img">
+                                    <input type="file" name="ImageUpload" onchange="ShowImagePreview(this, document.getElementById('previewImage'))" />
                                 </div>
                             </div>
+                            <div class="col-md-7">
+                                <div class="card-body px-4 p-sm-4">
+                                    <div class="form-floating mb-3">
+                                        <input type="text" name="Name" class="form-control" id="floatingInputUsername" placeholder="myusername" required autofocus>
+                                        <label for="floatingInputUsername">Username</label>
+                                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                    </div>
 
-                        </form>
-                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input type="email" name="Email" class="form-control" id="floatingInputEmail" placeholder="name@example.com">
+                                        <label for="floatingInputEmail">Email address</label>
+                                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                    </div>
+
+                                    <div class="form-floating mb-3">
+                                        <input type="password" name="PasswordHash" class="form-control" id="floatingPassword" placeholder="Password">
+                                        <label for="floatingPassword">Password</label>
+                                        @Html.ValidationMessageFor(model => model.PasswordHash, "", new { @class = "text-danger" })
+                                    </div>
+
+
+
+                                    <div class="row">
+                                        <div class="col-md-5">
+
+                                            <label for="floatingPasswordConfirm">Playstyle</label>
+                                            @Html.DropDownList("PlaystyleID", null, htmlAttributes: new { @class = "list-group-item col-md-12" })
+                                            @Html.ValidationMessageFor(model => model.PlaystyleID, "", new { @class = "text-danger" })
+                                            <input type="text" name="PlaystyleID" class="form-control" id="floatingPasswordConfirm" placeholder="Your style" hidden>
+
+                                        </div>
+                                        <div class="col-md-2"></div>
+                                        <div class="col-md-5">
+
+                                            <label for="floatingPasswordConfirm">Role</label>
+                                            @Html.DropDownList("RoleID", null, htmlAttributes: new { @class = "list-group-item col-md-12" })
+                                            @Html.ValidationMessageFor(model => model.RoleID, "", new { @class = "text-danger" })
+                                            <input type="text" name="RoleID" class="form-control" id="floatingPasswordConfirm" placeholder="Your role" hidden>
+
+                                        </div>
+                                    </div>
+
+
+                                    <div class="d-grid my-3 col-md-3" style="padding-left:unset;">
+                                        <button class="btn btn-lg btn-primary btn-login fw-bold text-uppercase" type="submit">Create</button>
+                                    </div>
+
+                                    <a class="d-block text-center mt-2 small" href="/users/login" style="font-size:medium; ">Already have an account? Login</a>
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
 
 
-   

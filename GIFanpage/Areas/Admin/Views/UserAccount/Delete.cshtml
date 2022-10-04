@@ -5,6 +5,90 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
+<style>
+
+    .change-img {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .img-wrapper > img {
+        display: block;
+        aspect-ratio: 1/1;
+        object-fit: cover;
+        object-position: center;
+        transition: 200ms ease-in-out;
+    }
+</style>
+
+
+<div class="row" style="margin-bottom: 20px;">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="row py-3">
+                <div class="col-md-12">
+
+                </div>
+                <div class="container px-5">
+                    <h2 class="text-danger">Delete User</h2>
+                    <h5><i>Are you sure you want to delete this user ?</i></h5>
+                    <hr />
+                </div>
+                <div class="col-md-12">
+
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="change-img p-4">
+                                <div class="img-wrapper">
+                                    <img src="@Url.Content(Model.UserImg)" width="200" class="bd-placeholder-img rounded-circle" id="previewImage" />
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-7">
+                            <div class="bg-secondary mx-3 p-2 rounded" style="max-width: 40%;">
+                                <h3 class="h2 px-3 text-white mb-0">@Model.Name</h3>
+                                <span class="text-warning px-3 glyphicon-text-color">@Model.Role.RoleName</span>
+                            </div>
+                            <div class="card-body px-4 p-sm-4">
+
+                                <ul class="list-unstyled mb-1-9">
+                                    <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 fw-bolder">Playstyle in game:</span> @Model.Playstyle.PlaystyleName</li>
+                                    <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 fw-bolder">Email:</span> @Model.Email</li>
+                                    <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 fw-bolder">Password:</span> @Model.PasswordHash</li>
+
+                                </ul>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="d-grid my-3 col-md-12" style="padding-left:unset;">
+                                            <form action="/admin/userAccount/delete?id=@Model.UserID" method="post" enctype="multipart/form-data" style="text-decoration: none;">
+                                                @Html.AntiForgeryToken()
+                                                <button class="btn btn-lg btn-danger btn-login fw-bold text-uppercase" type="submit"><i class="pe-7s-trash btn-icon-wrapper"> Delete</i></button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="d-grid my-3 col-md-12" style="padding-left:unset;">
+                                            <a href="/admin/userAccount/index" style="text-decoration: none;">
+                                                <button class="btn btn-lg btn-primary btn-login fw-bold text-uppercase" type="submit"><i class="pe-7s-back btn-icon-wrapper"> Back to List</i></button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <h2>Delete</h2>
 
 <h3>Are you sure you want to delete this?</h3>
@@ -62,7 +146,8 @@
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">

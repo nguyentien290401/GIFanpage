@@ -5,63 +5,83 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
 
-<div>
-    <h4>User</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Playstyle.PlaystyleName)
-        </dt>
+<style>
 
-        <dd>
-            @Html.DisplayFor(model => model.Playstyle.PlaystyleName)
-        </dd>
+    .change-img {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Role.RoleName)
-        </dt>
+    .img-wrapper > img {
+        display: block;
+        aspect-ratio: 1/1;
+        object-fit: cover;
+        object-position: center;
+        transition: 200ms ease-in-out;
+    }
+</style>
+<div class="row" style="margin-bottom: 20px;">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="row py-3">
+                <div class="col-md-12">
 
-        <dd>
-            @Html.DisplayFor(model => model.Role.RoleName)
-        </dd>
+                </div>
+                <div class="container px-5">
+                    <h2>User Profile</h2>
+                    <hr />
+                </div>
+                <div class="col-md-12">
+                    
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="change-img p-4">
+                                    <div class="img-wrapper">
+                                        <img src="@Url.Content(Model.UserImg)" width="200" class="bd-placeholder-img rounded-circle" id="previewImage" />
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            <div class="col-md-7">
+                                <div class="bg-secondary mx-3 p-2 rounded" style="max-width: 40%;">
+                                    <h3 class="h2 px-3 text-white mb-0">@Model.Name</h3>
+                                    <span class="text-warning px-3 glyphicon-text-color">@Model.Role.RoleName</span>
+                                </div>
+                                <div class="card-body px-4 p-sm-4">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+                                    <ul class="list-unstyled mb-1-9">
+                                        <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 fw-bolder">Playstyle in game:</span> @Model.Playstyle.PlaystyleName</li>
+                                        <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 fw-bolder">Email:</span> @Model.Email</li>
+                                        <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 fw-bolder">Password:</span> @Model.PasswordHash</li>
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+                                    </ul>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="d-grid my-3 col-md-12" style="padding-left:unset;">
+                                                <a href="/admin/userAccount/edit?id=@Model.UserID" style="text-decoration: none;">
+                                                    <button class="btn btn-lg btn-primary btn-login fw-bold text-uppercase" type="submit"><i class="pe-7s-pen btn-icon-wrapper"> Edit</i></button>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="d-grid my-3 col-md-12" style="padding-left:unset;">
+                                                <a href="/admin/userAccount/index" style="text-decoration: none;">
+                                                    <button class="btn btn-lg btn-primary btn-login fw-bold text-uppercase" type="submit"><i class="pe-7s-back btn-icon-wrapper"> Back to List</i></button>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PasswordHash)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PasswordHash)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.UserImg)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UserImg)
-        </dd>
-
-    </dl>
+                
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.UserID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
