@@ -72,7 +72,7 @@
                 Total Characters: @ViewBag.TotalCharacter
                 <div class="btn-actions-pane-right">
                     <div role="group" class="btn-group-sm btn-group">
-                       
+
                         <a href="/admin/characterInfo/create">
                             <button class="btn btn-primary">Create New</button>
                         </a>
@@ -140,10 +140,11 @@
                         <h1 class="jumbotron text-center" style="background-color: white; margin: 40px auto; padding: 40px 0;">@ViewBag.Msg</h1>
                     }
                 </table>
-                
+
             </div>
 
-            @{
+            @if (ViewBag.Msg == null)
+            {
                 int PrevPageNo = ViewBag.PageNo - 1;
                 if (PrevPageNo <= 0)
                 {
@@ -155,7 +156,9 @@
                 {
                     NextPageNo = ViewBag.NoOfPages;
                 }
-            }
+
+
+
             <div class="d-block text-center card-footer">
                 <ul class="pagination justify-content-center">
                     @if (ViewBag.PageNo == 1)
@@ -201,8 +204,9 @@
                     }
 
                 </ul>
-                
+
             </div>
+            }
         </div>
     </div>
 </div>

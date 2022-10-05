@@ -9,6 +9,17 @@
     }
 }
 
+function showImagePreview(imageUpload, previewImg) {
+    if (imageUpload.files && imageUpload.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $(previewImg).attr('src', e.target.result);
+        }
+        reader.readAsDataURL(imageUpload.files[0]);
+
+    }
+}
+
 
 var uploadBtn = document.getElementById("upload-button");
 var previewImg = document.getElementById("preview-image");

@@ -5,79 +5,84 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<style>
+    body {
+        background-color: #e6e6e6;
+        font-family: Helvetica;
+    }
 
-<div>
-    <h4>Character</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.CharacterName)
-        </dt>
+    .container {
+        margin-bottom: 30px;
+    }
 
-        <dd>
-            @Html.DisplayFor(model => model.CharacterName)
-        </dd>
+    .breadcrumb-item a {
+        text-decoration: none;
+        color: #0dcaf0;
+        font-size: 16px;
+    }
+    .col-sm-12 img {
+        padding-top: 20px;
+    }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CharacterVision)
-        </dt>
+   
 
-        <dd>
-            @Html.DisplayFor(model => model.CharacterVision)
-        </dd>
+    .col-sm-12 .text-character {
+        display: block;
+    }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CharacterDescription)
-        </dt>
+        .col-sm-12 .text-character .text-object p {
+            display: inline-flex;
+            margin-right: 10px;
+            font-weight: bolder;
+        }
 
-        <dd>
-            @Html.DisplayFor(model => model.CharacterDescription)
-        </dd>
+    .col-sm-12 .image-card p {
+        font-weight: bolder;
+    }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CharacterRarity)
-        </dt>
+    .col-sm-12 .character-content-raw {
+        background-color: #ffffff;
+        border: 1px solid #808080;
+        border-radius: 5px;
+        margin-bottom: 10px;
+    }
+</style>
 
-        <dd>
-            @Html.DisplayFor(model => model.CharacterRarity)
-        </dd>
+<div class="container px-5 py-2">
+    <div class="row  d-flex justify-content-center">
+        <nav aria-label="breadcrumb" style="padding: unset;">
+            <ol class="breadcrumb gx-2">
+                <li class="breadcrumb-item"><a href="/admin/dashboard/index">Dashboard</a> </li>
+                <li class="breadcrumb-item"> <a href="/admin/characterInfo/index">  Characters</a> </li>
+                <li class="breadcrumb-item active" aria-current="page"><a class="text-secondary"> @Model.CharacterName's information</a></li>
+            </ol>
+        </nav>
+        <div class="col-md-11">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CharacterRegion)
-        </dt>
+        </div>
+        <div class="col-sm-12 col-md-6 d-flex justify-content-center">
+            <img src="@Url.Content(Model.CharacterImageOriginal)" width="450" />
+        </div>
+        <div class="col-sm-12 col-lg-1"></div>
+        <div class="col-sm-12 col-lg-5" style="padding-left: 20px; padding-top: 20px;">
+            <h2>Character: @Model.CharacterName</h2>
+            <i>Rarity: @Model.CharacterRarity</i>
+            <br />
+            <br />
+            <div class="text-character">
+                <div class="text-object">
+                    <p>Vision: </p>@Model.CharacterVision
+                </div>
+                <div class="text-object"><p>Region: </p>@Model.CharacterRegion</div>
+                <div class="text-object"><p>Birthday: </p>@Model.CharacterBirthday.Day / @Model.CharacterBirthday.Month</div>
 
-        <dd>
-            @Html.DisplayFor(model => model.CharacterRegion)
-        </dd>
+            </div>
+            <h6 class="fw-bolder">Description: </h6>
+            <div class="character-content-raw">@Html.Raw(Model.CharacterDescription)</div>
+            <div class="image-card" style="display: flex;">
+                <p>Image Card: </p> <img style="display: flex; justify-content: center; margin-left: 20px;" src="@Url.Content(Model.CharacterImageCard)" width="100" />
+            </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CharacterBirthday)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CharacterBirthday)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CharacterImageCard)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CharacterImageCard)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CharacterImageOriginal)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CharacterImageOriginal)
-        </dd>
-
-    </dl>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.CharacterID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
