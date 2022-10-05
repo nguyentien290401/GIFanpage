@@ -15,24 +15,39 @@ namespace GIFanpage.Areas.Admin.Controllers
         private GIFanpageDbContext db = new GIFanpageDbContext();
 
         // GET: Admin/NewInfo
-        public ActionResult Index()
+        public ActionResult Index(string Search = "", int PageNo = 1)
         {
-            return View(db.News.ToList());
+            //Search
+            List<New> newInfos = db.News.Where(s => s.NewsTitle.Contains(Search)).ToList();
+
+            if (newInfos.Count() == 0)
+            {
+                ViewBag.Msg = "Data Not Found";
+                return View();
+            }
+
+            // Total Users Account
+            int TotalNew = newInfos.Count();
+            ViewBag.TotalNew = TotalNew;
+
+            //Pagination
+
+            int NoOfRecordsPerPage = 4;
+            int NoOfPages = Convert.ToInt32(Math.Ceiling(Convert.ToDouble(newInfos.Count) / Convert.ToDouble(NoOfRecordsPerPage)));
+            int NoOfRecordsToSkip = (PageNo - 1) * NoOfRecordsPerPage;
+            ViewBag.PageNo = PageNo;
+            ViewBag.NoOfPages = NoOfPages;
+            newInfos = newInfos.Skip(NoOfRecordsToSkip).Take(NoOfRecordsPerPage).ToList();
+
+            return View(newInfos);
         }
 
         // GET: Admin/NewInfo/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int newInfo)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            New @new = db.News.Find(id);
-            if (@new == null)
-            {
-                return HttpNotFound();
-            }
-            return View(@new);
+            New newInfos = db.News.Where(c => c.NewsID == newInfo).FirstOrDefault();
+
+            return View(newInfos);
         }
 
         // GET: Admin/NewInfo/Create
@@ -46,16 +61,25 @@ namespace GIFanpage.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "NewsID,NewsTitle,NewsDescription,NewsImage,NewsContent,CreateDate")] New @new)
+        public ActionResult Create([Bind(Include = "NewsID,NewsTitle,NewsDescription,NewsImage,NewsContent,CreateDate")] New newInfo, HttpPostedFileBase fileNew)
         {
             if (ModelState.IsValid)
             {
-                db.News.Add(@new);
+                if (fileNew != null)
+                {
+                    // Define image card file
+                    var fileName = fileNew.FileName;
+                    var pathFile = "~/Content/Image/" + fileName;
+                    fileNew.SaveAs(Server.MapPath(pathFile));
+                    newInfo.NewsImage = pathFile;
+                }
+
+                db.News.Add(newInfo);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(@new);
+            return View(newInfo);
         }
 
         // GET: Admin/NewInfo/Edit/5
@@ -65,12 +89,12 @@ namespace GIFanpage.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            New @new = db.News.Find(id);
-            if (@new == null)
+            New newInfo = db.News.Find(id);
+            if (newInfo == null)
             {
                 return HttpNotFound();
             }
-            return View(@new);
+            return View(newInfo);
         }
 
         // POST: Admin/NewInfo/Edit/5

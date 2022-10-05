@@ -169,16 +169,10 @@
                         </span>
                     </button>
                 </span>
-            </div>    <div class="app-header__content">
+            </div>    
+            <div class="app-header__content">
                 <div class="app-header-left">
-                    <div class="search-wrapper">
-                        <div class="input-holder">
-                            <input type="text" class="search-input" placeholder="Type to search">
-                            <button class="search-icon"><span></span></button>
-                        </div>
-                        <button class="close"></button>
-                    </div>
-
+                   
                 </div>
                 <div class="app-header-right" style="display: flex; justify-content: center; gap: 10px; align-items: center;">
                     @if (Session["CurrentUserImg"] == null)
@@ -680,6 +674,33 @@
 
 <script>
 
+
+    // Preview Image before update/edit to database (button1)
+    var uploadBtn1 = document.getElementById("upload-button1");
+    var previewImg1 = document.getElementById("preview-image1");
+
+    uploadBtn1.addEventListener("change", function (event) {
+        if (event.target.files.length == 0) {
+            return;
+        }
+        var tempUrl1 = URL.createObjectURL(event.target.files[0]);
+        previewImg1.setAttribute("src", tempUrl1);
+    })
+
+    // Preview Image before update/edit to database (button2)
+    var uploadBtn2 = document.getElementById("upload-button2");
+    var previewImg2 = document.getElementById("preview-image2");
+
+    uploadBtn2.addEventListener("change", function (event) {
+        if (event.target.files.length == 0) {
+            return;
+        }
+        var tempUrl2 = URL.createObjectURL(event.target.files[0]);
+        previewImg2.setAttribute("src", tempUrl2);
+    })
+
+
+    // Change image in Edit form 
     function ShowImagePreview(imageUploader, previewImage) {
         if (imageUploader.files && imageUploader.files[0]) {
             var reader = new FileReader();
