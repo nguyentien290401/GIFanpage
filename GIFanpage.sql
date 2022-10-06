@@ -80,7 +80,6 @@ Content nvarchar(max),
 CreateDate datetime,
 ViewCount int,
 CommentCount int,
-FileName nvarchar(max),
 FilePath nvarchar(max),
 IsTrue bit default(0),
 UserID int references Users(UserID) on delete cascade,
@@ -190,6 +189,6 @@ go
 use GIFanpage
 
 
-select * from Characters
+select * from Asks
 select * from Playstyles
 

@@ -5,116 +5,118 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Edit</h2>
+<style>
+    label {
+        font-weight: bolder;
+    }
+</style>
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Ask</h4>
+<div class="card">
+    <div class="row  d-flex justify-content-center" style="margin: 5%;">
+        <div style="display:inline-flex;">
+            <h2>Edit Question</h2>
+            <div style="margin-left: auto; margin-top: 5px;">
+                <a href="/admin/questionManage/index" style="text-decoration: none;">
+                    <button class="btn btn-lg btn-primary btn-login fw-bold text-uppercase" type="submit"><i class="pe-7s-back btn-icon-wrapper"> Back to List</i></button>
+                </a>
+            </div>
+        </div>
         <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.AskID)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
-            </div>
-        </div>
+        <form action="/admin/questionManage/edit" method="post" enctype="multipart/form-data">
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.AskID)
+            @Html.TextBoxFor(model => model.CreateDate, new { @Value = DateTime.Now, @type = "hidden" })
+            @Html.TextBoxFor(model => model.ViewCount, new { @Value = 0, @type = "hidden" })
+            @Html.TextBoxFor(model => model.UserID, new { @Value = Session["CurrentUserID"], @type = "hidden" })
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Content, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Content, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.CreateDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CreateDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CreateDate, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ViewCount, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ViewCount, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ViewCount, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.CommentCount, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CommentCount, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CommentCount, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.FileName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.FileName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.FileName, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.FilePath, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.FilePath, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.FilePath, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.IsTrue, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.IsTrue)
-                    @Html.ValidationMessageFor(model => model.IsTrue, "", new { @class = "text-danger" })
+            <div class="row">
+                <div class="form-group col-md-8">
+                    <label for="Title">Title</label>
+                    <input type="text" name="Title" id="Title" value="@Model.Title" class="form-control" required>
+                    @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group col-md-4" style="margin-top:unset;">
+                    <label for="Category">Category</label>
+                    @Html.DropDownList("CategoryID", null, htmlAttributes: new { @class = "list-group-item col-md-12", @id = "Category" })
                 </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.UserID, "UserID", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("UserID", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.UserID, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <label for="Description">Description</label>
+                <textarea rows="2" name="Description" id="Description" placeholder="@Model.Description" value="@Model.Description" class="form-control" required></textarea>
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
             </div>
-        </div>
+            @if (Model.FilePath != null)
+            {
+                <div class="form-group">
+                    <label class="fw-bolder">Image</label>
+                    <br />
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.CategoryID, "CategoryID", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("CategoryID", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.CategoryID, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                    <input type="file" name="file" class="form-control-file" id="upload-button1" onchange="ShowImagePreview(this, document.getElementById('previewImage'))" required hidden>
+                    <label for="upload-button1" class="btn-success p-2" style="border-radius: 10px; cursor: pointer;">
+                        <i class="fa fa-download" aria-hidden="true"></i> &nbsp; Choose A Photo
+                    </label>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                    <div class="image-card" style="display: flex; margin-top: 10px;">
+                        <img src="@Url.Content(Model.FilePath)" width="200" id="previewImage" />
+                    </div>
+                </div>
+            }
+
+
+            <div class="form-group">
+                <label for="summernote">Content</label>
+                <textarea rows="3" name="Content" id="summernote" placeholder="abc" class="form-control" required></textarea>
+                @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
             </div>
-        </div>
+
+            <div class="form-group" style="margin-bottom: 15px;">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="check" id="toggle" checked value="" required>
+                    <label class="form-check-label">
+                        Argree with <a href="/home/agree" target="_blank">term of user</a>
+                    </label>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary" id="add-button" style="margin-bottom: 15px;"><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</button>
+        </form>
     </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
 </div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+
+<script>
+    $('#summernote').summernote({
+
+        tabsize: 2,
+        height: 200,
+        toolbar: [
+            ['style', ['style']],
+            ['font', ['bold', 'underline', 'clear']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['table', ['table']],
+            ['insert', ['link', 'picture', 'video']],
+            ['view', ['fullscreen', 'codeview', 'help']]
+        ]
+    });
+
+    $('#toggle').click(function () {
+        //check if checkbox is checked
+        if ($(this).is(':checked')) {
+
+            $('#add-button').removeAttr('disabled'); //enable input
+
+        } else {
+            $('#add-button').attr('disabled', true); //disable input
+        }
+    });
+</script>

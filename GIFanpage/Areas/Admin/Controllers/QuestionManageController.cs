@@ -15,25 +15,39 @@ namespace GIFanpage.Areas.Admin.Controllers
         private GIFanpageDbContext db = new GIFanpageDbContext();
 
         // GET: Admin/QuestionManage
-        public ActionResult Index()
+        public ActionResult Index(string Search = "", int PageNo = 1)
         {
-            var asks = db.Asks.Include(a => a.Category).Include(a => a.User);
-            return View(asks.ToList());
+            //Search
+            List<Ask> asks = db.Asks.Where(s => s.User.Name.Contains(Search) || s.Title.Contains(Search) || s.Category.CategoryName.Contains(Search) || s.User.Email.Contains(Search)).ToList();
+
+            if (asks.Count() == 0)
+            {
+                ViewBag.Msg = "Data Not Found";
+                return View();
+            }
+
+            // Total Users Account
+            int TotalQuestion = asks.Count();
+            ViewBag.TotalQuestion = TotalQuestion;
+
+            //Pagination
+
+            int NoOfRecordsPerPage = 4;
+            int NoOfPages = Convert.ToInt32(Math.Ceiling(Convert.ToDouble(asks.Count) / Convert.ToDouble(NoOfRecordsPerPage)));
+            int NoOfRecordsToSkip = (PageNo - 1) * NoOfRecordsPerPage;
+            ViewBag.PageNo = PageNo;
+            ViewBag.NoOfPages = NoOfPages;
+            asks = asks.Skip(NoOfRecordsToSkip).Take(NoOfRecordsPerPage).ToList();
+
+            return View(asks);
         }
 
         // GET: Admin/QuestionManage/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int ask)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Ask ask = db.Asks.Find(id);
-            if (ask == null)
-            {
-                return HttpNotFound();
-            }
-            return View(ask);
+            Ask asks = db.Asks.Where(a => a.AskID == ask).FirstOrDefault();
+            
+            return View(asks);
         }
 
         // GET: Admin/QuestionManage/Create
@@ -49,17 +63,33 @@ namespace GIFanpage.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "AskID,Title,Description,Content,CreateDate,ViewCount,CommentCount,FileName,FilePath,IsTrue,UserID,CategoryID")] Ask ask)
+        public ActionResult Create([Bind(Include = "AskID,Title,Description,Content,CreateDate,ViewCount,FileName,FilePath,UserID,CategoryID")] Ask ask, HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
             {
-                db.Asks.Add(ask);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (file == null)
+                {
+                    db.Asks.Add(ask);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    var myFile = file.FileName;
+                    var path = "~/Content/Image/" + myFile;
+                    file.SaveAs(Server.MapPath(path));
+                    ask.FilePath = path;
+
+                    db.Asks.Add(ask);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+
             }
 
             ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", ask.CategoryID);
             ViewBag.UserID = new SelectList(db.Users, "UserID", "Name", ask.UserID);
+            
             return View(ask);
         }
 
@@ -85,13 +115,29 @@ namespace GIFanpage.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "AskID,Title,Description,Content,CreateDate,ViewCount,CommentCount,FileName,FilePath,IsTrue,UserID,CategoryID")] Ask ask)
+        public ActionResult Edit([Bind(Include = "AskID,Title,Description,Content,CreateDate,ViewCount,CommentCount,FilePath,IsTrue,UserID,CategoryID")] Ask ask, HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(ask).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (file == null)
+                {
+                    db.Asks.Add(ask);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    var myFile = file.FileName;
+                    var path = "~/Content/Image/" + myFile;
+                    file.SaveAs(Server.MapPath(path));
+                    ask.FilePath = path;
+
+                    db.Entry(ask).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+
+                
             }
             ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", ask.CategoryID);
             ViewBag.UserID = new SelectList(db.Users, "UserID", "Name", ask.UserID);

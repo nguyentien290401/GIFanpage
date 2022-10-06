@@ -5,103 +5,68 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
 
-<div>
-    <h4>Ask</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Category.CategoryName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Category.CategoryName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.User.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.User.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Content)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Content)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CreateDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CreateDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ViewCount)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ViewCount)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CommentCount)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CommentCount)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.FileName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FileName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.FilePath)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FilePath)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IsTrue)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsTrue)
-        </dd>
-
-    </dl>
+<div style="display: inline-flex; align-items: center; min-width: 100%;">
+    <h2>Question's User</h2>
+    <div style="display: inline-flex; gap: 10px; margin-left:auto; align-items: center; margin-bottom: 20px;">
+        <a href="/admin/questionManage/edit?id=@Model.AskID" style="text-decoration: none; margin-left: auto; margin-top: 30px;">
+            <button class="btn btn-lg btn-success btn-login fw-bold text-uppercase" type="submit"><i class="pe-7s-pen btn-icon-wrapper"> Edit</i></button>
+        </a>
+        <a href="/admin/questionManage/index" style="text-decoration: none; margin-left: auto; margin-top: 30px;">
+            <button class="btn btn-lg btn-primary btn-login fw-bold text-uppercase" type="submit"><i class="pe-7s-back btn-icon-wrapper"> Back to List</i></button>
+        </a>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.AskID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+<div class="card p-4" style="margin-bottom: 20px;">
+
+    <div class="d-flex  align-items-center" style="max-width: 100%;">
+
+        <div class="user d-flex flex-row" style="display: flex; align-items: flex-start;">   
+            <img src="@Url.Content(Model.User.UserImg)" width="45" height="45" class="user-img rounded-circle mr-2" style="display:flex; align-items:flex-start;">
+          
+            <span style="padding-left: 15px; min-width: 100%;">
+                <small class="font-weight-bold text-dark" style="font-size: 20px; display: block;"> @Model.Title </small>
+                <small class="font-weight-bold text-white" style="font-size:20px; color: white; cursor:unset;"> (Genshin impact is an story game that tell that tell about traveler's Aether) </small>
+                <br />
+                <span style="display: flex; align-items: center;">
+                    <small class="font-weight-bold text-primary" style="font-size: 16px; padding-right: 10%;"> @Model.User.Name</small>
+                    <small class="font-weight-light text-secondary" style="padding-right: 10%;"><i class="fa fa-calendar"></i> @Model.CreateDate</small>
+                    <small class="font-weight-light text-secondary" style="padding-right: 10%;"><i class="fa fa-eye"></i> @Model.ViewCount</small>
+                    <small class="font-weight-light text-secondary"><i class="fa fa-book"></i> @Model.Category.CategoryName</small>
+                </span>
+                <hr />
+                <p style="padding-top: 8px;"> @Model.Description</p>
+                @{
+                    var filePath = Model.FilePath;
+                    if (filePath == null)
+                    {
+
+                    }
+                    else
+                    {
+                        <div style="display: flex; justify-content: center;">
+                            <img src="@Url.Content(Model.FilePath)" style="width: 60%;" />
+                        </div>
+                    }
+                }
+                <p style="padding-top: 8px;">@Html.Raw(Model.Content)</p>
+            </span>
+        </div>
+    </div>
+
+    <div class="action d-flex justify-content-between mt-2 align-items-center">
+
+        <div class="reply px-4">
+            <small><i class="fa fa-comment"></i> @Model.CommentCount  </small>
+        </div>
+
+        <div class="icons align-items-center">
+            <i class="fa fa-star text-warning"></i>
+            <i class="fa fa-check-circle-o check-icon"></i>
+        </div>
+
+    </div>
+
+</div>
+

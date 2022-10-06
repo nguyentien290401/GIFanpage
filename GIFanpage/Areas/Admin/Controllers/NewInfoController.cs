@@ -119,7 +119,7 @@ namespace GIFanpage.Areas.Admin.Controllers
                     newInfo.NewsImage = pathFile;
                 }
 
-                db.News.Add(newInfo);
+                db.Entry(newInfo).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

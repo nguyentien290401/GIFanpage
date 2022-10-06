@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Web.Mvc;
 
 namespace GIFanpage.Models
 {
@@ -14,11 +15,13 @@ namespace GIFanpage.Models
         public int AskID { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
+
+        [AllowHtml]
         public string Content { get; set; }
         public DateTime CreateDate { get; set; }
         public int ViewCount { get; set; }
         public int CommentCount { get; set; }
-        public string FileName { get; set; }
+        
         public string FilePath { get; set; }
         public Boolean IsTrue { get; set; }
 

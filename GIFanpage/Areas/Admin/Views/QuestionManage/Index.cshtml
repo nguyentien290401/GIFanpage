@@ -5,90 +5,208 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<style>
+    .search {
+        position: relative;
+        box-shadow: 0 0 40px rgba(51, 51, 51, .1);
+    }
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Category.CategoryName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.User.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Content)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreateDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ViewCount)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CommentCount)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FileName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FilePath)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsTrue)
-        </th>
-        <th></th>
-    </tr>
+        .search input {
+            height: 50px;
+            text-indent: 25px;
+            border: 2px solid #d6d4d4;
+            border-radius: 20px;
+        }
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Category.CategoryName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.User.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Content)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreateDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ViewCount)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CommentCount)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FileName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FilePath)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsTrue)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.AskID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.AskID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.AskID })
-        </td>
-    </tr>
-}
 
-</table>
+            .search input:focus {
+                box-shadow: none;
+                border: 2px solid blue;
+            }
+
+        .search .fa-search {
+            position: absolute;
+            top: 18px;
+            left: 18px;
+        }
+
+        .search button {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            height: 40px;
+            width: 110px;
+            background: blue;
+        }
+
+    .widget-content-left > img {
+        display: block;
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+        object-position: center;
+        transition: 200ms ease-in-out;
+    }
+</style>
+
+<div style="display: inline-flex; min-width: 100%; margin-bottom: 20px;">
+    <div>
+        <h2>User's Question</h2>
+    </div>
+
+    <div class="search" style="display: inline-flex; margin-left:auto; align-items: center;">
+        <form action="/admin/questionManage/index">
+            <i class="fa fa-search"></i>
+            <input type="search" name="Search" class="form-control" placeholder="Type to search ">
+
+        </form>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="main-card mb-3 card ">
+            <div class="card-header fw-bolder text-capitalize">
+
+                Total Questions: @ViewBag.TotalQuestion
+                <div class="btn-actions-pane-right">
+                    <div role="group" class="btn-group-sm btn-group">
+                        <a href="/admin/questionManage/create">
+                            <button class="btn btn-primary">Create New</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="align-middle mb-0 table table-borderless table-hover ">
+                    <thead>
+                        <tr>
+                            <th class="text-center">#</th>
+
+                            <th>User's Name</th>
+                            <th class="text-center">Question's Title</th>
+                            <th class="text-center">Date Posted</th>
+                            <th class="text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    @if (ViewBag.Msg == null)
+                    {
+                        foreach (var item in Model)
+                        {
+                            <tbody>
+                                <tr>
+                                    <td class="text-center"># @item.AskID</td>
+
+                                    <td>
+                                        <div class="widget-content p-0">
+                                            <div class="widget-content-wrapper">
+                                                <div class="widget-content-left mr-3">
+                                                    <div class="widget-content-left">
+                                                        <img width="40" class="rounded-circle" src=@Url.Content(item.User.UserImg) alt="">
+                                                    </div>
+                                                </div>
+                                                <div class="widget-content-left flex2">
+                                                    <div class="widget-heading text-capitalize"> @item.User.Name </div>
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="text-center text-capitalize">@item.Title</td>
+                                    <td class="text-center">
+                                        <div class="badge badge-warning">@item.CreateDate.Month / @item.CreateDate.Day / @item.CreateDate.Year</div>
+                                    </td>
+                                    <td class="text-center">
+                                        <a href="/admin/questionManage/edit?id=@item.AskID" style="text-decoration: none;">
+                                            <button type="button" id="PopoverCustomT-1" class="btn btn-primary btn-sm"><i class="pe-7s-pen btn-icon-wrapper"> </i></button>
+                                        </a>
+                                        <a href="/admin/questionManage/details?ask=@item.AskID" style="text-decoration: none;">
+                                            <button type="button" id="PopoverCustomT-1" class="btn btn-success btn-sm"><i class="pe-7s-look btn-icon-wrapper"> </i></button>
+                                        </a>
+                                        <a href="/admin/questionManage/delete?id=@item.AskID" style="text-decoration: none;">
+                                            <button type="button" id="PopoverCustomT-1" class="btn btn-danger btn-sm"><i class="pe-7s-trash btn-icon-wrapper"> </i></button>
+                                        </a>
+
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                        }
+                    }
+                    else
+                    {
+                        <h1 class="jumbotron text-center" style="background-color: white; margin: 40px auto; padding: 40px 0;">@ViewBag.Msg</h1>
+                    }
+                </table>
+            </div>
+            @if (ViewBag.Msg == null)
+            {
+
+
+                int PrevPageNo = ViewBag.PageNo - 1;
+                if (PrevPageNo <= 0)
+                {
+                    PrevPageNo = 1;
+                }
+
+                int NextPageNo = ViewBag.PageNo + 1;
+                if (NextPageNo > ViewBag.NoOfPages)
+                {
+                    NextPageNo = ViewBag.NoOfPages;
+                }
+
+
+                <div class="d-block text-center card-footer">
+                    <ul class="pagination justify-content-center">
+                        @if (ViewBag.PageNo == 1)
+                        {
+                            <li class="page-item disabled">
+                                <a class="page-link" href="/admin/questionManage/index?PageNo=@PrevPageNo">Prev</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="page-item">
+                                <a class="page-link" href="/admin/questionManage/index?PageNo=@PrevPageNo">Prev</a>
+                            </li>
+                        }
+
+                        @for (int i = 0; i < ViewBag.NoOfPages; i++)
+                        {
+                            if ((i + 1) == ViewBag.PageNo)
+                            {
+                                <li class="page-item active">
+                                    <a class="page-link" href="/admin/questionManage/index?PageNo=@(i + 1)">@( i + 1)</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" href="/admin/questionManage/index?PageNo=@(i + 1)">@( i + 1)</a>
+                                </li>
+                            }
+                        }
+
+                        @if (ViewBag.PageNo == ViewBag.NoOfPages)
+                        {
+                            <li class="page-item disabled">
+                                <a class="page-link" href="/admin/questionManage/index?PageNo=@NextPageNo">Next</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="page-item">
+                                <a class="page-link" href="/admin/questionManage/index?PageNo=@NextPageNo">Next</a>
+                            </li>
+                        }
+
+                    </ul>
+
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
+
+
