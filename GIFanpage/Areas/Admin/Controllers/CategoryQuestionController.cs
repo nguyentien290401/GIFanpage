@@ -15,24 +15,31 @@ namespace GIFanpage.Areas.Admin.Controllers
         private GIFanpageDbContext db = new GIFanpageDbContext();
 
         // GET: Admin/CategoryQuestion
-        public ActionResult Index()
+        public ActionResult Index(string Search = "", int PageNo = 1)
         {
-            return View(db.Categories.ToList());
-        }
+            //Search
+            List<Category> categories = db.Categories.Where(s => s.CategoryName.Contains(Search) || s.CategoryDescription.Contains(Search)).ToList();
 
-        // GET: Admin/CategoryQuestion/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
+            if (categories.Count() == 0)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                ViewBag.Msg = "Data Not Found";
+                return View();
             }
-            Category category = db.Categories.Find(id);
-            if (category == null)
-            {
-                return HttpNotFound();
-            }
-            return View(category);
+
+            // Total Users Account
+            int TotalCategory = categories.Count();
+            ViewBag.TotalCategory = TotalCategory;
+
+            //Pagination
+
+            int NoOfRecordsPerPage = 4;
+            int NoOfPages = Convert.ToInt32(Math.Ceiling(Convert.ToDouble(categories.Count) / Convert.ToDouble(NoOfRecordsPerPage)));
+            int NoOfRecordsToSkip = (PageNo - 1) * NoOfRecordsPerPage;
+            ViewBag.PageNo = PageNo;
+            ViewBag.NoOfPages = NoOfPages;
+            categories = categories.Skip(NoOfRecordsToSkip).Take(NoOfRecordsPerPage).ToList();
+
+            return View(categories);
         }
 
         // GET: Admin/CategoryQuestion/Create

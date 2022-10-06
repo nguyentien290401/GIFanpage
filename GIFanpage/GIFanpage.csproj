@@ -264,7 +264,6 @@
     <Content Include="Areas\Admin\Views\QuestionManage\Index.cshtml" />
     <Content Include="Areas\Admin\Views\CategoryQuestion\Create.cshtml" />
     <Content Include="Areas\Admin\Views\CategoryQuestion\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\CategoryQuestion\Details.cshtml" />
     <Content Include="Areas\Admin\Views\CategoryQuestion\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\CategoryQuestion\Index.cshtml" />
     <Content Include="Areas\Admin\Views\FeedbackUser\Index.cshtml" />
