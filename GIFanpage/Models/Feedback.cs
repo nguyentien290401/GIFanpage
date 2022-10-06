@@ -18,6 +18,7 @@ namespace GIFanpage.Models
         [Required]
         public int UserID { get; set; }
 
+        public virtual User User { get; set; }
 
     }
 }

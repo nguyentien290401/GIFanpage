@@ -18,27 +18,50 @@ namespace GIFanpage.Areas.Admin.Controllers
         private GIFanpageDbContext db = new GIFanpageDbContext();
 
         // GET: Feedbacks
-        public ActionResult Index()
+        public ActionResult Index(string Search = "", int PageNo = 1)
         {
-            return View(from feedback in db.Feedbacks
-                        select feedback);
-            //return View(db.Feedbacks.ToList());
+            //Search
+            List<Feedback> feedbacks = db.Feedbacks.Where(s => s.User.Name.Contains(Search) || s.FeedbackTitle.Contains(Search) || s.FeedbackContent.Contains(Search)).ToList();
+
+            if (feedbacks.Count() == 0)
+            {
+                ViewBag.Msg = "Data Not Found";
+                return View();
+            }
+
+            // Total Users Account
+            int TotalFeedback = feedbacks.Count();
+            ViewBag.TotalFeedback = TotalFeedback;
+
+            //Pagination
+
+            int NoOfRecordsPerPage = 4;
+            int NoOfPages = Convert.ToInt32(Math.Ceiling(Convert.ToDouble(feedbacks.Count) / Convert.ToDouble(NoOfRecordsPerPage)));
+            int NoOfRecordsToSkip = (PageNo - 1) * NoOfRecordsPerPage;
+            ViewBag.PageNo = PageNo;
+            ViewBag.NoOfPages = NoOfPages;
+            feedbacks = feedbacks.Skip(NoOfRecordsToSkip).Take(NoOfRecordsPerPage).ToList();
+
+            return View(feedbacks);
         }
 
         [HttpPost]
         public FileResult ExportToExcel()
         {
             DataTable dt = new DataTable("Grid");
-            dt.Columns.AddRange(new DataColumn[3] { new DataColumn("FeedbackID"),
+            dt.Columns.AddRange(new DataColumn[4] {  
+                                                     new DataColumn("FeedbackID"),
+                                                     new DataColumn("Name"),
                                                      new DataColumn("FeedbackTitle"),
-                                                     new DataColumn("FeedbackContent"),
+                                                     new DataColumn("FeedbackContent")
+                                                     
                                                     });
 
             var feedbacks = from GIFanpagesDbContext in db.Feedbacks select GIFanpagesDbContext;
 
             foreach (var feedback in feedbacks)
             {
-                dt.Rows.Add(feedback.FeedbackID, feedback.FeedbackTitle, feedback.FeedbackContent);
+                dt.Rows.Add(feedback.FeedbackID, feedback.FeedbackTitle, feedback.FeedbackContent, feedback.User.Name);
             }
 
             using (XLWorkbook wb = new XLWorkbook()) //Install ClosedXml from Nuget for XLWorkbook  

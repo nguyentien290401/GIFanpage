@@ -5,53 +5,206 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.FeedbackTitle)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FeedbackContent)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UserID)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.FeedbackTitle)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FeedbackContent)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserID)
-            </td>
-            <td>
-
-                @Html.ActionLink("Delete", "Delete", new { id = item.FeedbackID })
-            </td>
-        </tr>
+<style>
+    .search {
+        position: relative;
+        box-shadow: 0 0 40px rgba(51, 51, 51, .1);
     }
 
-</table>
+        .search input {
+            height: 50px;
+            text-indent: 25px;
+            border: 2px solid #d6d4d4;
+            border-radius: 20px;
+        }
 
-<div>
-    @using (Html.BeginForm("ExportToExcel", "FeedbackUser", FormMethod.Post, new { enctype = "multipart/form-data" }))
-    {
-        <div>
 
-            <input type="submit" value="Export" class="btn-primary" />
+            .search input:focus {
+                box-shadow: none;
+                border: 2px solid blue;
+            }
+
+        .search .fa-search {
+            position: absolute;
+            top: 18px;
+            left: 18px;
+        }
+
+        .search button {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            height: 40px;
+            width: 110px;
+            background: blue;
+        }
+
+    .widget-content-left > img {
+        display: block;
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+        object-position: center;
+        transition: 200ms ease-in-out;
+    }
+</style>
+
+<div style="display: inline-flex; min-width: 100%; margin-bottom: 20px;">
+    <div>
+        <h2>User's Feedback</h2>
+    </div>
+
+    <div class="search" style="display: inline-flex; margin-left:auto; align-items: center;">
+        <form action="/admin/feedbackUser/index">
+            <i class="fa fa-search"></i>
+            <input type="search" name="Search" class="form-control" placeholder="Type to search ">
+
+        </form>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="main-card mb-3 card ">
+            <div class="card-header fw-bolder text-capitalize">
+
+                Total Feedbacks: @ViewBag.TotalFeedback
+                <div class="btn-actions-pane-right">
+                    <div role="group" class="btn-group-sm btn-group" style="gap: 20px;">
+                        <form action="/admin/feedbackUser/ExportToExcel" method="post" enctype="multipart/form-data">
+                            <input type="submit" value="Export" class="btn btn-warning" />
+                        </form>
+                        <a href="/admin/feedbackUser/create">
+                            <button class="btn btn-primary">Create New</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="align-middle mb-0 table table-borderless table-hover ">
+                    <thead>
+                        <tr>
+                            <th class="text-center">#</th>
+                            <th>User's Name</th>
+                            <th class="text-center">Title</th>
+                            <th class="text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    @if (ViewBag.Msg == null)
+                    {
+                        foreach (var item in Model)
+                        {
+                            <tbody>
+                                <tr>
+                                    <td class="text-center"># @item.FeedbackID</td>
+
+                                    <td>
+                                        <div class="widget-content p-0">
+                                            <div class="widget-content-wrapper">
+                                                <div class="widget-content-left mr-3">
+                                                    <div class="widget-content-left">
+                                                        <img width="40" class="rounded-circle" src=@Url.Content(item.User.UserImg) alt="">
+                                                    </div>
+                                                </div>
+                                                <div class="widget-content-left flex2">
+                                                    <div class="widget-heading text-capitalize"> @item.User.Name </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="text-center" style="max-width: 200px; max-height: 90px;">
+
+                                        @item.FeedbackTitle
+
+                                    </td>
+
+                                    <td class="text-center">
+                                        <a href="/admin/feedbackUser/details?feedback=@item.FeedbackID" style="text-decoration: none;">
+                                            <button type="button" id="PopoverCustomT-1" class="btn btn-success btn-sm"><i class="pe-7s-look btn-icon-wrapper"> </i></button>
+                                        </a>
+                                        <a href="/admin/feedbackUser/delete?id=@item.FeedbackID" style="text-decoration: none;">
+                                            <button type="button" id="PopoverCustomT-1" class="btn btn-danger btn-sm"><i class="pe-7s-trash btn-icon-wrapper"> </i></button>
+                                        </a>
+
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                        }
+                    }
+                    else
+                    {
+                        <h1 class="jumbotron text-center" style="background-color: white; margin: 40px auto; padding: 40px 0;">@ViewBag.Msg</h1>
+                    }
+                </table>
+
+            </div>
+
+            @if (ViewBag.Msg == null)
+            {
+                int PrevPageNo = ViewBag.PageNo - 1;
+                if (PrevPageNo <= 0)
+                {
+                    PrevPageNo = 1;
+                }
+
+                int NextPageNo = ViewBag.PageNo + 1;
+                if (NextPageNo > ViewBag.NoOfPages)
+                {
+                    NextPageNo = ViewBag.NoOfPages;
+                }
+
+
+
+                <div class="d-block text-center card-footer">
+
+                    <ul class="pagination justify-content-center ">
+                        @if (ViewBag.PageNo == 1)
+                        {
+                            <li class="page-item disabled">
+                                <a class="page-link" href="/admin/feedbackUser/index?PageNo=@PrevPageNo">Prev</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="page-item">
+                                <a class="page-link" href="/admin/feedbackUser/index?PageNo=@PrevPageNo">Prev</a>
+                            </li>
+                        }
+
+                        @for (int i = 0; i < ViewBag.NoOfPages; i++)
+                        {
+                            if ((i + 1) == ViewBag.PageNo)
+                            {
+                                <li class="page-item active">
+                                    <a class="page-link" href="/admin/feedbackUser/index?PageNo=@(i + 1)">@( i + 1)</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" href="/admin/feedbackUser/index?PageNo=@(i + 1)">@( i + 1)</a>
+                                </li>
+                            }
+                        }
+
+                        @if (ViewBag.PageNo == ViewBag.NoOfPages)
+                        {
+                            <li class="page-item disabled">
+                                <a class="page-link" href="/admin/feedbackUser/index?PageNo=@NextPageNo">Next</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="page-item">
+                                <a class="page-link" href="/admin/feedbackUser/index?PageNo=@NextPageNo">Next</a>
+                            </li>
+                        }
+
+                    </ul>
+
+                </div>
+            }
         </div>
-
-    }
+    </div>
 </div>
