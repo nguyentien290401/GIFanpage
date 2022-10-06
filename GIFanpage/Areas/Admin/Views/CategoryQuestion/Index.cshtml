@@ -63,7 +63,7 @@
         <div class="main-card mb-3 card ">
             <div class="card-header fw-bolder text-capitalize">
 
-                Total Characters: @ViewBag.TotalCategory
+                Total Categories: @ViewBag.TotalCategory
                 <div class="btn-actions-pane-right">
                     <div role="group" class="btn-group-sm btn-group">
 
@@ -81,6 +81,7 @@
 
                             <th class="text-center">Title</th>
                             <th class="text-center">Description</th>
+                            <th class="text-center">Actions</th>
                             
                         </tr>
                     </thead>
@@ -92,13 +93,15 @@
                                 <tr>
                                     <td class="text-center"># @item.CategoryID</td>
 
+                                    <td class="text-center text-capitalize">@item.CategoryName</td>
+
                                     <td class="text-center text-capitalize">@item.CategoryDescription</td>
-                                  
+
                                     <td class="text-center">
                                         <a href="/admin/categoryQuestion/edit?id=@item.CategoryID" style="text-decoration: none;">
                                             <button type="button" id="PopoverCustomT-1" class="btn btn-primary btn-sm"><i class="pe-7s-pen btn-icon-wrapper"> </i></button>
                                         </a>
-                                        
+
                                         <a href="/admin/categoryQuestion/delete?id=@item.CategoryID" style="text-decoration: none;">
                                             <button type="button" id="PopoverCustomT-1" class="btn btn-danger btn-sm"><i class="pe-7s-trash btn-icon-wrapper"> </i></button>
                                         </a>
@@ -184,41 +187,3 @@
         </div>
     </div>
 </div>
-
-
-
-
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.CategoryName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CategoryDescription)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.CategoryName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CategoryDescription)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.CategoryID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.CategoryID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.CategoryID })
-            </td>
-        </tr>
-    }
-
-</table>
