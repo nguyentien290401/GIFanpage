@@ -46,6 +46,10 @@ namespace GIFanpage.Areas.Admin.Controllers
         public ActionResult Details(int newInfo)
         {
             New newInfos = db.News.Where(c => c.NewsID == newInfo).FirstOrDefault();
+            List<New> numberNews = db.News.Where(n => n.NewsID == newInfo).ToList();
+
+            int totalNumberNews = numberNews.Count();
+            ViewBag.totalNumberNews = totalNumberNews;
 
             return View(newInfos);
         }
@@ -97,20 +101,30 @@ namespace GIFanpage.Areas.Admin.Controllers
             return View(newInfo);
         }
 
-        // POST: Admin/NewInfo/Edit/5
+        // POST: Admin/NewInfo/Edit
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "NewsID,NewsTitle,NewsDescription,NewsImage,NewsContent,CreateDate")] New @new)
+        public ActionResult Edit([Bind(Include = "NewsID,NewsTitle,NewsDescription,NewsImage,NewsContent,CreateDate")] New newInfo, HttpPostedFileBase fileNew)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(@new).State = EntityState.Modified;
+                if (fileNew != null)
+                {
+                    // Define image card file
+                    var fileName = fileNew.FileName;
+                    var pathFile = "~/Content/Image/" + fileName;
+                    fileNew.SaveAs(Server.MapPath(pathFile));
+                    newInfo.NewsImage = pathFile;
+                }
+
+                db.News.Add(newInfo);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(@new);
+
+            return View(newInfo);
         }
 
         // GET: Admin/NewInfo/Delete/5
@@ -120,12 +134,12 @@ namespace GIFanpage.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            New @new = db.News.Find(id);
-            if (@new == null)
+            New newInfo = db.News.Find(id);
+            if (newInfo == null)
             {
                 return HttpNotFound();
             }
-            return View(@new);
+            return View(newInfo);
         }
 
         // POST: Admin/NewInfo/Delete/5
@@ -133,8 +147,8 @@ namespace GIFanpage.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            New @new = db.News.Find(id);
-            db.News.Remove(@new);
+            New newInfo = db.News.Find(id);
+            db.News.Remove(newInfo);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

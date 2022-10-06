@@ -5,55 +5,156 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
 
-<div>
-    <h4>New</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.NewsTitle)
-        </dt>
+<style>
 
-        <dd>
-            @Html.DisplayFor(model => model.NewsTitle)
-        </dd>
+    .container-fluid {
+        padding: 0;
+        margin: 0;
+        position: relative;
+    }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.NewsDescription)
-        </dt>
+    .container a {
+        text-decoration: none;
+        color: aqua;
+    }
 
-        <dd>
-            @Html.DisplayFor(model => model.NewsDescription)
-        </dd>
+        .container a:hover {
+            color: ghostwhite;
+        }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.NewsImage)
-        </dt>
+    .breadcrumb {
+        background-color: unset;
+    }
 
-        <dd>
-            @Html.DisplayFor(model => model.NewsImage)
-        </dd>
+    .cate {
+        border-top: #e8cba7 solid 6px;
+    }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.NewsContent)
-        </dt>
+    .row .article {
+        position: relative;
+        background-color: #f0f0f0;
+        padding: 79px 90px 115px;
+        min-height: 600px;
+        font-size: 0;
+    }
 
-        <dd>
-            @Html.DisplayFor(model => model.NewsContent)
-        </dd>
+    .article-title {
+        line-height: 40px;
+        font-size: 32px;
+        color: #333;
+    }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CreateDate)
-        </dt>
+    .artical-date {
+        margin-top: 13px;
+        font-size: 16px;
+        line-height: 22px;
+        color: #999;
+    }
 
-        <dd>
-            @Html.DisplayFor(model => model.CreateDate)
-        </dd>
+    .artical__content {
+        margin-top: 51px;
+        font-size: 14px;
+        color: #7d7d7d;
+        line-height: 24px;
+        display: flex;
+        justify-content:center;
+        flex-direction: column;
+    }
 
-    </dl>
+        .artical__content > img {
+            display: block;
+            width: 100%;
+            aspect-ratio: 28 / 13;
+            object-fit: cover;
+            object-position: center;
+        }
+
+    .buttonbar {
+        position: absolute;
+        left: 50%;
+        bottom: 60px;
+        display: flex;
+        justify-content: space-between;
+        width: 721px;
+        margin: 24px 0 0 0;
+        transform: translateX(-50%);
+    }
+
+    .buttonbar__prev, .buttonbar__next {
+        width: 70px;
+        height: 44px;
+        background: #393b40 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAArCAYAAACNWyPFAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTM4IDc5LjE1OTgyNCwgMjAxNi8wOS8xNC0wMTowOTowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTcgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjY0QzcyMDFBMUQ4MzExRUFBQTdEOTNGRkFCRjFCQTJBIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjY0QzcyMDFCMUQ4MzExRUFBQTdEOTNGRkFCRjFCQTJBIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6NjRDNzIwMTgxRDgzMTFFQUFBN0Q5M0ZGQUJGMUJBMkEiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6NjRDNzIwMTkxRDgzMTFFQUFBN0Q5M0ZGQUJGMUJBMkEiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz4oRmJtAAAB1ElEQVR42qyY2ysEcRTHZ0frmkdelLskCkkepCVK/i/xoKQoYouisKIoUpQlTx68KYS0rdsmSW77NL5H8ytlds7M7/xOffb2q/k0M/s7l7Ecx8kDw+ARvINVUA4sU9DLqPM/LkCFScmz4x1XoNKExLYsK2p5Rx1IgipLGCRJ+KzXgEP3XT9wOiXgyPGPFKiX3BMlSjKiNGiUSIhisM+I7kGTRKJEu4yI9lOzREIUgh1GlAGtEgmRD7YYEe2vdolEiTYY0QvokEiIKFhjRK+gSyKx3AS6EkDULZEo0RIjegM9EokSLTAiKhW9Eglhgzgj+gD9EgkRATMBRIMSiRJNMaIvMCSRKNEEI8qCmInyOsaITiO/pyOPE9CZYy1rCw8eAeM+Aooz6T2ZZC7Vt+SekGCaEXyqv7GOgDbkXIB9MqC7Tyi1zIdNLWEFizpJMoxgWTfdBxFQ4UpIChcnoBK8Li3BnGDTRDORa6EAbAdoi9p0u5WiAA3eE2iRdJB7jOAhbKv69ws13QeM4E6n6VYfSgOODw26XT0JjhnBLaiVzCezjOAGVEsH04yP4NrEcGq7c6NXXIIYSJkYTOMev5+DPpA20QCoBDjiXjb1RKLM5BOJHwEGAGMhDj181kwgAAAAAElFTkSuQmCC) no-repeat center;
+        background-size: 14px 23px;
+        border-radius: 4px;
+        opacity: 0.8;
+        text-align: center;
+        font-size: 16px;
+        color: #ccc;
+        cursor: pointer;
+        text-decoration: none;
+    }
+
+    .buttonbar__prev {
+        transform: rotate(180deg);
+    }
+
+    .container-fluid .container .buttonbar__next:hover, .container-fluid .container .buttonbar__prev:hover {
+        color: gainsboro;
+    }
+</style>
+
+<div class="container-fluid" style=" padding-top:20px; min-height: 700px; background: rgb(2,0,36); background: linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 12%, rgba(0,212,255,1) 97%);">
+    <div class="container px-5 py-2">
+        <div class="row" >
+            <div class="col-sm-8 col-md-9">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/admin/dashboard/index">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="/admin/newInfo/index">News</a></li>
+                        <li class="breadcrumb-item active" aria-current="page" style="color: white;">@Model.NewsTitle</li>
+                    </ol>
+
+                </nav>
+            </div>
+            <div class="col-sm-4 col-md-3" style="position: relative; padding-right:unset; display: flex; justify-content: flex-end;">
+                <nav aria-label="breadcrumb ">
+
+                    <ol class="breadcrumb ">
+                        <li class="breadcrumb-item"><a href="/admin/newInfo/index">Back to News</a></li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+
+        <div class="row cate" style="position: relative; background-color: #f0f0f0; padding: 40px 45px 80px; min-height: 600px; font-size: 0;">
+            <div class="article-title">
+                @Model.NewsTitle
+            </div>
+            <div class="artical-date">
+                Date Posted @Model.CreateDate.Month / @Model.CreateDate.Day / @Model.CreateDate.Year
+            </div>
+            <div class="artical__content">
+                <img src="@Url.Content(Model.NewsImage)" style="max-width: 100%; margin-bottom: 20px;">
+                @Html.Raw(Model.NewsContent)
+            </div>
+
+            <div style="display: flex; justify-content: space-between; margin-top: 20px;">
+                @{
+
+                    int Page = Model.NewsID;
+                    var nextPage = Page + 1;
+                    var prevPage = Page - 1;
+
+                        <a href="/admin/newInfo/details?newInfo=@prevPage" class="buttonbar__prev"></a>
+                        <a href="/admin/newInfo/details?newInfo=@nextPage" class="buttonbar__next "></a>
+                }
+
+            </div>
+            @ViewBag.totalNumberNews;
+        </div>
+
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.NewsID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+
