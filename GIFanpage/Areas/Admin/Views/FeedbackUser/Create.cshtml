@@ -5,46 +5,42 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Create</h2>
-
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Feedback</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.FeedbackTitle, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.FeedbackTitle, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.FeedbackTitle, "", new { @class = "text-danger" })
+<div class="card" style="margin-bottom: 30px;">
+    <div class="row px-5  d-flex justify-content-center">
+        <div class="col-md-10">
+            <div style="display:inline-flex; width: 100%;">
+                <div>
+                    <h2 style="padding-top: 20px;">Feedback Form</h2>
+                    <i class="text-secondary" style="font-size: 14px;">
+                        Give us your idea about our service.
+                    </i>
+                </div>
+                <a href="/admin/feedbackUser/index" style="text-decoration: none; margin-left: auto; margin-top: 30px;">
+                    <button class="btn btn-lg btn-primary btn-login fw-bold text-uppercase" type="submit"><i class="pe-7s-back btn-icon-wrapper"> Back to List</i></button>
+                </a>
             </div>
-        </div>
+            <hr />
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.FeedbackContent, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.FeedbackContent, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.FeedbackContent, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div>
-                <input type="text" name="UserID" value="@Session["CurrentUserID"]" hidden />
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
+            <form action="/admin/feedbackUser/create" method="post" enctype="multipart/form-data">
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.TextBoxFor(model => model.UserID, new { @Value = Session["CurrentUserID"], @type = "hidden" })
+                <div class="row  d-flex justify-content-center">
+                    <div class="form-group col-md-12">
+                        <label for="CategoryName" class="fw-bolder">Feedback's Title</label>
+                        <input type="text" name="FeedbackTitle" class="form-control" placeholder="" id="CategoryName" required style="margin-top:unset;">
+                        @Html.ValidationMessageFor(model => model.FeedbackTitle, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="CategoryDescription" class="fw-bolder">Feedback's Content</label>
+                        <input type="text" name="FeedbackContent" class="form-control" placeholder="" id="CategoryDescription" required style="margin-top:unset;">
+                        @Html.ValidationMessageFor(model => model.FeedbackContent, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-12" style="display: flex; justify-content: flex-start; margin-top: 15px; margin-bottom: 20px;">
+                        <button class="btn  btn-primary btn-login fw-bold " type="submit"><i class="fa fa-floppy-o" aria-hidden="true"> Save</i></button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
 </div>

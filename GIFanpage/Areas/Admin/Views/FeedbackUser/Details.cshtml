@@ -1,7 +1,7 @@
 ﻿@model GIFanpage.Models.Feedback
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Details";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
@@ -59,17 +59,6 @@
                                     <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 fw-bolder">Feedback Content: </span> @Model.FeedbackContent</li>
 
                                 </ul>
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="d-grid my-3 col-md-12" style="padding-left:unset;">
-                                            <form action="/admin/feedbackUser/delete?id=@Model.FeedbackID" method="post" enctype="multipart/form-data" style="text-decoration: none;">
-                                                @Html.AntiForgeryToken()
-                                                <button class="btn btn-lg btn-danger btn-login fw-bold text-uppercase" type="submit"><i class="pe-7s-trash btn-icon-wrapper"> Delete</i></button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-
                             </div>
                         </div>
                     </div>

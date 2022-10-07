@@ -76,18 +76,11 @@ namespace GIFanpage.Areas.Admin.Controllers
         }
 
         // GET: Feedbacks/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int feedback)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Feedback feedback = db.Feedbacks.Find(id);
-            if (feedback == null)
-            {
-                return HttpNotFound();
-            }
-            return View(feedback);
+            Feedback feedbacks = db.Feedbacks.Where(a => a.FeedbackID == feedback).FirstOrDefault();
+
+            return View(feedbacks); ;
         }
 
         // GET: Feedbacks/Create
