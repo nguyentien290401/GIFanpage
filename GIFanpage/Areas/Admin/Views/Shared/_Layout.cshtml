@@ -83,7 +83,7 @@
             content: "\e979";
         }
 
-        .app-header-right > img {
+        .app-header-right a > img {
             display: block;
             aspect-ratio: 1 / 1;
             object-fit: cover;
@@ -174,36 +174,43 @@
                 <div class="app-header-left">
                    
                 </div>
-                <div class="app-header-right" style="display: flex; justify-content: center; gap: 10px; align-items: center;">
+                <div class="app-header-right" style="display: inline-flex; justify-content: center; gap: 10px; align-items: center;">
                     @if (Session["CurrentUserImg"] == null)
                     {
+
                         <img src="~/Content/Image/add.png" class="bd-placeholder-img rounded-circle" width="30" />
-                        <p style="margin-top: 15px;">User</p>
+                        <div class="btn-group">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                User
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="/users/logout">Logout</a></li>
+                            </ul>
+                        </div>
+                        <a href="/home/index" class="btn btn-success">
+                            Go to Website
+                        </a>
+
                     }
                     else
                     {
-                        <img src="@Url.Content(Session["CurrentUserImg"].ToString())" class="bd-placeholder-img rounded-circle" width="30" />
-                        @Session["CurrentUserName"]
-                    }
-                    <div class="header-btn-lg pr-0">
-                        <div class="widget-content p-0">
-                            <div class="widget-content-wrapper">
-                                <div class="widget-content-left">
-                                    <div class="btn-group">
-                                        <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="p-0 btn">
-                                            <img width="42" class="rounded-circle" src="assets/images/avatars/1.jpg" alt="">
-                                            <i class="fa fa-angle-down ml-2 opacity-8"></i>
-                                        </a>
-                                        <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
-                                            <button type="button" tabindex="0" class="dropdown-item">Change Profile</button>
-                                            <div tabindex="-1" class="dropdown-divider"></div>
-                                            <button type="button" tabindex="0" class="dropdown-item">Logout</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+
+                        <a href="/users/logout">
+                            <img src="@Url.Content(Session["CurrentUserImg"].ToString())" class="bd-placeholder-img rounded-circle" width="30" />
+                        </a>
+                        <div class="btn-group">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                @Session["CurrentUserName"]
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="/users/logout">Logout</a></li>
+                            </ul>
                         </div>
-                    </div>
+                        <a href="/home/index" class="btn btn-success">
+                            Go to Website
+                        </a>
+                    }
+
                 </div>
             </div>
         </div>
@@ -532,17 +539,17 @@
                         <ul class="vertical-nav-menu">
                             <li class="app-sidebar__heading">Dashboard</li>
                             <li>
-                                <a href="/admin/dashboard/index" class="mm-active">
+                                <a href="/admin/dashboard/index">
                                     <i class="metismenu-icon pe-7s-browser"></i>
                                     Dashboard Index
                                 </a>
                             </li>
 
-                            <li class="app-sidebar__heading">Clients</li>
+                            <li class="app-sidebar__heading">Users</li>
                             <li>
                                 <a href="/admin/userAccount/index">
                                     <i class="metismenu-icon pe-7s-users"></i>
-                                    Clients account
+                                    Users account
                                 </a>
                             </li>
 
@@ -673,8 +680,7 @@
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 
 <script>
-
-
+    
     // Preview Image before update/edit to database (button1)
     var uploadBtn1 = document.getElementById("upload-button1");
     var previewImg1 = document.getElementById("preview-image1");
