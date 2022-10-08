@@ -223,6 +223,9 @@
     <Content Include="Content\Image\LiyueSlide.png" />
     <Content Include="Content\Image\LoginBackground.jpeg" />
     <Content Include="Content\Image\Logo.png" />
+    <Content Include="Content\Image\MHY-About.png" />
+    <Content Include="Content\Image\MHY-Login.png" />
+    <Content Include="Content\Image\MHY-Register.png" />
     <Content Include="Content\Image\MonstadtSlide.png" />
     <Content Include="Content\Image\NewsTitle.png" />
     <Content Include="Content\Image\PaimonAsk.png" />
@@ -233,6 +236,7 @@
     <Content Include="Content\Image\SumeruSlide.png" />
     <Content Include="Content\Image\TighnariAvatar.png" />
     <Content Include="Content\Image\ZhongliAvatar.jpg" />
+    <Content Include="Content\Style.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />

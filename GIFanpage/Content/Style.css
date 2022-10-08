@@ -1,0 +1,175 @@
+﻿*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+body {
+    background: white;
+    font-family: Helvetica;
+}
+
+
+/*IndexQuestionView  -->    Back to top button*/
+.container #myBtn > button {
+    display: none; /* Hidden by default */
+    position: fixed; /* Fixed/sticky position */
+    bottom: 150px; /* Place the button at the bottom of the page */
+    right: 30px; /* Place the button 30px from the right */
+    z-index: 200; /* Make sure it does not overlap */
+    border: none; /* Remove borders */
+    outline: none; /* Remove outline */
+    background-color: red; /* Set a background color */
+    color: white; /* Text color */
+    cursor: pointer; /* Add a mouse pointer on hover */
+    padding: 15px; /* Some padding */
+    border-radius: 10px; /* Rounded corners */
+    font-size: 18px; /* Increase font size */
+}
+
+.container #myBtn:hover > button {
+    background-color: #555; /* Add a dark-grey background on hover */
+}
+
+
+
+/*Feedback form*/
+#feedback-form-wrapper #floating-icon > button {
+    position: fixed;
+    right: 0;
+    top: 50%;
+    transform: rotate(-90deg) translate(50%, -50%);
+    transform-origin: right;
+}
+
+#feedback-form-wrapper .rating-input-wrapper input[type="radio"] {
+    display: none;
+}
+
+    #feedback-form-wrapper .rating-input-wrapper input[type="radio"] ~ span {
+        cursor: pointer;
+    }
+
+    #feedback-form-wrapper .rating-input-wrapper input[type="radio"]:checked ~ span {
+        background-color: #4261dc;
+        color: #fff;
+    }
+
+#feedback-form-wrapper .rating-labels > label {
+    font-size: 14px;
+    color: #777;
+}
+
+
+/*Feature in Homepage*/
+.featurette-divider {
+    margin: 4rem 0; /* Space out the Bootstrap <hr> more */
+}
+
+/* Thin out the marketing headings */
+.featurette-heading {
+    font-weight: 300;
+    line-height: 1;
+    /* rtl:remove */
+    letter-spacing: -.05rem;
+}
+
+/* Login */
+.card-img-right {
+    width: 43%;
+    background: scroll left url('Image/MHY-Login.png');
+    background-size: cover;
+}
+
+/*https://i.ytimg.com/vi/y3yrizZKzaY/maxresdefault.jpg*/
+/*Register css*/
+.card-img-left {
+    width: 43%;
+    /* Link to your background image using in the property below! */
+    /* https://i.ytimg.com/vi/y3yrizZKzaY/maxresdefault.jpg   */
+
+    background: scroll left url('Image/MHY-Register.png');
+    background-size: cover;
+    
+}
+
+.btn-google {
+    color: white !important;
+    background-color: #ea4335;
+}
+
+
+/*  Home / Index / User */
+
+/* Navbar CSS*/
+.navbar {
+    background: #000000
+}
+
+.navbar-dark .container-fluid .navbar-brand h3 {
+    background-image: url('Image/Logo.png');
+    -webkit-background-clip: text;
+    color: transparent;
+    overflow: hidden;
+}
+
+.nav-item::after {
+    content: '';
+    display: block;
+    width: 0px;
+    height: 1px;
+    background: #69e0ff;
+    transition: 0.4s
+}
+
+.nav-item:hover::after {
+    width: 100%
+}
+
+.navbar-dark .navbar-nav .active > .nav-link,
+.navbar-dark .navbar-nav .nav-link.active,
+.navbar-dark .navbar-nav .nav-link.show,
+.navbar-dark .navbar-nav .show > .nav-link,
+.navbar-dark .navbar-nav .nav-link:focus,
+.navbar-dark .navbar-nav .nav-link:hover {
+    color: #69e0ff;
+}
+
+.nav-link {
+    padding: 12px 5px;
+    transition: 0.2s
+}
+
+.img-wrapper > img {
+    display: block;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    object-position: center;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+
+/*  About Container */
+.container-fluid .about-container {
+    max-height: 580px;
+}
+
+.container-fluid .row .col-md-12 .card {
+    border: unset;
+}
+
+.container-fluid .row .col-md-12 .card .row .about-title {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+}
+
+.container-fluid .row .col-md-12 .card .row .about-sub-title {
+    display: flex;
+    justify-content: center;
+}
