@@ -13,10 +13,10 @@
     <div style="display: inline-flex; gap: 10px; margin-left:auto; align-items: center; margin-bottom: 20px;">
         <form action="/admin/questionManage/delete?id=@Model.AskID" method="post" enctype="multipart/form-data" style="text-decoration: none;">
             @Html.AntiForgeryToken()
-            <button class="btn btn-lg btn-danger btn-login fw-bold text-uppercase" type="submit"><i class="pe-7s-trash btn-icon-wrapper"> Delete</i></button>
+            <button class="btn btn-lg btn-danger btn-login fw-bold " type="submit">Delete</button>
         </form>
         <a href="/admin/questionManage/index" style="text-decoration: none; margin-left: auto;">
-            <button class="btn btn-lg btn-primary btn-login fw-bold text-uppercase" type="submit"><i class="pe-7s-back btn-icon-wrapper"> Back to List</i></button>
+            <button class="btn btn-lg btn-primary btn-login fw-bold" type="submit">Back to List</button>
         </a>
     </div>
 </div>

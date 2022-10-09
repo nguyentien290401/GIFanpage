@@ -56,7 +56,7 @@
 
     <div class="search" style="display: inline-flex; margin-left:auto; align-items: center;">
         <form action="/admin/characterInfo/index">
-            <i class="fa fa-search"></i>
+            @*<i class="fa fa-search"></i>*@
             <input type="search" name="Search" class="form-control" placeholder="Type to search ">
 
         </form>
@@ -72,7 +72,10 @@
                 Total Characters: @ViewBag.TotalCharacter
                 <div class="btn-actions-pane-right">
                     <div role="group" class="btn-group-sm btn-group">
-
+                        <form action="/admin/characterInfo/uploadExcel" method="post" enctype="multipart/form-data">
+                            <input type="file" name="fileUpload" class=" btn-warning" />
+                            <input type="submit" value="Upload" id="btnSubmit" class="btn btn-primary" />
+                        </form>
                         <a href="/admin/characterInfo/create">
                             <button class="btn btn-primary">Create New</button>
                         </a>
@@ -120,13 +123,13 @@
                                     </td>
                                     <td class="text-center">
                                         <a href="/admin/characterInfo/edit?id=@item.CharacterID" style="text-decoration: none;">
-                                            <button type="button" id="PopoverCustomT-1" class="btn btn-primary btn-sm"><i class="pe-7s-pen btn-icon-wrapper"> </i></button>
+                                            <button type="button" id="PopoverCustomT-1" class="btn btn-primary btn-sm">Edit</button>
                                         </a>
                                         <a href="/admin/characterInfo/details?character=@item.CharacterID" style="text-decoration: none;">
-                                            <button type="button" id="PopoverCustomT-1" class="btn btn-success btn-sm"><i class="pe-7s-look btn-icon-wrapper"> </i></button>
+                                            <button type="button" id="PopoverCustomT-1" class="btn btn-success btn-sm">Detail</button>
                                         </a>
                                         <a href="/admin/characterInfo/delete?id=@item.CharacterID" style="text-decoration: none;">
-                                            <button type="button" id="PopoverCustomT-1" class="btn btn-danger btn-sm"><i class="pe-7s-trash btn-icon-wrapper"> </i></button>
+                                            <button type="button" id="PopoverCustomT-1" class="btn btn-danger btn-sm">Delete</button>
                                         </a>
 
                                     </td>

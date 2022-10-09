@@ -17,7 +17,7 @@
                     </i>
                 </div>
                 <a href="/admin/characterInfo/index" style="text-decoration: none; margin-left: auto; margin-top: 30px;">
-                    <button class="btn btn-lg btn-primary btn-login fw-bold text-uppercase" type="submit"><i class="pe-7s-back btn-icon-wrapper"> Back to List</i></button>
+                    <button class="btn btn-lg btn-primary btn-login fw-bold " type="submit">Back to List</button>
                 </a>
             </div>
             <hr />
@@ -66,7 +66,7 @@
 
                         <input type="file" name="fileCard" class="form-control-file" id="upload-button1" onchange="ShowImagePreview(this, document.getElementById('previewImage'))" required hidden>
                         <label for="upload-button1" class="btn-success p-2" style="border-radius: 10px; cursor: pointer;">
-                            <i class="fa fa-download" aria-hidden="true"></i> &nbsp; Choose A Photo
+                            &nbsp; Choose A Photo
                         </label>
                         <div class="image-card" style="display: flex; margin-top: 10px;">
                             <img src="@Url.Content(Model.CharacterImageCard)" width="200" id="previewImage" />
@@ -79,14 +79,14 @@
 
                         <input type="file" name="fileOriginal" class="form-control-file" id="upload-button2" onchange="showImagePreview(this, document.getElementById('previewImg'))" required hidden>
                         <label for="upload-button2" class="btn-success p-2" style="border-radius: 10px; cursor: pointer;">
-                            <i class="fa fa-download" aria-hidden="true"></i> &nbsp; Choose A Photo
+                            &nbsp; Choose A Photo
                         </label>
                         <div class="image-card" style="display: flex; margin-top: 10px;">
                             <img src="@Url.Content(Model.CharacterImageOriginal)" width="200" id="previewImg" />
                         </div>
                     </div>
                     <div class="col-md-12" style="display: flex; justify-content: flex-start; margin-top: 15px; margin-bottom: 20px;">
-                        <button class="btn  btn-primary btn-login fw-bold " type="submit"><i class="fa fa-floppy-o" aria-hidden="true"> Save</i></button>
+                        <button class="btn  btn-primary btn-login fw-bold " type="submit">Save</button>
                     </div>
                 </div>
             </form>

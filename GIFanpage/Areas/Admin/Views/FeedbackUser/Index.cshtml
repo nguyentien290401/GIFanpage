@@ -55,7 +55,7 @@
 
     <div class="search" style="display: inline-flex; margin-left:auto; align-items: center;">
         <form action="/admin/feedbackUser/index">
-            <i class="fa fa-search"></i>
+            
             <input type="search" name="Search" class="form-control" placeholder="Type to search ">
 
         </form>
@@ -120,10 +120,10 @@
 
                                     <td class="text-center">
                                         <a href="/admin/feedbackUser/details?feedback=@item.FeedbackID" style="text-decoration: none;">
-                                            <button type="button" id="PopoverCustomT-1" class="btn btn-success btn-sm"><i class="pe-7s-look btn-icon-wrapper"> </i></button>
+                                            <button type="button" id="PopoverCustomT-1" class="btn btn-success btn-sm">Detail</button>
                                         </a>
                                         <a href="/admin/feedbackUser/delete?id=@item.FeedbackID" style="text-decoration: none;">
-                                            <button type="button" id="PopoverCustomT-1" class="btn btn-danger btn-sm"><i class="pe-7s-trash btn-icon-wrapper"> </i></button>
+                                            <button type="button" id="PopoverCustomT-1" class="btn btn-danger btn-sm">Edit</button>
                                         </a>
 
                                     </td>

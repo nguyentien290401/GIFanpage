@@ -56,9 +56,7 @@
 
     <div class="search" style="display: inline-flex; margin-left:auto; align-items: center;">
         <form action="/admin/userAccount/index">
-            <i class="fa fa-search"></i>
             <input type="search" name="Search" class="form-control" placeholder="Type to search ">
-            
         </form>
     </div>
     @*<div class="search-wrapper" style="display: flex; margin-left:auto; align-items: center;">
@@ -129,13 +127,13 @@
                                     </td>
                                     <td class="text-center">
                                         <a href="/admin/userAccount/edit?id=@item.UserID" style="text-decoration: none;">
-                                            <button type="button" id="PopoverCustomT-1" class="btn btn-primary btn-sm"><i class="pe-7s-pen btn-icon-wrapper"> </i></button>
+                                            <button type="button" id="PopoverCustomT-1" class="btn btn-primary btn-sm">Edit</button>
                                         </a>
                                         <a href="/admin/userAccount/details?user=@item.UserID" style="text-decoration: none;">
-                                            <button type="button" id="PopoverCustomT-1" class="btn btn-success btn-sm"><i class="pe-7s-look btn-icon-wrapper"> </i></button>
+                                            <button type="button" id="PopoverCustomT-1" class="btn btn-success btn-sm">Detail</button>
                                         </a>
                                         <a href="/admin/userAccount/delete?id=@item.UserID" style="text-decoration: none;">
-                                            <button type="button" id="PopoverCustomT-1" class="btn btn-danger btn-sm"><i class="pe-7s-trash btn-icon-wrapper"> </i></button>
+                                            <button type="button" id="PopoverCustomT-1" class="btn btn-danger btn-sm">Delete</button>
                                         </a>
 
                                     </td>

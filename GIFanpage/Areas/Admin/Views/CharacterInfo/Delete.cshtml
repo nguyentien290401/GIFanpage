@@ -74,14 +74,14 @@
                     <div class="d-grid my-3 col-md-12" style="padding-left:unset;">
                         <form action="/admin/characterInfo/delete?id=@Model.CharacterID" method="post" enctype="multipart/form-data" style="text-decoration: none;">
                             @Html.AntiForgeryToken()
-                            <button class="btn btn-lg btn-danger btn-login fw-bold text-uppercase" type="submit"><i class="pe-7s-trash btn-icon-wrapper"> Delete</i></button>
+                            <button class="btn btn-lg btn-danger btn-login fw-bold " type="submit">Delete</button>
                         </form>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="d-grid my-3 col-md-12" style="padding-left:unset;">
                         <a href="/admin/characterInfo/index" style="text-decoration: none;">
-                            <button class="btn btn-lg btn-primary btn-login fw-bold text-uppercase" type="submit"><i class="pe-7s-back btn-icon-wrapper"> Back to List</i></button>
+                            <button class="btn btn-lg btn-primary btn-login fw-bold " type="submit"> Back to List</button>
                         </a>
                     </div>
                 </div>

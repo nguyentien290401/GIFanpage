@@ -234,10 +234,14 @@ C:\Users\PGK\Desktop\GIFanpage\GIFanpage\GIFanpage\bin\DocumentFormat.OpenXml.dl
 C:\Users\PGK\Desktop\GIFanpage\GIFanpage\GIFanpage\bin\EntityFramework.dll
 C:\Users\PGK\Desktop\GIFanpage\GIFanpage\GIFanpage\bin\EntityFramework.SqlServer.dll
 C:\Users\PGK\Desktop\GIFanpage\GIFanpage\GIFanpage\bin\ExcelNumberFormat.dll
+C:\Users\PGK\Desktop\GIFanpage\GIFanpage\GIFanpage\bin\LinqToExcel.dll
 C:\Users\PGK\Desktop\GIFanpage\GIFanpage\GIFanpage\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 C:\Users\PGK\Desktop\GIFanpage\GIFanpage\GIFanpage\bin\Microsoft.Web.Infrastructure.dll
 C:\Users\PGK\Desktop\GIFanpage\GIFanpage\GIFanpage\bin\MoreLinq.dll
 C:\Users\PGK\Desktop\GIFanpage\GIFanpage\GIFanpage\bin\Newtonsoft.Json.dll
+C:\Users\PGK\Desktop\GIFanpage\GIFanpage\GIFanpage\bin\Remotion.Data.Linq.dll
+C:\Users\PGK\Desktop\GIFanpage\GIFanpage\GIFanpage\bin\Remotion.dll
+C:\Users\PGK\Desktop\GIFanpage\GIFanpage\GIFanpage\bin\Remotion.Interfaces.dll
 C:\Users\PGK\Desktop\GIFanpage\GIFanpage\GIFanpage\bin\System.IO.Packaging.dll
 C:\Users\PGK\Desktop\GIFanpage\GIFanpage\GIFanpage\bin\System.Linq.Dynamic.Core.dll
 C:\Users\PGK\Desktop\GIFanpage\GIFanpage\GIFanpage\bin\System.Net.Http.Formatting.dll
@@ -258,6 +262,7 @@ C:\Users\PGK\Desktop\GIFanpage\GIFanpage\GIFanpage\bin\DocumentFormat.OpenXml.xm
 C:\Users\PGK\Desktop\GIFanpage\GIFanpage\GIFanpage\bin\EntityFramework.xml
 C:\Users\PGK\Desktop\GIFanpage\GIFanpage\GIFanpage\bin\EntityFramework.SqlServer.xml
 C:\Users\PGK\Desktop\GIFanpage\GIFanpage\GIFanpage\bin\ExcelNumberFormat.xml
+C:\Users\PGK\Desktop\GIFanpage\GIFanpage\GIFanpage\bin\LinqToExcel.xml
 C:\Users\PGK\Desktop\GIFanpage\GIFanpage\GIFanpage\bin\MoreLinq.xml
 C:\Users\PGK\Desktop\GIFanpage\GIFanpage\GIFanpage\bin\System.Linq.Dynamic.Core.pdb
 C:\Users\PGK\Desktop\GIFanpage\GIFanpage\GIFanpage\bin\System.Linq.Dynamic.Core.xml

@@ -157,6 +157,7 @@ body {
 /*  About Container */
 .container-fluid .about-container {
     max-height: 580px;
+    overflow: hidden;
 }
 
 .container-fluid .row .col-md-12 .card {

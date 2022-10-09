@@ -15,11 +15,11 @@ go
 
 create table Characters(
 CharacterID int primary key identity(1,1),
-CharacterName nvarchar(20),
-CharacterVision nvarchar(10),
+CharacterName nvarchar(50),
+CharacterVision nvarchar(50),
 CharacterDescription nvarchar(max),
-CharacterRarity nvarchar(10),
-CharacterRegion nvarchar(20),
+CharacterRarity nvarchar(50),
+CharacterRegion nvarchar(50),
 CharacterBirthday datetime,
 CharacterImageCard nvarchar(max),
 CharacterImageOriginal nvarchar(max)

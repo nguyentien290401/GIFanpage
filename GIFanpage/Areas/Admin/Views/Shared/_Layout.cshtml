@@ -172,7 +172,13 @@
             </div>    
             <div class="app-header__content">
                 <div class="app-header-left">
-                   
+                    @*<div class="search-wrapper">
+                        <div class="input-holder">
+                            <input type="text" class="search-input" placeholder="Type to search">
+                            <button class="search-icon"><span></span></button>
+                        </div>
+                        <button class="close"></button>
+                    </div>*@
                 </div>
                 <div class="app-header-right" style="display: inline-flex; justify-content: center; gap: 10px; align-items: center;">
                     @if (Session["CurrentUserImg"] == null)
@@ -540,7 +546,7 @@
                             <li class="app-sidebar__heading">Dashboard</li>
                             <li>
                                 <a href="/admin/dashboard/index">
-                                    <i class="metismenu-icon pe-7s-browser"></i>
+                                    @*<i class="metismenu-icon pe-7s-browser"></i>*@
                                     Dashboard Index
                                 </a>
                             </li>
@@ -548,7 +554,7 @@
                             <li class="app-sidebar__heading">Users</li>
                             <li>
                                 <a href="/admin/userAccount/index">
-                                    <i class="metismenu-icon pe-7s-users"></i>
+                                    @*<i class="metismenu-icon pe-7s-users"></i>*@
                                     Users account
                                 </a>
                             </li>
@@ -556,21 +562,21 @@
                             <li class="app-sidebar__heading">Information</li>
                             <li>
                                 <a href="/admin/characterInfo/index">
-                                    <i class="metismenu-icon pe-7s-bookmarks"></i>
+                                    @*<i class="metismenu-icon pe-7s-bookmarks"></i>*@
                                     Characters information
                                 </a>
                             </li>
                             <li>
                                 <a href="/admin/newInfo/index">
-                                    <i class="metismenu-icon pe-7s-news-paper"></i>
+                                    @*<i class="metismenu-icon pe-7s-news-paper"></i>*@
                                     News information
                                 </a>
                             </li>
                             <li>
                                 <a href="#">
-                                    <i class="metismenu-icon pe-7s-chat"></i>
+                                    @*<i class="metismenu-icon pe-7s-chat"></i>*@
                                     Questions
-                                    <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                                    <i class="metismenu-state-icon caret-left">V</i>
                                 </a>
                                 <ul>
                                     <li>
@@ -591,7 +597,7 @@
                             <li class="app-sidebar__heading">Form</li>
                             <li>
                                 <a href="/admin/feedbackUser/index">
-                                    <i class="metismenu-icon pe-7s-note"></i>
+                                    @*<i class="metismenu-icon pe-7s-note"></i>*@
                                     Feedback data
                                 </a>
                             </li>
@@ -599,13 +605,13 @@
                             <li class="app-sidebar__heading">Quiz</li>
                             <li>
                                 <a href="index.html">
-                                    <i class="metismenu-icon pe-7s-credit"></i>
+                                    @*<i class="metismenu-icon pe-7s-credit"></i>*@
                                     Quiz Category
                                 </a>
                             </li>
                             <li>
                                 <a href="index.html">
-                                    <i class="metismenu-icon pe-7s-display2"></i>
+                                    @*<i class="metismenu-icon pe-7s-display2"></i>*@
                                     Quiz Question
                                 </a>
                             </li>
