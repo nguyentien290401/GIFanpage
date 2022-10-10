@@ -240,8 +240,13 @@
     <Content Include="Content\Image\MHY-About.png" />
     <Content Include="Content\Image\MHY-Ask-Create.png" />
     <Content Include="Content\Image\MHY-Login.png" />
+    <Content Include="Content\Image\MHY-New-Background.png" />
+    <Content Include="Content\Image\MHY-New1-Index.png" />
     <Content Include="Content\Image\MHY-New1.png" />
+    <Content Include="Content\Image\MHY-New2-Index.png" />
     <Content Include="Content\Image\MHY-New2.png" />
+    <Content Include="Content\Image\MHY-New3-Index.png" />
+    <Content Include="Content\Image\MHY-New4-Index.png" />
     <Content Include="Content\Image\MHY-Register.png" />
     <Content Include="Content\Image\MonstadtSlide.png" />
     <Content Include="Content\Image\NewsTitle.png" />
@@ -317,8 +322,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Playstyles\Create.cshtml" />
     <Content Include="Views\Playstyles\Delete.cshtml" />

@@ -10,6 +10,14 @@ body {
     font-family: Helvetica;
 }
 
+ul, li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
 
 /*IndexQuestionView  -->    Back to top button*/
 .container #myBtn > button {
@@ -177,7 +185,28 @@ body {
 
 
 /* New container */
-.news-container .news-main .news-content .news-title {
-    display: flex;
+
+.container-fluid .news-title-item:hover {
+    cursor: pointer;
+    background: rgba(255,212,159,0.06);
 }
+
+.container-fluid .news-more-text p {
+    color: white;
+}
+
+.container-fluid .news-more-text p:hover {
+    color: rgb(255 212 159 / 75%);
+    cursor: pointer;
+}
+
+.container-fluid .news-container .news-title-item {
+    display: flex;
+    border-bottom: 3px solid gray;
+    margin-top: .25rem;
+}
+
+    .container-fluid .news-container .news-title-item p {
+        margin-bottom: .5rem;
+    }
 
