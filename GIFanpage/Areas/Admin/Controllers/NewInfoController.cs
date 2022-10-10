@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
+using System.Data.OleDb;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using GIFanpage.Models;
+using LinqToExcel;
 
 namespace GIFanpage.Areas.Admin.Controllers
 {
@@ -41,6 +44,111 @@ namespace GIFanpage.Areas.Admin.Controllers
 
             return View(newInfos);
         }
+
+
+        [HttpPost]
+        public ActionResult UploadExcel(New newInfo, HttpPostedFileBase fileUpload)
+        {
+
+            List<string> data = new List<string>();
+            if (fileUpload != null)
+            {
+                // tdata.ExecuteCommand("truncate table OtherCompanyAssets");
+                if (fileUpload.ContentType == "application/vnd.ms-excel" || fileUpload.ContentType == "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+                {
+                    string filename = fileUpload.FileName;
+                    string targetpath = Server.MapPath("~/UploadFile/");
+                    fileUpload.SaveAs(targetpath + filename);
+                    string pathToExcelFile = targetpath + filename;
+                    var connectionString = "";
+                    if (filename.EndsWith(".xls"))
+                    {
+                        connectionString = string.Format("Provider=Microsoft.Jet.OLEDB.4.0; data source={0}; Extended Properties=Excel 8.0;", pathToExcelFile);
+                    }
+                    else if (filename.EndsWith(".xlsx"))
+                    {
+                        connectionString = string.Format("Provider=Microsoft.ACE.OLEDB.12.0;Data Source={0};Extended Properties=\"Excel 12.0 Xml;HDR=YES;IMEX=1\";", pathToExcelFile);
+                    }
+
+                    var adapter = new OleDbDataAdapter("SELECT * FROM [Sheet1$]", connectionString);
+                    var ds = new DataSet();
+                    adapter.Fill(ds, "ExcelTable");
+                    DataTable dtable = ds.Tables["ExcelTable"];
+                    string sheetName = "Sheet1";
+                    var excelFile = new ExcelQueryFactory(pathToExcelFile);
+                    var artistAlbums = from a in excelFile.Worksheet<New>(sheetName) select a;
+                    foreach (var a in artistAlbums)
+                    {
+                        try
+                        {
+                            if (a.NewsTitle != "" && a.NewsDescription != "" && a.NewsImage != "" && a.CreateDate != null && a.NewsContent != "")
+                            {
+                                New newInfos = new New();
+                                newInfos.NewsTitle = a.NewsTitle;
+                                newInfos.NewsDescription = a.NewsDescription;
+                                newInfos.NewsContent = a.NewsContent;
+                                newInfos.CreateDate = a.CreateDate;
+                                newInfos.NewsImage = a.NewsImage;
+                               
+                                db.News.Add(newInfos);
+                                db.SaveChanges();
+
+                            }
+                            else
+                            {
+                                data.Add("<ul>");
+                                if (a.NewsTitle == "" || a.NewsTitle == null) data.Add("<li> New's title is required</li>");
+                                if (a.NewsDescription == "" || a.NewsDescription == null) data.Add("<li> New's description is required</li>");
+                                if (a.CreateDate == null) data.Add("<li>Date is required</li>");
+                                if (a.NewsContent == "" || a.NewsContent == null) data.Add("<li>New's content is required</li>");
+                                if (a.NewsImage == "" || a.NewsImage == null) data.Add("<li>New's image is required</li>");
+                              
+                                data.Add("</ul>");
+                                data.ToArray();
+                                return Json(data, JsonRequestBehavior.AllowGet);
+                            }
+                        }
+                        catch (DbEntityValidationException ex)
+                        {
+                            foreach (var entityValidationErrors in ex.EntityValidationErrors)
+                            {
+                                foreach (var validationError in entityValidationErrors.ValidationErrors)
+                                {
+                                    Response.Write("Property: " + validationError.PropertyName + " Error: " + validationError.ErrorMessage);
+                                }
+                            }
+                        }
+                    }
+                    //deleting excel file from folder
+                    if ((System.IO.File.Exists(pathToExcelFile)))
+                    {
+                        System.IO.File.Delete(pathToExcelFile);
+                    }
+                    //return Json("success", JsonRequestBehavior.AllowGet);
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    //alert message for invalid file format
+                    data.Add("<ul>");
+                    data.Add("<li>Only Excel file format is allowed</li>");
+                    data.Add("</ul>");
+                    data.ToArray();
+                    return Json(data, JsonRequestBehavior.AllowGet);
+                }
+            }
+            else
+            {
+                data.Add("<ul>");
+                if (fileUpload == null) data.Add("<li>Please choose Excel file</li>");
+                data.Add("</ul>");
+                data.ToArray();
+                return Json(data, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+
+
 
         // GET: Admin/NewInfo/Details/5
         public ActionResult Details(int newInfo)

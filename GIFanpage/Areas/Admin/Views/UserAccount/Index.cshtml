@@ -78,8 +78,13 @@
 
                 Total User Accounts: @ViewBag.TotalUser
                 <div class="btn-actions-pane-right">
-                    <div role="group" class="btn-group-sm btn-group">
-                        
+                    <div role="group" class="btn-group-sm btn-group" style="gap: 40px;">
+                        <form action="/admin/userAccount/uploadExcel" method="post" enctype="multipart/form-data">
+                            <label for="uploadExcel" class="btn btn-warning">Get Excel File</label>
+                            <input type="file" name="fileUpload" id="uploadExcel" hidden />
+                            <label for="btnSubmit" class="btn btn-secondary">Update Data</label>
+                            <input type="submit" value="Upload" id="btnSubmit" hidden />
+                        </form>
                         <a href="/admin/userAccount/create">
                             <button class="btn btn-primary">Create New</button>
                         </a>

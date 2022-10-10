@@ -188,6 +188,7 @@
     <Compile Include="Areas\Admin\Controllers\FeedbackUserController.cs" />
     <Compile Include="Areas\Admin\Controllers\NewInfoController.cs" />
     <Compile Include="Areas\Admin\Controllers\QuestionManageController.cs" />
+    <Compile Include="Areas\Admin\Controllers\QuizInfoController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserAccountController.cs" />
     <Compile Include="Controllers\AsksController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
@@ -239,9 +240,12 @@
     <Content Include="Content\Image\MHY-About.png" />
     <Content Include="Content\Image\MHY-Ask-Create.png" />
     <Content Include="Content\Image\MHY-Login.png" />
+    <Content Include="Content\Image\MHY-New1.png" />
+    <Content Include="Content\Image\MHY-New2.png" />
     <Content Include="Content\Image\MHY-Register.png" />
     <Content Include="Content\Image\MonstadtSlide.png" />
     <Content Include="Content\Image\NewsTitle.png" />
+    <Content Include="Content\Image\Nilou.png" />
     <Content Include="Content\Image\PaimonAsk.png" />
     <Content Include="Content\Image\PaimonFeedbacks.png" />
     <Content Include="Content\Image\PaimonNews.png" />
@@ -288,6 +292,8 @@
     <Content Include="Areas\Admin\Views\FeedbackUser\Create.cshtml" />
     <Content Include="Areas\Admin\Views\FeedbackUser\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\FeedbackUser\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\QuizInfo\AddQuizCategory.cshtml" />
+    <Content Include="Areas\Admin\Views\QuizInfo\AddQuizQuestion.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

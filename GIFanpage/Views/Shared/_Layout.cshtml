@@ -25,7 +25,7 @@
 
 
 <body>
-    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark ">
+    <nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark ">
         <div class="container-fluid">
             <a class="navbar-brand" href="/home/index"><h3>AIMIGEN</h3></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,7 +34,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 @if (Session["CurrentUserID"] == null)
                 {
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="gap: 1rem;">
+                    <ul class="navbar-nav mb-2 mb-md-0" style="gap: 1rem;">
 
                         <li class="nav-item"> <a href="/home/index" class="nav-link"> Home </a> </li>
                         <li class="nav-item"> <a href="/characters/indexView" class="nav-link"> Character </a> </li>
@@ -42,7 +42,7 @@
                         <li class="nav-item"> <a href="/asks/indexQuestionView" class="nav-link"> Questions </a> </li>
                     </ul>
 
-                    <ul class="navbar-nav  mb-2 mb-lg-0" style="display: flex; margin-left: auto; gap: 1rem;">
+                    <ul class="navbar-nav  mb-2 mb-md-0" style="display: flex; margin-left: auto; gap: 1rem;">
                         <li class="nav-item"> <a href="/users/login" class="nav-link"> Login </a> </li>
                         <li class="nav-item"> <a href="/users/register" class="nav-link"> Register </a> </li>
                     </ul>
@@ -51,7 +51,7 @@
 
                 @if (Session["CurrentUserID"] != null)
                 {
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="gap: 1rem;">
+                    <ul class="navbar-nav mb-2 mb-md-0" style="gap: 1rem;">
 
                         <li class="nav-item"> <a href="/home/index" class="nav-link"> Home </a> </li>
                         <li class="nav-item"> <a href="/characters/indexView" class="nav-link"> Character </a> </li>
@@ -67,7 +67,7 @@
 
                     </ul>
 
-                    <ul class="navbar-nav  mb-2 mb-lg-0" style="display: flex; margin-left: auto;">
+                    <ul class="navbar-nav  mb-2 mb-md-0" style="display: flex; margin-left: auto;">
                         <li class="nav-item dropdown" style="display: flex; align-items: center;">
                             <div class="img-wrapper mx-2">
                                 <img src="@Url.Content(Session["CurrentUserImg"].ToString())" class="bd-placeholder-img rounded-circle" width="30" />
