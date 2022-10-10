@@ -191,11 +191,11 @@ a {
     background: rgba(255,212,159,0.06);
 }
 
-.container-fluid .news-more-text p {
+.container-fluid .news-more-text a {
     color: white;
 }
 
-.container-fluid .news-more-text p:hover {
+.container-fluid .news-more-text a:hover {
     color: rgb(255 212 159 / 75%);
     cursor: pointer;
 }
