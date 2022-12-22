@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <title>@ViewBag.Title - Genshin Impact</title>
     @*@Styles.Render("~/Content/css")*@
     @*@Scripts.Render("~/bundles/modernizr")*@
@@ -25,7 +26,7 @@
 
 
 <body>
-    <nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark ">
+    <nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark " style="padding:unset;">
         <div class="container-fluid">
             <a class="navbar-brand" href="/home/index"><h3>AIMIGEN</h3></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -59,10 +60,10 @@
                         <li class="nav-item"> <a href="/asks/indexQuestionView" class="nav-link"> Questions </a> </li>
                         <li class="nav-item"> <a href="/asks/indexQuestions/@Session["CurrentUserID"]" class="nav-link"> My Questions </a> </li>
                         <li class="nav-item"> <a href="/feedbacks/create/@Session["CurrentUserID"]" class="nav-link"> Feedback </a> </li>
-                        <li class="nav-item"> <a href="/quizs/addQuizCategory/@Session["CurrentUserID"]" class="nav-link"> Quiz </a> </li>
+                        @*<li class="nav-item"> <a href="/quizs/addQuizCategory/@Session["CurrentUserID"]" class="nav-link"> Quiz </a> </li>*@
                         @if (Convert.ToInt32(Session["CurrentUserRoleID"]) == 1)
                         {
-                            <li class="nav-item"> <a href="/admin/dashboard/index/@Session["CurrentUserID"]" class="nav-link"> Dashboard </a> </li>
+                            <li class="nav-item"> <a href="/admin/userAccount/index/@Session["CurrentUserID"]" class="nav-link"> Dashboard </a> </li>
                         }
 
                     </ul>

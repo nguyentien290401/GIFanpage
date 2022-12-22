@@ -38,14 +38,14 @@
     }
 </style>
 
-<div class="container-fluid" style="padding: 0; max-height: 600px; overflow:hidden; width: 100%; padding-bottom: 56.25%; position: relative; ">
+@*<div class="container-fluid" style="padding: 0; max-height: 600px; overflow:hidden; width: 100%; padding-bottom: 56.25%; position: relative; ">
     <iframe src="https://www.youtube.com/embed/35MhuH8xdbU?autoplay=0&loop=1&rel=0&color=white&playlist=35MhuH8xdbU" width="1263" height="600" style="max-width: 100%; position: absolute; top: 0; left: 0; width: 100%; height: 100%; " title="Short video about the Colaboration between Mihoyo and Ufotable" frameborder="0" allowfullscreen></iframe>
-</div>
+</div>*@
 
 
 <div class="container-fluid" style="padding: 0; min-height: 650px; background-color: #f0f0f0">
     <img src="~/Content/Image/NewsTitle.png" style="max-width: 100%;" />
-    <div class="container p-5" style="margin-top: 18px; min-height: 448px;">
+    <div class="container p-2" style=" min-height: 448px;">
         @foreach (var item in Model)
         {
         <a href="/news/details?newInfo=@item.NewsID" style="text-decoration: none;">

@@ -47,11 +47,18 @@
                 </div>
                 <br />
             }
+
         </div>
 
         <div class="col-md-10">
-            <h3>Display</h3>
-            <h1 class="jumbotron text-center">@ViewBag.Msg</h1>
+            <h3>List Questions</h3>
+            @if (ViewBag.Msg != null)
+            {
+                <div class="jumbotron mt-5 p-5 text-white" style="border: 1px solid black; border-radius: 8px; background-color: gray;">
+                    <h1 class="text-center">@ViewBag.Msg</h1>
+                </div>
+            }
+
         </div>
         @if (ViewBag.Msg == null)
         {
@@ -87,6 +94,72 @@
 
             }
         }
+
+
+        @if (ViewBag.Msg == null)
+        {
+            int PrevPageNo = ViewBag.PageNo - 1;
+            if (PrevPageNo <= 0)
+            {
+                PrevPageNo = 1;
+            }
+
+            int NextPageNo = ViewBag.PageNo + 1;
+            if (NextPageNo > ViewBag.NoOfPages)
+            {
+                NextPageNo = ViewBag.NoOfPages;
+            }
+
+
+
+           
+                <ul class="pagination justify-content-center pt-3">
+                    @if (ViewBag.PageNo == 1)
+                    {
+                        <li class="page-item disabled">
+                            <a class="page-link" href="/asks/indexQuestionView?PageNo=@PrevPageNo">Prev</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="page-item">
+                            <a class="page-link" href="/asks/indexQuestionView?PageNo=@PrevPageNo">Prev</a>
+                        </li>
+                    }
+
+                    @for (int i = 0; i < ViewBag.NoOfPages; i++)
+                    {
+                        if ((i + 1) == ViewBag.PageNo)
+                        {
+                            <li class="page-item active">
+                                <a class="page-link" href="/asks/indexQuestionView?PageNo=@(i + 1)">@( i + 1)</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="page-item">
+                                <a class="page-link" href="/asks/indexQuestionView?PageNo=@(i + 1)">@( i + 1)</a>
+                            </li>
+                        }
+                    }
+
+                    @if (ViewBag.PageNo == ViewBag.NoOfPages)
+                    {
+                        <li class="page-item disabled">
+                            <a class="page-link" href="/asks/indexQuestionView?PageNo=@NextPageNo">Next</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="page-item">
+                            <a class="page-link" href="/asks/indexQuestionView?PageNo=@NextPageNo">Next</a>
+                        </li>
+                    }
+                </ul>
+
+           
+        }
+
 
     </div>
 

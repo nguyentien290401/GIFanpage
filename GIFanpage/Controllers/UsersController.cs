@@ -38,7 +38,7 @@ namespace GIFanpage.Controllers
                 if (usr.RoleID == 1)
                 {
                     Session["IsAdmin"] = true;
-                    return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
+                    return RedirectToAction("Index", "UserAccount", new { area = "Admin" });
                 }
                 else if (usr.RoleID == 2)
                 {

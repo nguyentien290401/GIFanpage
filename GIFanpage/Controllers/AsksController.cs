@@ -17,49 +17,43 @@ namespace GIFanpage.Controllers
         // GET: List of all questions
         public ActionResult Index()
         {
-            var asks = db.Asks.Include(a => a.Category).Include(a => a.User).ToList();   /*.Include(a => a.Submission)*/
+            var asks = db.Asks.Include(a => a.Category).Include(a => a.User).ToList();   
             return View(asks);
         }
 
         //Get: Index questions of user role
-        public ActionResult IndexQuestionView(string Search /*int? page, string sortColumn = ""*/)
+        public ActionResult IndexQuestionView(string Search = "", int PageNo = 1, string SortColumn = "")
         {
            
-            List <Ask> asks = db.Asks.Include(a => a.Category).Include(a => a.User).ToList();
+            //List <Ask> asks = db.Asks.Include(a => a.Category).Include(a => a.User).ToList();
+            List<Ask> asks = db.Asks.Where(s => s.Category.CategoryName.Contains(Search) || s.Title.Contains(Search) || s.User.Name.Contains(Search)).ToList();
 
-            //Search
-            if (Search != null)
+            if (asks.Count() == 0)
             {
-                var findAsk = db.Asks.Where(s => s.Title.Contains(Search)).Include(a => a.Category).Include(a => a.User).ToList();
-                if (asks.Count == 0)
-                {
-                    ViewBag.Msg = "Data Not Found";
-                    return View();
-                }
-                else
-                {
-                    var findAskDate = findAsk.OrderByDescending(f => f.ViewCount).ToList();
-                    return View(findAskDate);
-                }
+                ViewBag.Msg = "Data Not Found";
+                return View();
             }
 
-            ////Pagnitation 
-            //if (page > 0)
-            //{
-            //    page = page;
-            //}
-            //else
-            //{
-            //    page = 1;                       //Set page default 
-            //}
-            //int limit = 4;                      //Display show 4 quesitons
-            //int start = (int)(page - 1) * limit;
-            //int totalQuestion = asks.Count();
-            //ViewBag.totalQuestion = totalQuestion;
-            //ViewBag.pageCurrent = page;
-            //float numberPage = (float)totalQuestion / limit;
-            //ViewBag.numberPage = (int)Math.Ceiling(numberPage);
-            var asksQuestion = asks.OrderByDescending(a => a.ViewCount).ToList();            /*.Skip(start).Take(limit);*/
+            //Sorting
+            ViewBag.SortColumn = SortColumn;
+
+            if (SortColumn == "TopView")
+            {
+                asks = asks.OrderByDescending(i => i.ViewCount).ToList();
+            }
+            else if (SortColumn == "Newest")
+            {
+                asks = asks.OrderByDescending(i => i.CreateDate).ToList();
+            }
+
+            //Pagination
+
+            int NoOfRecordsPerPage = 4;
+            int NoOfPages = Convert.ToInt32(Math.Ceiling(Convert.ToDouble(asks.Count) / Convert.ToDouble(NoOfRecordsPerPage)));
+            int NoOfRecordsToSkip = (PageNo - 1) * NoOfRecordsPerPage;
+            ViewBag.PageNo = PageNo;
+            ViewBag.NoOfPages = NoOfPages;
+            asks = asks.Skip(NoOfRecordsToSkip).Take(NoOfRecordsPerPage).ToList();
 
             ////Sorting 
             //ViewBag.sortColumn = sortColumn;
@@ -72,7 +66,7 @@ namespace GIFanpage.Controllers
             //    asksQuestion = asks.OrderByDescending(i => i.CreateDate).ToList();
             //}
 
-            return View(asksQuestion);
+            return View(asks);
         }
 
         // Get: All questions of each accounts
