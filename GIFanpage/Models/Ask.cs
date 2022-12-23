@@ -14,7 +14,6 @@ namespace GIFanpage.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int AskID { get; set; }
         public string Title { get; set; }
-        public string Description { get; set; }
 
         [AllowHtml]
         public string Content { get; set; }
@@ -22,7 +21,6 @@ namespace GIFanpage.Models
         public int ViewCount { get; set; }
         public int CommentCount { get; set; }
         
-        public string FilePath { get; set; }
         public Boolean IsTrue { get; set; }
 
         public int UserID { get; set; }

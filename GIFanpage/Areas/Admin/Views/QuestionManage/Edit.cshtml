@@ -46,29 +46,7 @@
                 </div>
             </div>
 
-            <div class="form-group">
-                <label for="Description">Description</label>
-                <textarea rows="2" name="Description" id="Description" placeholder="@Model.Description" value="@Model.Description" class="form-control" required></textarea>
-                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
-            </div>
-            @if (Model.FilePath != null)
-            {
-                <div class="form-group">
-                    <label class="fw-bolder">Image</label>
-                    <br />
-
-                    <input type="file" name="file" class="form-control-file" id="upload-button1" onchange="ShowImagePreview(this, document.getElementById('previewImage'))" required hidden>
-                    <label for="upload-button1" class="btn-success p-2" style="border-radius: 10px; cursor: pointer;">
-                        <i class="fa fa-download" aria-hidden="true"></i> &nbsp; Choose A Photo
-                    </label>
-
-                    <div class="image-card" style="display: flex; margin-top: 10px;">
-                        <img src="@Url.Content(Model.FilePath)" width="200" id="previewImage" />
-                    </div>
-                </div>
-            }
-
-
+           
             <div class="form-group">
                 <label for="summernote">Content</label>
                 <textarea rows="3" name="Content" id="summernote" placeholder="abc" class="form-control" required></textarea>
@@ -97,7 +75,7 @@
     $('#summernote').summernote({
 
         tabsize: 2,
-        height: 200,
+        height: 250,
         toolbar: [
             ['style', ['style']],
             ['font', ['bold', 'underline', 'clear']],

@@ -31,25 +31,12 @@
                 <br />
                 <span style="display: flex; align-items: center;">
                     <small class="font-weight-bold text-primary" style="font-size: 16px; padding-right: 10%;"> @Model.User.Name</small>
-                    <small class="font-weight-light text-secondary" style="padding-right: 10%;"><i class="fa fa-calendar"></i> @Model.CreateDate</small>
-                    <small class="font-weight-light text-secondary" style="padding-right: 10%;"><i class="fa fa-eye"></i> @Model.ViewCount</small>
-                    <small class="font-weight-light text-secondary"><i class="fa fa-book"></i> @Model.Category.CategoryName</small>
+                    <small class="font-weight-light text-secondary" style="padding-right: 10%;"> @Model.CreateDate</small>
+                    <small class="font-weight-light text-secondary" style="padding-right: 10%;">View: @Model.ViewCount</small>
+                    <small class="font-weight-light text-secondary"> @Model.Category.CategoryName</small>
                 </span>
                 <hr />
-                <p style="padding-top: 8px;"> @Model.Description</p>
-                @{
-                    var filePath = Model.FilePath;
-                    if (filePath == null)
-                    {
-
-                    }
-                    else
-                    {
-                        <div style="display: flex; justify-content: center;">
-                            <img src="@Url.Content(Model.FilePath)" style="width: 60%;" />
-                        </div>
-                    }
-                }
+               
                 <p style="padding-top: 8px;">@Html.Raw(Model.Content)</p>
             </span>
         </div>
@@ -58,7 +45,7 @@
     <div class="action d-flex justify-content-between mt-2 align-items-center">
 
         <div class="reply px-4">
-            <small><i class="fa fa-comment"></i> @Model.CommentCount  </small>
+            <small>Comments: @Model.CommentCount  </small>
         </div>
 
         <div class="icons align-items-center">

@@ -42,20 +42,7 @@
                                 <small class="font-weight-light text-secondary"><i class="fa fa-book"></i> @Model.Category.CategoryName</small>
                             </span>
                             <hr />
-                            <p style="padding-top: 8px;"> @Model.Description</p>
-                            @{
-                                var filePath = Model.FilePath;
-                                if (filePath == null)
-                                {
-
-                                }
-                                else
-                                {
-                                    <div style="display: flex; justify-content: center;">
-                                        <img src="@Url.Content(Model.FilePath)" style="width: 60%;" />
-                                    </div>
-                                }
-                            }
+                           
                             <p style="padding-top: 8px;">@Html.Raw(Model.Content)</p>
                         </span>
                     </div>
@@ -65,10 +52,7 @@
 
                     <div class="reply px-4">
                         <small><i class="fa fa-comment"></i> @Model.CommentCount  </small>
-                        @*<span class="dots" style="padding-left: 10px;"></span>
-                            <small><i class="fa fa-thumbs-up"> Like </i></small>
-                            <span class="dots" style="padding-left: 10px;"></span>
-                            <small><i class="fa fa-thumbs-o-up"> 6 </i></small>*@
+                        
                     </div>
 
                     <div class="icons align-items-center">
@@ -275,10 +259,6 @@
                                 <div class="action d-flex justify-content-between mt-2 align-items-center">
                                     <div class="reply px-4">
                                         <small><i class="fa fa-comment"></i> </small>
-                                        <span class="dots" style="padding-left: 10px;"></span>
-                                        <small><button type="submit" style="border: unset; background-color: white;"><i class="fa fa-thumbs-o-up"></i>  Like </button></small>
-                                        <span class="dots" style="padding-left: 10px;"></span>
-                                        <small><button type="button" style="border: unset; background-color: white;"><i class="fa fa-thumbs-o-up"> @Model.Comments[i].VotesCount</i> </button></small>
                                     </div>
 
                                     @if (Convert.ToInt32(Session["CurrentUserID"]) == Model.Comments[i].SubComments[j].UserID)

@@ -394,4 +394,3 @@ C:\Users\PGK\Desktop\GIFanpage\Final\GIFanpage\obj\Debug\GIFanpage.csproj.CoreCo
 C:\Users\PGK\Desktop\GIFanpage\Final\GIFanpage\obj\Debug\GIFanpage.csproj.CopyComplete
 C:\Users\PGK\Desktop\GIFanpage\Final\GIFanpage\obj\Debug\GIFanpage.dll
 C:\Users\PGK\Desktop\GIFanpage\Final\GIFanpage\obj\Debug\GIFanpage.pdb
-C:\Users\PGK\Desktop\GIFanpage\Final\GIFanpage\obj\Debug\GIFanpage.csproj.AssemblyReference.cache

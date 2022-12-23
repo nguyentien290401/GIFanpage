@@ -17,7 +17,7 @@ namespace GIFanpage.Controllers
         // GET: List of all questions
         public ActionResult Index()
         {
-            var asks = db.Asks.Include(a => a.Category).Include(a => a.User).ToList();   
+            var asks = db.Asks.Include(a => a.Category).Include(a => a.User).ToList();
             return View(asks);
         }
 
@@ -54,17 +54,6 @@ namespace GIFanpage.Controllers
             ViewBag.PageNo = PageNo;
             ViewBag.NoOfPages = NoOfPages;
             asks = asks.Skip(NoOfRecordsToSkip).Take(NoOfRecordsPerPage).ToList();
-
-            ////Sorting 
-            //ViewBag.sortColumn = sortColumn;
-            //if (sortColumn == "TopView")
-            //{
-            //    asksQuestion = asks.OrderByDescending(i => i.ViewCount).ToList();
-            //}
-            //else if (sortColumn == "Newest")
-            //{
-            //    asksQuestion = asks.OrderByDescending(i => i.CreateDate).ToList();
-            //}
 
             return View(asks);
         }
@@ -258,9 +247,7 @@ namespace GIFanpage.Controllers
         {
             ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName");
             ViewBag.UserID = Session["CurrentUserID"];
-            //ViewBag.UserID = new SelectList(db.Users, "UserID", "UserImg");
-            //ViewBag.SubmissionID = new SelectList(db.Submissions, "SubmissionID", "SubmissionName");
-            // ViewBag.UserID = new SelectList(db.Users, "UserID", "Name");
+           
             return View();
         }
 
@@ -269,34 +256,21 @@ namespace GIFanpage.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "AskID,Title,Description,Content,CreateDate,ViewCount,FileName,FilePath,UserID,CategoryID")] Ask ask, HttpPostedFileBase file)
+        public ActionResult Create([Bind(Include = "AskID,Title,Content,CreateDate,ViewCount,UserID,CategoryID")] Ask ask)
         {
             if (ModelState.IsValid)
             {
-                if (file == null)
-                {
-                    db.Asks.Add(ask);
-                    db.SaveChanges();
-                    return RedirectToAction("IndexQuestionView", "Asks");
-                }   
-                else
-                {
-                    var myFile = file.FileName;
-                    var path = "~/Content/Image/" + myFile;
-                    file.SaveAs(Server.MapPath(path));
-                    ask.FilePath = path;
 
-                    db.Asks.Add(ask);
-                    db.SaveChanges();
-                    return RedirectToAction("IndexQuestionView", "Asks");
-                }    
-                
+                db.Asks.Add(ask);
+                db.SaveChanges();
+                return RedirectToAction("IndexQuestionView", "Asks");
+
             }
 
             ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", ask.CategoryID);
-            //ViewBag.SubmissionID = new SelectList(db.Submissions, "SubmissionID", "SubmissionName", ask.SubmissionID);
+            
             ViewBag.UserID = new SelectList(db.Users, "UserID", "Name", ask.UserID);
-            //ViewBag.UserID = new SelectList(db.Users, "UserID", "UserImg", ask.UserID);
+         
             return View(ask);
         }
 
@@ -313,9 +287,9 @@ namespace GIFanpage.Controllers
                 return HttpNotFound();
             }
             ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", ask.CategoryID);
-            //ViewBag.SubmissionID = new SelectList(db.Submissions, "SubmissionID", "SubmissionName", ask.SubmissionID);
+            
             ViewBag.UserID = new SelectList(db.Users, "UserID", "Name", ask.UserID);
-            //ViewBag.UserID = new SelectList(db.Users, "UserID", "UserImg", ask.UserID);
+            
             return View(ask);
         }
 
@@ -324,16 +298,16 @@ namespace GIFanpage.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "AskID,Title,Description,Content,CreateDate,ViewCount,CommentCount,VotesCount,FileName,FilePath,CurrentUserVoteType,UserID,CategoryID,SubmissionID")] Ask ask)
+        public ActionResult Edit([Bind(Include = "AskID,Title,Content,CreateDate,ViewCount,CommentCount,VotesCount,CurrentUserVoteType,UserID,CategoryID,SubmissionID")] Ask ask)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(ask).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("IndexQuestions");
             }
             ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", ask.CategoryID);
-            //ViewBag.SubmissionID = new SelectList(db.Submissions, "SubmissionID", "SubmissionName", ask.SubmissionID);
+            
             ViewBag.UserID = new SelectList(db.Users, "UserID", "Name", ask.UserID);
             return View(ask);
         }
@@ -361,7 +335,7 @@ namespace GIFanpage.Controllers
             Ask ask = db.Asks.Find(id);
             db.Asks.Remove(ask);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("IndexQuestions");
         }
 
         protected override void Dispose(bool disposing)

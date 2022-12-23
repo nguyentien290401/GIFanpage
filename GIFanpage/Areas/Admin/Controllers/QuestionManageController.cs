@@ -63,27 +63,14 @@ namespace GIFanpage.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "AskID,Title,Description,Content,CreateDate,ViewCount,FileName,FilePath,UserID,CategoryID")] Ask ask, HttpPostedFileBase file)
+        public ActionResult Create([Bind(Include = "AskID,Title,Content,CreateDate,ViewCount,FileName,UserID,CategoryID")] Ask ask)
         {
             if (ModelState.IsValid)
             {
-                if (file == null)
-                {
-                    db.Asks.Add(ask);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
-                }
-                else
-                {
-                    var myFile = file.FileName;
-                    var path = "~/Content/Image/" + myFile;
-                    file.SaveAs(Server.MapPath(path));
-                    ask.FilePath = path;
 
-                    db.Asks.Add(ask);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
-                }
+                db.Asks.Add(ask);
+                db.SaveChanges();
+                return RedirectToAction("Index");
 
             }
 
@@ -115,29 +102,15 @@ namespace GIFanpage.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "AskID,Title,Description,Content,CreateDate,ViewCount,CommentCount,FilePath,IsTrue,UserID,CategoryID")] Ask ask, HttpPostedFileBase file)
+        public ActionResult Edit([Bind(Include = "AskID,Title,Content,CreateDate,ViewCount,CommentCount,IsTrue,UserID,CategoryID")] Ask ask, HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
             {
-                if (file == null)
-                {
-                    db.Asks.Add(ask);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
-                }
-                else
-                {
-                    var myFile = file.FileName;
-                    var path = "~/Content/Image/" + myFile;
-                    file.SaveAs(Server.MapPath(path));
-                    ask.FilePath = path;
 
-                    db.Entry(ask).State = EntityState.Modified;
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
-                }
+                db.Entry(ask).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
 
-                
             }
             ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", ask.CategoryID);
             ViewBag.UserID = new SelectList(db.Users, "UserID", "Name", ask.UserID);

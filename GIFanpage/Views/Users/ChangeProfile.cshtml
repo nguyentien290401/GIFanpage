@@ -85,9 +85,18 @@
                                         <div class="col-md-5">
 
                                             <label for="floatingPasswordConfirm">Role</label>
-                                            @Html.DropDownList("RoleID", null, htmlAttributes: new { @class = "list-group-item col-md-12" })
-                                            @Html.ValidationMessageFor(model => model.RoleID, "", new { @class = "text-danger" })
-                                            <input type="text" name="RoleID" class="form-control" id="floatingPasswordConfirm" placeholder="Your role" hidden>
+                                            <p class="pt-1"> @Model.Role.RoleName</p>
+
+                                            @if (@Model.Role.RoleID == 1)
+                                            {
+                                                @Html.TextBoxFor(t => t.RoleID, new { @Value = 1, @type = "hidden" })
+                                                @Html.ValidationMessageFor(model => model.RoleID, "", new { @class = "text-danger" })
+                                            }
+                                            else
+                                            {
+                                                @Html.TextBoxFor(t => t.RoleID, new { @Value = 2, @type = "hidden" })
+                                                @Html.ValidationMessageFor(model => model.RoleID, "", new { @class = "text-danger" })
+                                            }
 
                                         </div>
                                     </div>

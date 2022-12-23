@@ -26,164 +26,68 @@
                 <h2 class="title">My Questions</h2>
                 @*<div class="buttons">*@
 
-                    <div class="d-flex flex-row align-items-end">
+                <div class="d-flex flex-row align-items-end">
 
-                        <ul class="pagination">
+                    <ul class="pagination">
 
-                            @{
-                                int numberPage = ViewBag.numberPage;
-                                int pageCurrent = ViewBag.pageCurrent;
-                                if (pageCurrent > 1)
+                        @{
+                            int numberPage = ViewBag.numberPage;
+                            int pageCurrent = ViewBag.pageCurrent;
+                            if (pageCurrent > 1)
+                            {
+                                int prePage = pageCurrent - 1;
+                                <li class="page-item active"><a class="page-link" href="?page=@prePage">PrePage</a></li>
+                            }
+
+                            int i;
+                            for (i = 1; i <= numberPage; i++)
+                            {
+                                if (i == pageCurrent)
                                 {
-                                    int prePage = pageCurrent - 1;
-                                    <li class="page-item active"><a class="page-link" href="?page=@prePage">PrePage</a></li>
+                                    <li class="page-item active"><a class="page-link" href="?page=@i">@i</a></li>
                                 }
-
-                                int i;
-                                for (i = 1; i <= numberPage; i++)
+                                else
                                 {
-                                    if (i == pageCurrent)
-                                    {
-                                        <li class="page-item active"><a class="page-link" href="?page=@i">@i</a></li>
-                                    }
-                                    else
-                                    {
-                                        <li class="page-item"><a class="page-link" href="?page=@i">@i</a></li>
-                                    }
-                                }
-                                if (pageCurrent > 1 && pageCurrent < numberPage)
-                                {
-                                    int nextPage = pageCurrent + 1;
-                                    <li class="page-item"><a class="page-link" href="?page=@nextPage">NextPage</a></li>
+                                    <li class="page-item"><a class="page-link" href="?page=@i">@i</a></li>
                                 }
                             }
-                        </ul>
-                        @*<span class="text-primary">Comments "ON"</span>
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
-                        </div>*@
-                    @*</div>*@
-
+                            if (pageCurrent > 1 && pageCurrent < numberPage)
+                            {
+                                int nextPage = pageCurrent + 1;
+                                <li class="page-item"><a class="page-link" href="?page=@nextPage">NextPage</a></li>
+                            }
+                        }
+                    </ul>
+                    
                 </div>
             </div>
 
-            
 
-                @foreach (var item in Model)
-                {
-                    <div class="card p-3" style="margin-bottom: 10px;">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="user d-flex flex-row align-items-center">
-                                <span class="font-weight-bold text-primary">
-                                    <a href="/asks/details?ask=@item.AskID" style="text-decoration: none;">@item.Title</a>
-                                </span>
-                            </div>
-                            <small><i class="fa fa-calendar fa-fw w3-margin-right"></i> @item.CreateDate</small>
+
+            @foreach (var item in Model)
+            {
+                <div class="card p-3" style="margin-bottom: 10px;">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="user d-flex flex-row align-items-center">
+                            <span class="font-weight-bold text-primary">
+                                <a href="/asks/details?ask=@item.AskID" style="text-decoration: none;">@item.Title</a>
+                            </span>
                         </div>
-                        <div class="action d-flex justify-content-between mt-2 align-items-center">
-                            <div class="reply px-4">
-                                <small><a href="/asks/edit/@item.AskID" style="text-decoration: none;">Edit</a></small>
-                                <span class="dots"></span>
-                                <small><a href="/asks/delete/@item.AskID" style="text-decoration: none;">Delete</a></small>
-                            </div>
-                            <div class="icons align-items-center">
-                                <i class="fa fa-eye" aria-hidden="true"></i> @item.ViewCount
-                            </div>
+                        <small><i class="fa fa-calendar fa-fw w3-margin-right"></i> @item.CreateDate</small>
+                    </div>
+                    <div class="action d-flex justify-content-between mt-2 align-items-center">
+                        <div class="reply px-4">
+                            <small><a href="/asks/edit/@item.AskID" style="text-decoration: none;">Edit</a></small>
+                            <span class="dots"></span>
+                            <small><a href="/asks/delete/@item.AskID" style="text-decoration: none;">Delete</a></small>
+                        </div>
+                        <div class="icons align-items-center">
+                            <i class="fa fa-eye" aria-hidden="true"></i> @item.ViewCount
                         </div>
                     </div>
-                }
+                </div>
+            }
         </div>
     </div>
-        </div>
+</div>
 
-            @*<p>
-            @Html.ActionLink("Create New", "Create")
-        </p>
-        <table class="table">
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Category.CategoryName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.User.Name)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Title)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Description)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Content)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.CreateDate)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ViewCount)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.CommentCount)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.VotesCount)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.FileName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.FilePath)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.CurrentUserVoteType)
-                </th>
-                <th></th>
-            </tr>
-
-        @foreach (var item in Model) {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Category.CategoryName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.User.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Title)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Content)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CreateDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ViewCount)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CommentCount)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.VotesCount)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FileName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FilePath)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CurrentUserVoteType)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id=item.AskID }) |
-                    @Html.ActionLink("Details", "Details", new { id=item.AskID }) |
-                    @Html.ActionLink("Delete", "Delete", new { id=item.AskID })
-                </td>
-            </tr>
-        }
-
-        </table>*@

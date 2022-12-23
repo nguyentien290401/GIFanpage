@@ -39,20 +39,7 @@
                     <small class="font-weight-light text-secondary"><i class="fa fa-book"></i> @Model.Category.CategoryName</small>
                 </span>
                 <hr />
-                <p style="padding-top: 8px;"> @Model.Description</p>
-                @{
-                    var filePath = Model.FilePath;
-                    if (filePath == null)
-                    {
-
-                    }
-                    else
-                    {
-                        <div style="display: flex; justify-content: center;">
-                            <img src="@Url.Content(Model.FilePath)" style="width: 60%;" />
-                        </div>
-                    }
-                }
+               
                 <p style="padding-top: 8px;">@Html.Raw(Model.Content)</p>
             </span>
         </div>
