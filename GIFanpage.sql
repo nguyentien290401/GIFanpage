@@ -75,12 +75,10 @@ go
 create table Asks(
 AskID int primary key identity(1,1),
 Title nvarchar(max),
-Description nvarchar(max),
 Content nvarchar(max),
 CreateDate datetime,
 ViewCount int,
 CommentCount int,
-FilePath nvarchar(max),
 IsTrue bit default(0),
 UserID int references Users(UserID) on delete cascade,
 CategoryID int references Categories(CategoryID) on delete cascade)
@@ -189,6 +187,6 @@ go
 use GIFanpage
 
 
-select * from Asks
-select * from Playstyles
+select * from Users
+
 
