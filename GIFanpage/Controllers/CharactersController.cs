@@ -14,12 +14,6 @@ namespace GIFanpage.Controllers
     {
         private GIFanpageDbContext db = new GIFanpageDbContext();
 
-        // GET: Characters
-        public ActionResult Index()
-        {
-            return View(db.Characters.ToList());
-        }
-
         public ActionResult IndexView(string Search = "")
         {
             //Search
@@ -47,102 +41,8 @@ namespace GIFanpage.Controllers
             return View();
         }
 
-        // POST: Characters/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CharacterID,CharacterName,CharacterVision,CharacterDescription,CharacterRarity,CharacterRegion,CharacterBirthday,CharacterImageCard,CharacterImageOriginal")] Character character, HttpPostedFileBase fileCard, HttpPostedFileBase fileOriginal)
-        {
-            if (ModelState.IsValid)
-            {
-                if (fileCard == null || fileOriginal == null)
-                {
-                    db.Characters.Add(character);
-                    db.SaveChanges();
-                    return RedirectToAction("IndexView", "Characters");
-                }    
-                else
-                {
-                    // Define image card file
-                    var myFileCard = fileCard.FileName;
-                    var pathCard = "~/Content/Image/" + myFileCard;
-                    fileCard.SaveAs(Server.MapPath(pathCard));
-                    character.CharacterImageCard = pathCard;
-
-                    // Define image original file
-                    var myFileOriginal = fileOriginal.FileName;
-                    var pathOriginal = "~/Content/Image/" + myFileOriginal;
-                    fileOriginal.SaveAs(Server.MapPath(pathOriginal));
-                    character.CharacterImageOriginal = pathOriginal;
-
-                }
-
-                db.Characters.Add(character);
-                db.SaveChanges();
-                return RedirectToAction("IndexView", "Characters");
-            }
-
-            return View(character);
-        }
-
-        // GET: Characters/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Character character = db.Characters.Find(id);
-            if (character == null)
-            {
-                return HttpNotFound();
-            }
-            return View(character);
-        }
-
-        // POST: Characters/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CharacterID,CharacterName,CharacterVision,CharacterDescription,CharacterRarity,CharacterRegion,CharacterBirthday,CharacterImageCard,CharacterImageOriginal")] Character character)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(character).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(character);
-        }
-
-        // GET: Characters/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Character character = db.Characters.Find(id);
-            if (character == null)
-            {
-                return HttpNotFound();
-            }
-            return View(character);
-        }
-
-        // POST: Characters/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Character character = db.Characters.Find(id);
-            db.Characters.Remove(character);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
+       
+       
         protected override void Dispose(bool disposing)
         {
             if (disposing)

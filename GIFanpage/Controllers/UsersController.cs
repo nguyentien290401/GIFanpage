@@ -60,30 +60,6 @@ namespace GIFanpage.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-
-
-        // GET: Users
-        public ActionResult Index()
-        {
-            var users = db.Users.Include(u => u.Playstyle).Include(u => u.Role);
-            return View(users.ToList());
-        }
-
-        // GET: Users/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            User user = db.Users.Find(id);
-            if (user == null)
-            {
-                return HttpNotFound();
-            }
-            return View(user);
-        }
-
         // GET: Users/Create
         public ActionResult Register()
         {
@@ -150,7 +126,7 @@ namespace GIFanpage.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult changeProfile(/*[Bind(Include = "UserID,Name,Email,UserImg,PlaystyleID,RoleID")]*/ User user)
+        public ActionResult changeProfile(User user)
         {
             if (ModelState.IsValid)
             {
@@ -172,31 +148,11 @@ namespace GIFanpage.Controllers
             return View();
         }
 
-        // GET: Users/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult UserProfile(int id)
         {
+            var user = db.Users.Where(u => u.UserID == id).FirstOrDefault();
 
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            User user = db.Users.Find(id);
-            if (user == null)
-            {
-                return HttpNotFound();
-            }
             return View(user);
-        }
-
-        // POST: Users/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            User user = db.Users.Find(id);
-            db.Users.Remove(user);
-            db.SaveChanges();
-            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)

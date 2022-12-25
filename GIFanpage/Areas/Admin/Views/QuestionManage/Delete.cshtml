@@ -34,9 +34,10 @@
                 <br />
                 <span style="display: flex; align-items: center;">
                     <small class="font-weight-bold text-primary" style="font-size: 16px; padding-right: 10%;"> @Model.User.Name</small>
-                    <small class="font-weight-light text-secondary" style="padding-right: 10%;"><i class="fa fa-calendar"></i> @Model.CreateDate</small>
-                    <small class="font-weight-light text-secondary" style="padding-right: 10%;"><i class="fa fa-eye"></i> @Model.ViewCount</small>
-                    <small class="font-weight-light text-secondary"><i class="fa fa-book"></i> @Model.Category.CategoryName</small>
+                    <small class="font-weight-light text-secondary" style="padding-right: 10%;"> @Model.CreateDate</small>
+                    <small class="font-weight-light text-secondary" style="padding-right: 10%;">View: @Model.ViewCount</small>
+                    <small class="font-weight-light text-secondary" style="padding-right: 10%;"> @Model.Category.CategoryName</small>
+                    <small class="font-weight-light text-secondary">Comment: @Model.CommentCount</small>
                 </span>
                 <hr />
                
@@ -44,18 +45,4 @@
             </span>
         </div>
     </div>
-
-    <div class="action d-flex justify-content-between mt-2 align-items-center">
-
-        <div class="reply px-4">
-            <small><i class="fa fa-comment"></i> @Model.CommentCount  </small>
-        </div>
-
-        <div class="icons align-items-center">
-            <i class="fa fa-star text-warning"></i>
-            <i class="fa fa-check-circle-o check-icon"></i>
-        </div>
-
-    </div>
-
 </div>

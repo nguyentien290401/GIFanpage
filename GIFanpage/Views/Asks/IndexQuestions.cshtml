@@ -24,69 +24,82 @@
         <div class="col-md-10">
             <div class="headings d-flex justify-content-between align-items-center mb-3">
                 <h2 class="title">My Questions</h2>
-                @*<div class="buttons">*@
 
-                <div class="d-flex flex-row align-items-end">
+                @if (ViewBag.Msg == null)
+            {
+            <div class="d-flex flex-row align-items-end">
 
-                    <ul class="pagination">
+                <ul class="pagination">
 
-                        @{
-                            int numberPage = ViewBag.numberPage;
-                            int pageCurrent = ViewBag.pageCurrent;
-                            if (pageCurrent > 1)
+                    @{
+                        int numberPage = ViewBag.numberPage;
+                        int pageCurrent = ViewBag.pageCurrent;
+                        if (pageCurrent > 1)
+                        {
+                            int prePage = pageCurrent - 1;
+                            <li class="page-item active"><a class="page-link" href="?page=@prePage">PrePage</a></li>
+                        }
+
+                        int i;
+                        for (i = 1; i <= numberPage; i++)
+                        {
+                            if (i == pageCurrent)
                             {
-                                int prePage = pageCurrent - 1;
-                                <li class="page-item active"><a class="page-link" href="?page=@prePage">PrePage</a></li>
+                                <li class="page-item active"><a class="page-link" href="?page=@i">@i</a></li>
                             }
-
-                            int i;
-                            for (i = 1; i <= numberPage; i++)
+                            else
                             {
-                                if (i == pageCurrent)
-                                {
-                                    <li class="page-item active"><a class="page-link" href="?page=@i">@i</a></li>
-                                }
-                                else
-                                {
-                                    <li class="page-item"><a class="page-link" href="?page=@i">@i</a></li>
-                                }
-                            }
-                            if (pageCurrent > 1 && pageCurrent < numberPage)
-                            {
-                                int nextPage = pageCurrent + 1;
-                                <li class="page-item"><a class="page-link" href="?page=@nextPage">NextPage</a></li>
+                                <li class="page-item"><a class="page-link" href="?page=@i">@i</a></li>
                             }
                         }
-                    </ul>
+                        if (pageCurrent > 1 && pageCurrent < numberPage)
+                        {
+                            int nextPage = pageCurrent + 1;
+                            <li class="page-item"><a class="page-link" href="?page=@nextPage">NextPage</a></li>
+                        }
+                    }
+                </ul>
+
+            </div>
+            }
+
                     
-                </div>
             </div>
 
-
-
-            @foreach (var item in Model)
+            @if (ViewBag.Msg != null)
             {
-                <div class="card p-3" style="margin-bottom: 10px;">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div class="user d-flex flex-row align-items-center">
-                            <span class="font-weight-bold text-primary">
-                                <a href="/asks/details?ask=@item.AskID" style="text-decoration: none;">@item.Title</a>
-                            </span>
-                        </div>
-                        <small><i class="fa fa-calendar fa-fw w3-margin-right"></i> @item.CreateDate</small>
-                    </div>
-                    <div class="action d-flex justify-content-between mt-2 align-items-center">
-                        <div class="reply px-4">
-                            <small><a href="/asks/edit/@item.AskID" style="text-decoration: none;">Edit</a></small>
-                            <span class="dots"></span>
-                            <small><a href="/asks/delete/@item.AskID" style="text-decoration: none;">Delete</a></small>
-                        </div>
-                        <div class="icons align-items-center">
-                            <i class="fa fa-eye" aria-hidden="true"></i> @item.ViewCount
-                        </div>
-                    </div>
+                <div class="jumbotron mt-5 p-5 text-white" style="border: 1px solid black; border-radius: 8px; background-color: gray;">
+                    <h1 class="text-center">@ViewBag.Msg</h1>
                 </div>
             }
+
+            @if (ViewBag.Msg == null)
+            {
+                foreach (var item in Model)
+                {
+                    <div class="card p-3" style="margin-bottom: 10px;">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="user d-flex flex-row align-items-center">
+                                <span class="font-weight-bold text-primary">
+                                    <a href="/asks/details?ask=@item.AskID" style="text-decoration: none;">@item.Title</a>
+                                </span>
+                            </div>
+                            <small><i class="fa fa-calendar fa-fw w3-margin-right"></i> @item.CreateDate</small>
+                        </div>
+                        <div class="action d-flex justify-content-between mt-2 align-items-center">
+                            <div class="reply px-4">
+                                <small><a href="/asks/edit/@item.AskID" style="text-decoration: none;">Edit</a></small>
+                                <span class="dots"></span>
+                                <small><a href="/asks/delete/@item.AskID" style="text-decoration: none;">Delete</a></small>
+                            </div>
+                            <div class="icons align-items-center">
+                                <i class="fa fa-eye" aria-hidden="true"></i> @item.ViewCount
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+           
         </div>
     </div>
 </div>

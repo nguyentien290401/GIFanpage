@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Web.Mvc;
 
 namespace GIFanpage.Models
 {
@@ -12,6 +13,8 @@ namespace GIFanpage.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int CommentID { get; set; }
+
+        [AllowHtml]
         public string Content { get; set; }
         public DateTime CommentDate { get; set; }
         public int SubCommentCount { get; set; }

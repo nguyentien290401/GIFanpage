@@ -14,13 +14,7 @@ namespace GIFanpage.Controllers
     {
         private GIFanpageDbContext db = new GIFanpageDbContext();
 
-        // GET: List of all questions
-        public ActionResult Index()
-        {
-            var asks = db.Asks.Include(a => a.Category).Include(a => a.User).ToList();
-            return View(asks);
-        }
-
+       
         //Get: Index questions of user role
         public ActionResult IndexQuestionView(string Search = "", int PageNo = 1, string SortColumn = "")
         {
@@ -62,6 +56,15 @@ namespace GIFanpage.Controllers
         public ActionResult IndexQuestions(int id, int? page)
         {
             var asks = db.Asks.Where(t => t.UserID == id);
+
+
+            if (asks.Count() == 0)
+            {
+                ViewBag.Msg = "Data Not Found";
+                return View();
+            }
+
+
             if (page > 0)
             {
                 page = page;
@@ -304,7 +307,7 @@ namespace GIFanpage.Controllers
             {
                 db.Entry(ask).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("IndexQuestions");
+                return RedirectToAction("IndexQuestionView");
             }
             ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", ask.CategoryID);
             
@@ -335,7 +338,7 @@ namespace GIFanpage.Controllers
             Ask ask = db.Asks.Find(id);
             db.Asks.Remove(ask);
             db.SaveChanges();
-            return RedirectToAction("IndexQuestions");
+            return RedirectToAction("IndexQuestionView");
         }
 
         protected override void Dispose(bool disposing)

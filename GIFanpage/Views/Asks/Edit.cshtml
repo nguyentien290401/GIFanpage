@@ -4,78 +4,102 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
+<style>
+    label {
+        font-weight: bolder;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+</style>
 
-
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Ask</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.AskID)
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+<div class="card">
+    <div class="row  d-flex justify-content-center" style="margin: 5%;">
+        <div style="display:inline-flex;">
+            <h2>Edit Question</h2>
+            <div style="margin-left: auto; margin-top: 5px; margin-bottom: 5px;">
+                <a href="/asks/indexQuestions?id=@Session["CurrentUserID"]" style="text-decoration: none;">
+                    <button class="btn btn-lg btn-primary btn-login fw-bold " type="submit">Back to List</button>
+                </a>
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Content, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Content, new { htmlAttributes = new { @class = "form-control" } })
+        <hr />
+
+        <form action="/asks/edit/@Session["CurrentUserID"]" method="post" enctype="multipart/form-data">
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.AskID)
+            @Html.TextBoxFor(model => model.CreateDate, new { @Value = DateTime.Now, @type = "hidden" })
+            @Html.TextBoxFor(model => model.ViewCount, new { @Value = 0, @type = "hidden" })
+            @Html.TextBoxFor(model => model.UserID, new { @Value = Session["CurrentUserID"], @type = "hidden" })
+
+
+
+            <div class="row">
+                <div class="form-group col-md-8">
+                    <label for="Title">Title</label>
+                    <input type="text" name="Title" id="Title" value="@Model.Title" class="form-control" required>
+                    @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group col-md-4" style="margin-top:unset;">
+                    <label for="Category">Category</label>
+                    @Html.DropDownList("CategoryID", null, htmlAttributes: new { @class = "list-group-item col-md-12", @id = "Category" })
+                </div>
+            </div>
+
+            <br />
+
+            <div class="form-group">
+                <label for="summernote">Content</label>
+                <textarea rows="3" name="Content" id="summernote" placeholder="abc" class="form-control" required></textarea>
                 @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.CreateDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CreateDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CreateDate, "", new { @class = "text-danger" })
+            <div class="form-group d-flex align-items-center" style="margin-bottom: 18px;">
+                <div class="form-check">
+                    <input class="form-check-input mt-3" type="checkbox" name="check" id="toggle" checked value="" required>
+                    <label class="form-check-label">
+                        Argree with <a href="/home/agree" target="_blank" style="text-decoration: underline; font-style: italic;">term of user</a>
+                    </label>
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ViewCount, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ViewCount, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ViewCount, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.UserID, "UserID", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("UserID", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.UserID, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.CategoryID, "CategoryID", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("CategoryID", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.CategoryID, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
-        </div>
+            <button type="submit" class="btn btn-primary fw-bold" id="add-button" style="margin-bottom: 15px;">Save</button>
+        </form>
     </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
 </div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+
+<script>
+    $('#summernote').summernote({
+
+        tabsize: 2,
+        height: 250,
+        toolbar: [
+            ['style', ['style']],
+            ['font', ['bold', 'underline', 'clear']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['table', ['table']],
+            ['insert', ['link', 'picture', 'video']],
+            ['view', ['fullscreen', 'codeview', 'help']]
+        ]
+    });
+
+    $('#toggle').click(function () {
+        //check if checkbox is checked
+        if ($(this).is(':checked')) {
+
+            $('#add-button').removeAttr('disabled'); //enable input
+
+        } else {
+            $('#add-button').attr('disabled', true); //disable input
+        }
+    });
+</script>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

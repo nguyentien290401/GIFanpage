@@ -4,77 +4,49 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Delete</h2>
-
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Ask</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Category.CategoryName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Category.CategoryName)
-        </dd>
-
-       
-        <dt>
-            @Html.DisplayNameFor(model => model.User.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.User.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>  
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Content)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Content)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CreateDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CreateDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ViewCount)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ViewCount)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CommentCount)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CommentCount)
-        </dd>
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+<div class="card min-vh-100">
+    <div class="row  d-flex justify-content-center" style="margin: 2%;">
+        <div style="display: inline-flex; align-items: center; min-width: 100%;">
+            <div>
+                <h2 class="text-danger">Delete Question's User</h2>
+                <i class="text-primary">Are you sure you want to delete this question ?</i>
+            </div>
+            <div style="display: inline-flex; gap: 10px; margin-left:auto; align-items: center; margin-bottom: 20px;">
+                <form action="/asks/delete?id=@Model.AskID" method="post" enctype="multipart/form-data" style="text-decoration: none;">
+                    @Html.AntiForgeryToken()
+                    <button class="btn btn-lg btn-danger btn-login fw-bold " type="submit">Delete</button>
+                </form>
+                <a href="/asks/indexQuestions?id=@Session["CurrentUserID"]" style="text-decoration: none; margin-left: auto;">
+                    <button class="btn btn-lg btn-primary btn-login fw-bold" type="submit">Back to List</button>
+                </a>
+            </div>
         </div>
-    }
+
+        <div class="card p-4" style="margin-bottom: 20px;">
+
+            <div class="d-flex  align-items-center" style="max-width: 90%;">
+
+                <div class="user d-flex flex-row" style="display: flex; align-items: flex-start;">
+                    <img src="@Url.Content(Model.User.UserImg)" width="45" height="45" class="user-img rounded-circle mr-2" style="display:flex; align-items:flex-start;">
+
+                    <span style="padding-left: 15px; min-width: 100%;">
+                        <small class="font-weight-bold text-dark" style="font-size: 20px; display: block;"> @Model.Title </small>
+                        <small class="font-weight-bold text-white" style="font-size:20px; color: white; cursor:unset;"> (Genshin impact is an story game that tell that tell about traveler's Aether) </small>
+                        <br />
+                        <span style="display: flex; align-items: center;">
+                            <small class="font-weight-bold text-primary" style="font-size: 16px; padding-right: 10%;"> @Model.User.Name</small>
+                            <small class="font-weight-light text-secondary" style="padding-right: 10%;"> @Model.CreateDate</small>
+                            <small class="font-weight-light text-secondary" style="padding-right: 10%;">View: @Model.ViewCount</small>
+                            <small class="font-weight-light text-secondary" style="padding-right: 10%;"> @Model.Category.CategoryName</small>
+                            <small class="font-weight-light text-secondary">Comment: @Model.CommentCount</small>
+                        </span>
+                        <hr />
+
+                        <p style="padding-top: 8px;">@Html.Raw(Model.Content)</p>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+

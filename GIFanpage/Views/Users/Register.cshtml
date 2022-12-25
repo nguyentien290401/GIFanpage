@@ -38,8 +38,8 @@
                                 @Html.ValidationMessageFor(model => model.PasswordHash, "", new { @class = "text-danger" })
                             </div>
 
-                            <div class="form-floating mb-3">
-                                <label for="floatingPasswordConfirm">Playstyle</label>
+                            <div class="form-group mb-3">
+                                <label for="floatingPasswordConfirm" class="fw-bolder">Playstyle</label>
                                 @Html.DropDownList("PlaystyleID", null, htmlAttributes: new { @class = "list-group-item col-md" })
 
                                 <input type="text" name="PlaystyleID" class="form-control" id="floatingPasswordConfirm" placeholder="Your style" hidden>

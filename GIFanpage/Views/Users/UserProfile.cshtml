@@ -1,0 +1,69 @@
+﻿@model GIFanpage.Models.User
+
+@{
+    ViewBag.Title = "UserProfile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<style>
+
+    .change-img {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .img-wrapper > img {
+        display: block;
+        aspect-ratio: 1/1;
+        object-fit: cover;
+        object-position: center;
+        transition: 200ms ease-in-out;
+    }
+</style>
+
+    <div class="row m-4 p-4" style="margin-bottom: 20px;">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="row py-3">
+                    <div class="col-md-12">
+
+                    </div>
+                    <div class="container px-5">
+                        <h2 class="text-primary">User Profile</h2>
+                        <hr />
+                    </div>
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="change-img p-4">
+                                    <div class="img-wrapper">
+                                        <img src="@Url.Content(Model.UserImg)" width="200" class="bd-placeholder-img rounded-circle" id="previewImage" />
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-7">
+                                <div class="bg-secondary mx-3 p-2 rounded" style="max-width: 40%;">
+                                    <h3 class="h2 px-3 text-white mb-0">@Model.Name</h3>
+                                    <span class="text-warning px-3 glyphicon-text-color">@Model.Role.RoleName</span>
+                                </div>
+                                <div class="card-body px-4 p-sm-4">
+
+                                    <ul class="list-unstyled mb-1-9">
+                                        <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 fw-bolder">Playstyle in game:</span> @Model.Playstyle.PlaystyleName</li>
+                                        <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 fw-bolder">Email:</span> @Model.Email</li>
+                                    </ul>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
